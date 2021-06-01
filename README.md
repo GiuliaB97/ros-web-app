@@ -5,7 +5,7 @@
 
 ### To establish the connection between ROS and the web page
 python -m SimpleHTTPServer 7000
-roslaunch rosbserver rosbridge_websocket.launch
+roslaunch rosbridge_server rosbridge_websocket.launch
 
 ### To run turtlesim
 roscore

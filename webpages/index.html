@@ -6,7 +6,7 @@
 	</head>
 
 	<body>
-	    	<h1>Hello from ROSDS!</h1>
+	    	<h1>Hello from ROS!</h1>
 
 	    	<p>Communicate to robots from my 1st webpage</p>
 
@@ -22,19 +22,84 @@
 			    name : 'turtle1/cmd_vel',
 			    messageType : 'geometry_msgs/Twist'
 			});
-			var twist = new ROSLIB.Message({
-			    linear : {
-				x : 5.5,
-				y : 5.0,
-				z : 0.0
-			    },
-			    angular : {
-				x : 0.0,
-				y : 0.0,
-				z : 0.5
-			    }
+/*
+var cmdVel2 = new ROSLIB.Topic({
+			    ros : ros,
+			    name : 'cmd_vel',
+			    messageType : 'geometry_msgs/Twist'
 			});
-			cmdVel.publish(twist);
+*/			
+	document.onkeydown = checkKey;
+
+	function checkKey(e) {
+
+	    e = e || window.event;
+
+	    if (e.keyCode == '38') {
+		// up arrow
+		var twist = new ROSLIB.Message({
+					    linear : {
+						x : 2.0,
+						y : 0.0,
+						z : 0.0
+					    },
+					    angular : {
+						x : 0.0,
+						y : 0.0,
+						z : 0.0
+					    }
+		});
+	    }
+	    else if (e.keyCode == '40') {
+// down arrow
+		var twist = new ROSLIB.Message({
+				    linear : {
+					x : -2.0,
+					y : 0.0,
+					z : 0.0
+				    },
+				    angular : {
+					x : 0.0,
+					y : 0.0,
+					z : 0.0
+				    }
+		});
+	    }
+	    else if (e.keyCode == '37') {
+	       // left arrow
+
+		var twist = new ROSLIB.Message({
+				    linear : {
+					x : 0.0,
+					y : -1.0,
+					z : 0.0
+				    },
+				    angular : {
+					x : 0.0,
+					y : 0.0,
+					z : 2.0
+				    }
+		});
+	    }
+	    else if (e.keyCode == '39') {
+	       // right 
+		var twist = new ROSLIB.Message({
+				    linear : {
+					x : 0.0,
+					y : 0.0,
+					z : 0.0
+				    },
+				    angular : {
+					x : 0.0,
+					y : 0.0,
+					z : -2.0
+				    }
+				});
+	    	}
+	cmdVel.publish(twist);
+//cmdVel2.publish(twist);
+	}
+			
 		</script>
 	</body>
 </html>
