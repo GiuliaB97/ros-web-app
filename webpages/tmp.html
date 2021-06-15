@@ -1,0 +1,137 @@
+<!--Not tested-->
+ <html>
+    <head>
+      <script type="text/javascript" src="http://brown-ros-pkg.googlecode.com/svn/tags/brown-ros-pkg/rosjs/ros.min.js"></script>
+      <script type="text/javascript">
+    function nop() {}
+    /* console for logging */
+    var console = null;
+    /* state */
+    var active = false;
+    var wall = false;
+    var bump = false;
+    function log(msg) {
+        console.innerHTML = console.innerHTML + msg + "<br/>";
+    }
+    function init() {
+        function waitForDOM() {
+            var cnsl = document.getElementById('console');
+            if (cnsl == null) {
+                setTimeout(waitForDOM, 100);
+            } else {
+                console = cnsl;
+                setTimeout(main, 0);
+            }
+        }
+        setTimeout(waitForDOM, 100);
+    }
+    function main() {
+        log('console initialized');
+        var connectInfo = document.location.toString();
+        log('url: ' + connectInfo);
+        var addressMatches = connectInfo.match(/address=([^&]*)/);
+        if (addressMatches == null) {
+            log('Problem extracting address!');
+            return;
+        }
+        var address = addressMatches[1];
+        log('address: ' + address);
+        var portMatches = connectInfo.match(/.*&port=([^&]*)/);
+        if (portMatches == null) {
+            log('Problem extracting port!');
+            return;
+        }
+        var port = portMatches[1];
+        log('port: ' + port);
+        log('creating ROSProxy connection object...');
+        var connection = null;
+        try {
+            connection = new ros.Connection('ws://' + address + ':' + port);
+        } catch (err) {
+            log('Problem creating proxy connection object!');
+            return;
+        }
+        log('created');
+        log('connecting to ' + address + ' on port ' + port + '...');
+        connection.setOnClose(function (e) {
+            log('connection closed');
+        });
+        connection.setOnError(function (e) {
+            log('network error!');
+        });
+        connection.setOnOpen(function (e) {
+            log('connected');
+            log('initializing ROSProxy...');
+            try {
+                connection.callService('/rosjs/topics', '[]', nop);
+            } catch (error) {
+                log('Problem initializing ROSProxy!');
+                return;
+            }
+            log('initialized');
+            log('registering handler for sensorPacket...');
+            try {
+                connection.addHandler('/sensorPacket', function (msg) {
+                    bump = false;
+                    if (msg.bumpLeft || msg.bumpRight) {
+                        bump = true;
+                    }
+                    wall = msg.wall;
+                    if (msg.advance) {
+                        active = false;
+                    }
+                    if (msg.play) {
+                        active = true;
+                    }
+                });
+            } catch (error) {
+                log('Problem registering handler!');
+                return;
+            }
+            log('registered');
+            log('subscribing to sensorPacket...');
+            try {
+                connection.callService('/rosjs/subscribe', '["/sensorPacket",0]', nop);
+            } catch (error) {
+                log('Problem subscribing!');
+            }
+            log('subscribed');
+            log('setting closed loop control policy...');
+            var aligned = true;
+            var turned = 0;
+            var target = 150;
+            function twistMsg(x, z) {
+                return '{"linear":{"x":' + x + ',"y":0,"z":0},"angular":{"x":0,"y":0,"z":' + z + '}}';
+            }
+            setInterval(function () {
+                var x = 0;
+                var z = 0;
+                if (wall) aligned = true;
+                if (bump) aligned = false;
+                if (!aligned) {
+                    if (active) {
+                        z = .5;
+                        turned = turned + 1;
+                    }
+                } else {
+                    x = .25;
+                    turned = 0;
+                    target = 150 + Math.floor(Math.random() * 150);
+                    if (!wall) z = -.5;
+                }
+                if (turned > target) aligned = true;
+                if (!active) {
+                    x = 0;
+                    z = 0;
+                }
+                connection.publish('/cmd_vel', 'geometry_msgs/Twist', twistMsg(x, z));
+            }, 100);
+            log('running');
+        });
+    }
+        </script>
+      </head>
+    <body onload="init()">
+    <div id="console"></div>
+    </body>
+    </html>

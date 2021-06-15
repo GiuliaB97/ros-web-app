@@ -22,13 +22,13 @@
 			    name : 'turtle1/cmd_vel',
 			    messageType : 'geometry_msgs/Twist'
 			});
-/*
+//for turtlebot and LeoRover NB in for turtlebot
 var cmdVel2 = new ROSLIB.Topic({
 			    ros : ros,
-			    name : 'cmd_vel',
+			    name : '/cmd_vel',
 			    messageType : 'geometry_msgs/Twist'
 			});
-*/			
+
 	document.onkeydown = checkKey;
 
 	function checkKey(e) {
@@ -97,7 +97,7 @@ var cmdVel2 = new ROSLIB.Topic({
 				});
 	    	}
 	cmdVel.publish(twist);
-//cmdVel2.publish(twist);
+cmdVel2.publish(twist);
 	}
 			
 		</script>
