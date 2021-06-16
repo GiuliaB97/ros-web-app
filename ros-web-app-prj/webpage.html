@@ -1,0 +1,130 @@
+<!--python -m SimpleHTTPServer 7000-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page Title</title>
+    <script
+            type="text/javascript" src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js">
+    </script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/eventemitter2@5.0.1/lib/eventemitter2.min.js">
+    </script>
+    <script
+            type="text/javascript" src="https://static.robotwebtools.org/mjpegcanvasjs/current/mjpegcanvas.min.js">
+    </script>
+    <link
+            rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script
+            type="text/javascript" src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js">
+    </script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/vue">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/eventemitter2@5.0.1/lib/eventemitter2.min.js">
+    </script>
+    <script type="text/javascript" src="https://static.robotwebtools.org/mjpegcanvasjs/current/mjpegcanvas.min.js">
+    </script>
+</head>
+
+<body>
+    <div id="app" class="container">
+        <div class="jumbotron">
+            <h1>Hello from ROSDS!</h1>
+        </div>
+
+        <div class="col-md-6">
+            <h3>Connection status</h3>
+            <!--The text message that represents the status of the connection must depend on the connected variable.-->
+            <p class="text-success">Connected!</p>
+            <p class="text-danger">Not connected!</p>
+
+            <label>Websocket server address</label>
+            <input type="text" v-model="ws_address" />
+            <br />
+            <button @click="disconnect" class="btn btn-danger" v-if="connected">Disconnect!</button>
+            <button @click="connect" class="btn btn-success" v-else>Connect!</button>
+        </div>
+        <div class="col-md-6" style="max-height:200px; overflow:auto;">
+            <h3>Log messages</h3>
+            <div>
+                <p v-for="log in logs">
+                    {{ log }}
+                </p>
+            </div>
+        </div>
+
+
+        <hr>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h5>Commands</h5>
+            </div>
+
+
+            <!-- 1st row -->
+            <div class="col-md-12 text-center">
+                <button @click="forward" :disabled="!connected" class="btn btn-primary">Go forward</button>
+                <br><br>
+            </div>
+
+            <!-- 2nd row -->
+            <div class="col-md-4 text-center">
+                <button @click="turnLeft" :disabled="!connected" class="btn btn-primary">Turn left</button>
+            </div>
+            <div class="col-md-4 text-center">
+                <button @click="stop" :disabled="!connected" class="btn btn-danger">Stop</button>
+                <br><br>
+            </div>
+            <div class="col-md-4 text-center">
+                <button @click="turnRight" :disabled=" !connected" class="btn btn-primary">Turn right</button>
+            </div>
+
+            <!-- 3rd row -->
+            <div class="col-md-12 text-center">
+                <button @click="backward" :disabled=" !connected" class="btn btn-primary">Go backward</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 row">
+                <div class="col-md-12 text-center">
+                    <h5>Commands</h5>
+                </div>
+
+                <!-- 1st row -->
+                <div class="col-md-12 text-center">
+                    <button @click="forward" :disabled=" !connected" class="btn btn-primary">Go straight</button>
+                    <br><br>
+                </div>
+
+                <!-- 2nd row -->
+                <div class="col-md-4 text-center">
+                    <button @click="turnLeft" :disabled=" !connected" class="btn btn-primary">Turn left</button>
+                </div>
+                <div class="col-md-4 text-center">
+                    <br>
+                    <button @click="stop" :disabled=" !connected" class="btn btn-danger">Stop</button>
+                    <br>
+                    <br>
+                </div>
+                <div class="col-md-4 text-center">
+                    <button @click="turnRight" :disabled="!connected" class="btn btn-primary">Turn right</button>
+                </div>
+
+                <!-- 3rd row -->
+                <div class="col-md-12 text-center">
+                    <button @click="backward" :disabled="!connected" class="btn btn-primary">Go straight</button>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div id="mjpeg"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="main.js">
+    </script>
+</body>
+</html>
