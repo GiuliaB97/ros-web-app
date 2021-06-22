@@ -38,7 +38,7 @@ rosrun turtlesim turtlesim_node
 ```shell_session
 roslaunch leo_gazebo leo_marsyard.launch
  ```
-_ **NB** Becareful you should have download and setup correctly the following repository [GitHub](https://github.com/alma-x/ERC-Remote-Navigation-Simulation)_
+_**NB** Becareful you should have download and setup correctly the following repository:_ [GitHub](https://github.com/alma-x/ERC-Remote-Navigation-Simulation)
 
 __ROS USEFUL commands to check if it alright__
 * **check velocity** 
