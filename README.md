@@ -41,20 +41,20 @@ roslaunch leo_gazebo leo_marsyard.launch
 _**NB** Becareful you should have download and setup correctly the following repository:_ [GitHub](https://github.com/alma-x/ERC-Remote-Navigation-Simulation)
 
 __ROS USEFUL commands to check if it alright__
-* **check velocity** 
-  * command for turtlesim:
+* ***to check velocity*** 
+  * command for **turtlesim**:
     ```shell_session
     rostopic echo /turtle1/cmd_vel
      ```
-  * command for Turtlebot and Leo Rover:
+  * command for **Turtlebot** and **Leo Rover**:
     ```shell_session
     rostopic echo /cmd_vel
      ```
-* **print topic list**   
+* ***to print topic list***   
      ```shell_session
     rostopic list
      ```
  
- * **Turtlesim** and **Turtlebot** have no camera therefore ROS video server is not needed.*
+ > **Turtlesim** and **Turtlebot** have no camera therefore ROS video server is not needed.
  
  
