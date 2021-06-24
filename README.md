@@ -26,7 +26,7 @@ rosrun web_video_server web_video_server _port:=11315
 ```shell_session
 roslaunch leo_gazebo leo_marsyard.launch
  ```
-_**NB** Becareful you should have download and setup correctly the following repository:_ [GitHub](https://github.com/alma-x/ERC-Remote-Navigation-Simulation)
+_**NB** Becareful you should have download and setup correctly the following repository:_ [Almax-erc-simulation-repository](https://github.com/alma-x/ERC-Remote-Navigation-Simulation)
 
 #### Webpage
 * First reach the following address: `http://localhost:7000/` to see the webpage
