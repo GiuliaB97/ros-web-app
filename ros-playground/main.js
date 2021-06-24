@@ -89,14 +89,11 @@ var app = new Vue({
             console.log('set camera method')
             this.cameraViewer = new MJPEGCANVAS.Viewer({
                 divID: 'mjpeg',
-                //host: '54.167.21.209',
-                //host: '192.168.178.22',
-                host: '127.0.0.1',
+                host: '127.0.0.1', //localhost
                 width: 640,
                 height: 480,
                 topic: '/camera/rgb/image_raw',
-                //topic: '/zed2/right_raw/image_raw_color',
-            port: 11315,
+                    port: 11315,
             })
         },
 
