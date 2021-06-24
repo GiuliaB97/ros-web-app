@@ -1,4 +1,4 @@
-# TO-DO/FIX LIST
+# TO-DO/FIX list
 
 - [ ] Nodejs/express
   - [x] use nodejs as server instead of the python server
