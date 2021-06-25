@@ -31,13 +31,3 @@ _**NB** Becareful you should have download and setup correctly the following rep
 #### Webpage
 * First reach the following address: `http://localhost:7000/` to see the webpage
 * Next, when you are asked for a Websocket server address the following address needs to be typed `ws://localhost:9090/` to connect to ros-web-server
-
-__ROS USEFUL commands to check if it alright__
-* ***to check velocity Leo Rover***:
-    ```shell_session
-    rostopic echo /cmd_vel
-     ```
-* ***to print topic list***   
-     ```shell_session
-    rostopic list
-     ```
