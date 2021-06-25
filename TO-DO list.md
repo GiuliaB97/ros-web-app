@@ -1,6 +1,8 @@
 # TO-DO/FIX list
 - [ ] General
   - [ ] Decide if user can choose which input method to use for rover controlling (Desktop version)
+    - [x] buttons
+    - [ ] keyword
   - [ ]  How to enable feature just for mobile version:
     - [ ] joystic instead of buttons  `https://msadowski.github.io/ros-web-tutorial-pt1/ ` e `https://github.com/msadowski/ros_web_tutorial/blob/master/robot_gui_bridge/gui/gui.html`
 - [ ] Nodejs/express
