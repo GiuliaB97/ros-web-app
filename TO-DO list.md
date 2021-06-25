@@ -1,10 +1,13 @@
 # TO-DO/FIX list
-
+- [ ] General
+- [ ] How to enable feature just for mobile version:
+  - [ ] joystic instead of buttons  `https://msadowski.github.io/ros-web-tutorial-pt1/ ` e `https://github.com/msadowski/ros_web_tutorial/blob/master/robot_gui_bridge/gui/gui.html`
 - [ ] Nodejs/express
   - [x] use nodejs as server instead of the python server
-  - [ ] test intercommunication web-page - ROS using nodejs
+  - [x] test intercommunication web-page - ROS using nodejs
   - [ ] refactor index.js
   - [ ] implement routes
+  - [ ] understand how to organize the code
   
 
 - [ ] Framework you should use for client-side
@@ -25,7 +28,7 @@
       - [x] Leo-Rover
       - [ ] Turtlebot
       - [ ] Turtlesim  
-
+    
 
 - [ ] README 
   - [ ] deleting server part
