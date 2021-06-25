@@ -96,6 +96,9 @@ var app = new Vue({
                     port: 11315,
             })
         },
-
+        setCmdVelListener: function(){
+            this.topic.listener.subscribe(function(message) {
+                console.log('Received message on ' + listener.name + ': ' + message.data);
+             });
     },
 })
