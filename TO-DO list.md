@@ -1,7 +1,8 @@
 # TO-DO/FIX list
 - [ ] General
-- [ ] How to enable feature just for mobile version:
-  - [ ] joystic instead of buttons  `https://msadowski.github.io/ros-web-tutorial-pt1/ ` e `https://github.com/msadowski/ros_web_tutorial/blob/master/robot_gui_bridge/gui/gui.html`
+  - [ ] Decide if user can choose which input method to use for rover controlling (Desktop version)
+  - [ ]  How to enable feature just for mobile version:
+    - [ ] joystic instead of buttons  `https://msadowski.github.io/ros-web-tutorial-pt1/ ` e `https://github.com/msadowski/ros_web_tutorial/blob/master/robot_gui_bridge/gui/gui.html`
 - [ ] Nodejs/express
   - [x] use nodejs as server instead of the python server
   - [x] test intercommunication web-page - ROS using nodejs
