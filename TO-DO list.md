@@ -34,4 +34,7 @@
     
 
 - [ ] README 
-  - [ ] deleting server part
+  - [x] deleting server part
+
+- [ ] PROJECT repository
+  - [ ] delete useless folders and files in general
