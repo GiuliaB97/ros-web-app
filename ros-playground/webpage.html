@@ -4,40 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Page Title</title>
-    <script
-            type="text/javascript" src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js">
-    </script>
-    <script
-            src="https://cdn.jsdelivr.net/npm/eventemitter2@5.0.1/lib/eventemitter2.min.js">
-    </script>
-    <script
-            type="text/javascript" src="https://static.robotwebtools.org/mjpegcanvasjs/current/mjpegcanvas.min.js">
-    </script>
-    <link
-            rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script
-            type="text/javascript" src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js">
-    </script>
-    <script
-            src="https://cdn.jsdelivr.net/npm/vue">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/eventemitter2@5.0.1/lib/eventemitter2.min.js">
-    </script>
-    <script type="text/javascript" src="https://static.robotwebtools.org/mjpegcanvasjs/current/mjpegcanvas.min.js">
-    </script>
+    <script type="text/javascript" src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/eventemitter2@5.0.1/lib/eventemitter2.min.js"></script>
+    <script type="text/javascript" src="https://static.robotwebtools.org/mjpegcanvasjs/current/mjpegcanvas.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript" src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
 </head>
 
 <body>
     <div id="app" class="container">
         <div class="jumbotron">
-            <h1>Hello from ROSDS!</h1>
+            <h1>Leo-Rover on the Marsyard!</h1>
         </div>
 
         <div class="col-md-6">
             <h3>Connection status</h3>
             <!--The text message that represents the status of the connection must depend on the connected variable.-->
-            <p class="text-success">Connected!</p>
-            <p class="text-danger">Not connected!</p>
 
             <label>Websocket server address</label>
             <input type="text" v-model="ws_address" />
@@ -45,16 +29,6 @@
             <button @click="disconnect" class="btn btn-danger" v-if="connected">Disconnect!</button>
             <button @click="connect" class="btn btn-success" v-else>Connect!</button>
         </div>
-        <div class="col-md-6" style="max-height:200px; overflow:auto;">
-            <h3>Log messages</h3>
-            <div>
-                <p v-for="log in logs">
-                    {{ log }}
-                </p>
-            </div>
-        </div>
-
-
         <hr>
         <div class="row">
             <div class="col-md-12 text-center">
@@ -87,7 +61,6 @@
         </div>
 
     </div>
-    <script type="text/javascript" src="main.js">
-    </script>
+    <script type="text/javascript" src="main.js"></script>
 </body>
 </html>
