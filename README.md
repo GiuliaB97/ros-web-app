@@ -5,10 +5,7 @@
 
 ### Web page
 #### To establish the connection between ROS and the web page
-To run the server need for communication (this one should be replaced with npm in some way) 
-```shell_session
-python -m SimpleHTTPServer 7000
- ```
+_npm_ acts as server so there is no need to run a proper server
 ### ROS
 ####  Mandatory
 Before anything ROS Master should be executed to allow communication among the different nodes:
@@ -25,36 +22,21 @@ rosrun web_video_server web_video_server _port:=11315
  ```
 
 #### Simulation 
-You should choose to run one of the following simulation:
-1. **To run turtlesim simulation**
-```shell_session
-rosrun turtlesim turtlesim_node
- ```
-
-2. **To run Turtlebot simulation**
-
-
-3. **To run Leo Rover simulation**
+**To run Leo Rover simulation**
+* local ws
 ```shell_session
 roslaunch leo_gazebo leo_marsyard.launch
  ```
-_**NB** Becareful you should have download and setup correctly the following repository:_ [GitHub](https://github.com/alma-x/ERC-Remote-Navigation-Simulation)
+_**NB** Becareful you should have download and setup correctly the following repository:_ [Almax-erc-simulation-repository](https://github.com/alma-x/ERC-Remote-Navigation-Simulation)
+* docker
+```shell_session
+systemctl start docker
 
-__ROS USEFUL commands to check if it alright__
-* **check velocity** 
-  * command for turtlesim:
-    ```shell_session
-    rostopic echo /turtle1/cmd_vel
-     ```
-  * command for Turtlebot and Leo Rover:
-    ```shell_session
-    rostopic echo /cmd_vel
-     ```
-* **print topic list**   
-     ```shell_session
-    rostopic list
-     ```
- 
- * **Turtlesim** and **Turtlebot** have no camera therefore ROS video server is not needed.*
- 
- 
+docker pull ghcr.io/europeanroverchallenge/erc-remote-navigation-sim:latest
+docker tag ghcr.io/europeanroverchallenge/erc-remote-navigation-sim:latest erc_navigation_sim
+
+docker run --rm -it -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY --name erc_sim --net=host erc_navigation_sim
+ ```
+#### Webpage
+* First reach the following address: `http://localhost:7000/` to see the webpage
+* Next, when you are asked for a Websocket server address the following address needs to be typed `ws://localhost:9090/` to connect to ros-web-server

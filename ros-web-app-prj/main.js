@@ -91,10 +91,11 @@ var app = new Vue({
                 divID: 'mjpeg',
                 //host: '54.167.21.209',
                 //host: '192.168.178.22',
-                host: '127.0.0.1',
+                //host: '127.0.0.1',
+                host: 'localhost',
                 width: 640,
                 height: 480,
-                topic: '/camera/rgb/image_raw',
+                topic: '/camera/image_raw',
                 //topic: '/zed2/right_raw/image_raw_color',
             port: 11315,
             })
