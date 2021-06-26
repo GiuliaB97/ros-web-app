@@ -7,19 +7,19 @@ var PORT = 7000;            //port on which communication with ROS is enabled
 
 global.appRoot = path.resolve(__dirname);
 
-mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true, useFindAndModify: false,  useUnifiedTopology: true });
+//Quseto usalo quando hai effettivamente implementato il db
+//mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true, useFindAndModify: false,  useUnifiedTopology: true });
 
 app.use(cors())
-app.use(express.json());    //Per gestire i parametri passati nel corpo della richiesta http.
+
+//Per gestire i parametri passati nel corpo della richiesta http.
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.use('/static', express.static(__dirname + '/public'));//__dirname : It will resolve to your project folder.
 
 var routes = require('./src/routes/user');
 routes(app);
-//////////////////////////////Sta roba andrebbe tolta ma non capisco come caricare la pagina senza
-const router = express.Router();
-router.get('/',function(req,res){
-    res.sendFile(path.join(__dirname+'/webpage.html'));
-});
 
 app.use('/', router);
 app.use(function(req, res) {

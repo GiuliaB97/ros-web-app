@@ -1,10 +1,11 @@
 module.exports = function (mongoose){
-    var userSchema = mongoose.Schema({
+    var Schema = mongoose.Schema;
+    var UserSchema = new Schema({
         username: String,
         name: String,
         email: String,
         hash: String,
         salt: String
-    })
-    return mongoose.model('User',userSchema)
-}
+    });
+    return mongoose.model('User',UserSchema);
+};

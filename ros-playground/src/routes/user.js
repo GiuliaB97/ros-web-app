@@ -1,16 +1,13 @@
 module.exports = function (app){
-    var controller = require('../controllers/user');
+    var usersController = require('../controllers/user');
 
-    app.route('/users')
-        .get(controller.list_users())
-        .post(controller.create_movie)
+    app.route('/api/users')
+        .get(usersController.list_users())
+        .post(usersController.create_user)
 
-    app.route('/users/:id')
-        .get(controller.read_movie)
-        .put(controller.update_user)
-        .delete(controller.delete_user);
-/*
-    app.route('/querydb')
-        .get(controller.querydb)
-        */
+    app.route('/api/users/:id')
+        .get(usersController.read_user)
+        .put(usersController.update_user)
+        .delete(usersController.delete_user);
+    app.use(usersController.show_index);
 }
