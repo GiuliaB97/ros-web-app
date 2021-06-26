@@ -1,8 +1,12 @@
-var mongoose = require('mongoose');
-var userModel = require('../models/user')(mongoose)
+const mongoose = require('mongoose');
+User = require('../models/user')(mongoose)
+
+exports.show_index = function(req, res) {
+    res.sendFile(appRoot  + '/www/webpage.html');
+};
 
 exports.list_users = function (req,res){
-    userModel.find({},function (err,doc){
+    User.find({},function (err,doc){
         if(err){
             res.send(err);
         }
@@ -10,53 +14,65 @@ exports.list_users = function (req,res){
     })
 }
 
-exports.read_movie = function(req,res){
-    userModel.findById(req.params.id,function(err,doc){
-        if(err){
+exports.read_user = function(req,res){
+    /*
+     TODO cast req.params.id to ObjectId
+     */
+    User.findById(req.params.id, function(err, movie) {
+        if (err)
             res.send(err);
+        else{
+            if(movie==null){
+                res.status(404).send({
+                    description: 'User not found'
+                });
+            }
+            else{
+                res.json(movie);
+            }
         }
-        res.json(doc);
-    })
-}
+    });
+};
 
-exports.create_movie = function (req,res){
-    User = new userModel(req.body);
-    User.save(function (err,doc){
-        if(err){
+exports.create_user = function (req,res){
+    const new_user = new User(req.body);
+    new_user.save(function(err, movie) {
+        if (err)
             res.send(err);
-        }
-        res.json(doc);
-    })
+        res.status(201).json(movie);
+    });
 }
 
 exports.update_user = function (req,res){
-    userModel.findByIdAndUpdate(req.params.id,req.body,{new: true},function(err,doc){
-        if(err){
+    User.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function(err, user) {
+        if (err)
             res.send(err);
+        else{
+            if(user==null){
+                res.status(404).send({
+                    description: 'User not found'
+                });
+            }
+            else{
+                res.json(user);
+            }
         }
-        res.json(doc);
-    })
+    });
 }
 
 exports.delete_user = function(req,res){
-    userModel.findByIdAndDelete(req.params.id,function (err,doc){
-        if(err){
+    User.deleteOne({_id: req.params.id}, function(err, result) {
+        if (err)
             res.send(err);
+        else{
+            if(result.deletedCount===0){
+                res.status(404).send({
+                    description: 'Movie not found'
+                });
+            }
+            else{
+                res.json({ message: 'Task successfully deleted' });
+            }
         }
-        res.json(doc);
-    })
-}
-/*
-exports.querydb = function (req,res){
-    userModel.find().
-    where('actors').equals(req.query.actor).
-    where('year').gte(req.query.fromyear).lte(req.query.toyear).exec(function (err,doc){
-        if(err){
-            res.send(err);
-        }
-        res.json(doc);
-    })
-}
-*/
-
-//movieModel.find().where("year").gte().exec(function)
+    });
+};
