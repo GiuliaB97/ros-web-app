@@ -3,6 +3,7 @@ var app = express();
 var mongoose = require('mongoose')
 var cors = require('cors')
 var path = require('path');
+var bodyParser = require('body-parser');
 var PORT = 7000;            //port on which communication with ROS is enabled
 
 global.appRoot = path.resolve(__dirname);
@@ -21,7 +22,7 @@ app.use('/static', express.static(__dirname + '/public'));//__dirname : It will 
 var routes = require('./src/routes/user');
 routes(app);
 
-app.use('/', router);
+//app.use('/', router);
 app.use(function(req, res) {
     res.status(404).send({url: req.originalUrl + ' not found'})
 });

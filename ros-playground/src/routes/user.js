@@ -1,6 +1,9 @@
 module.exports = function (app){
     var usersController = require('../controllers/user');
 
+    app.route('/')
+        .get(usersController.show_index);
+    /*
     app.route('/api/users')
         .get(usersController.list_users())
         .post(usersController.create_user)
@@ -10,4 +13,6 @@ module.exports = function (app){
         .put(usersController.update_user)
         .delete(usersController.delete_user);
     app.use(usersController.show_index);
+
+     */
 }
