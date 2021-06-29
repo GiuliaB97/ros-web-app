@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{axios, bootstrap, eventemitter2, mjpegcanvas, roslib, vue, vue-router}" />
+    <file url="PROJECT" libraries="{all, axios, bootstrap, eventemitter2, mjpegcanvas, roslib, sb-forms-latest, vue, vue-router}" />
     <includedPredefinedLibrary name="Node.js Core" />
   </component>
 </project>

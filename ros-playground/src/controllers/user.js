@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 User = require('../models/user')(mongoose)
 
 exports.show_index = function(req, res) {
-    res.sendFile(appRoot  + '/www/webpage.html');
+    res.sendFile(appRoot  + '/www/rover-simulation.html');
 };
 
 exports.list_users = function (req,res){
