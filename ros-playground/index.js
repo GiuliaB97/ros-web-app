@@ -8,7 +8,7 @@ var PORT = 7000;            //port on which communication with ROS is enabled
 
 global.appRoot = path.resolve(__dirname);
 
-//Quseto usalo quando hai effettivamente implementato il db
+//Questo usalo quando hai effettivamente implementato il db
 //mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true, useFindAndModify: false,  useUnifiedTopology: true });
 
 app.use(cors())
