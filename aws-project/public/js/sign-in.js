@@ -30,6 +30,14 @@ const SignIn = {
         </div>
         
 	`,
+    data() { //The data() method returns an object
+        return { //nested userData object to hold the first and last name, email and password properties
+            userData: {
+                email: '',
+                password: ''
+            }
+        }
+    },
     methods: {
         submitted: function(){
 
