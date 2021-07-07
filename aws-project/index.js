@@ -1,3 +1,5 @@
+import VueFormulate from '@braid/vue-formulate'
+const VueFormulate = require('@braid/vue-formulate')
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose')

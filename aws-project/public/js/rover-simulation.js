@@ -1,27 +1,38 @@
+
+
 const RoverSimulation = {
     template: `
 		<div class="rover">
 			<div>
                     <h1>This is the rover simulation page</h1>
             </div>
-        <div class="jumbotron">
-            <h1>Hello from ROSDS!</h1>
+<!--
+In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa area centrale che visualizza i contenuti più importanti. Bootstrap la chiama jumbotron.
+-->
+        <div class="jumbotron ">
+            <div class="connection-status-container"><!--"col-md-6">-->
+                <h3>Connection status</h3>
+              
+                <label>Websocket server address</label>
+                <input type="text" v-model="ws_address" />
+                <br />
+                
+                <button @click="disconnect" class="btn btn-danger" v-if="connected">Disconnect!</button>
+                <button @click="connect" class="btn btn-success" v-else>Connect!</button>
+            </div>
+            <div class="log-message-container" style="max-height:200px; overflow:auto;">  
+              <h3>Log messages</h3>
+                <div>
+                
+                    <p v-for="log in logs">
+                        {{ log }}
+                    </p>
+                    
+                </div>
+            </div>
         </div>
 
-        <div class="col-md-6">
-            <h3>Connection status</h3>
-            <!--The text message that represents the status of the connection must depend on the connected variable.-->
-            <p class="text-success">Connected!</p>
-            <p class="text-danger">Not connected!</p>
-
-            <label>Websocket server address</label>
-            <input type="text" v-model="ws_address" />
-            <br />
-            
-            <button @click="disconnect" class="btn btn-danger" v-if="connected">Disconnect!</button>
-            <button @click="connect" class="btn btn-success" v-else>Connect!</button>
-            
-        </div>
+        <!--
         <div class="col-md-6" style="max-height:200px; overflow:auto;">
             <h3>Log messages</h3>
             <div>
@@ -32,14 +43,13 @@ const RoverSimulation = {
                 
             </div>
         </div>
-
+-->
 
         <hr>
         <div class="row">
             <div class="col-md-12 text-center">
                 <h5>Commands</h5>
             </div>
-
 
             <!-- 1st row -->
             <div class="col-md-12 text-center">
@@ -67,6 +77,7 @@ const RoverSimulation = {
         <div class="col-md-6">
             <div id="mjpeg"></div>
         </div> 
+        
 		</div>
 	`,
 
