@@ -1,7 +1,6 @@
 const SignIn = {
     template: `
         <div class="signInContainer">
-        
             <form>
                 <h3>Sign In</h3>
     
@@ -20,11 +19,12 @@ const SignIn = {
                     
                     <p class=" text-right mt-2 mb-4">
                         <router-link to="/forgot-password">Forgot password ?</router-link>
-                    </p>
-                
+                    </p>               
              </form>
 
         </div>
+        
 	`,
+
 
 }
