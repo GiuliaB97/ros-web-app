@@ -45,7 +45,7 @@ const SignUp = {
                 </div>
                 -->
                
-                <button class="btn btn-dark my-2 " @click="submitted">>
+                <button class="btn btn-dark my-2 " @click="submitted">
                     <router-link to="/">Sign-Up</router-link>
                 </button>
             </form>

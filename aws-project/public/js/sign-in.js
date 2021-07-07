@@ -5,15 +5,20 @@ const SignIn = {
                 <h3>Sign In</h3>
     
                 <div class="form-group">
-                    <label>Email address</label>
-                    <input type="email" class="form-control form-control-lg" />
+                <label for="email">Email Address</label>
+                    <input type="text"
+                           id="email"
+                           class="form-control"
+                           v-model="userData.email">
                 </div>
-    
-                <div class="form-group">
+                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control form-control-lg" />
+                    <input type="password" 
+                           id="password"
+                           class="form-control"
+                           v-model="userData.password">
                 </div>
-                    <button class="btn btn-dark my-2 " type="submit">
+                    <button class="btn btn-dark my-2 " @click="submitted">
                         <router-link to="/rover-simulation">Sign-In</router-link>
                     </button>  
                     
@@ -25,6 +30,10 @@ const SignIn = {
         </div>
         
 	`,
+    methods: {
+        submitted: function(){
 
+        }
+    }
 
 }
