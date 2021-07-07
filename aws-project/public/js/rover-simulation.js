@@ -7,7 +7,5 @@ const RoverSimulation = {
 
 		</div>
 	`,
-    data() {
 
-    },
 }

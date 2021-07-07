@@ -23,7 +23,5 @@ const HomePage = {
 		</div>
 		
 	`,
-    data() {
 
-    },
 }

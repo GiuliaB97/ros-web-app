@@ -1,3 +1,4 @@
+
 const SignUp = {
     template: `
 		<div class="signUpContainer">
@@ -27,12 +28,9 @@ const SignUp = {
                 <button class="btn btn-dark my-2 " type="submit">
                     <router-link to="/">Sign-Up</router-link>
                 </button>
-    
-           
             </form>
         </div>
+        
+        
 	`,
-    data() {
-
-    },
 }
