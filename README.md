@@ -31,12 +31,14 @@ _**NB** Becareful you should have download and setup correctly the following rep
 * docker
 ```shell_session
 systemctl start docker
+host +local:root
 
 docker pull ghcr.io/europeanroverchallenge/erc-remote-navigation-sim:latest
 docker tag ghcr.io/europeanroverchallenge/erc-remote-navigation-sim:latest erc_navigation_sim
 
-docker run --rm -it -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY --name erc_sim --net=host erc_navigation_sim
+ docker run --rm -it -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY --name erc_sim --privileged --net=host erc_navigation_sim
  ```
+
 #### Webpage
 * First reach the following address: `http://localhost:7000/` to see the webpage
 * Next, when you are asked for a Websocket server address the following address needs to be typed `ws://localhost:9090/` to connect to ros-web-server
