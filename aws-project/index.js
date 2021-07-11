@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 
 app.use('/static', express.static(__dirname + '/public'));
 
-var routes = require('./src/routes/moviesRoutes');
+var routes = require('./src/routes/usersRoutes');
 routes(app);
 
 app.use(function(req, res) {
