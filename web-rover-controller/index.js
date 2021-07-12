@@ -1,12 +1,5 @@
-/*
-Nodejs: piattaforma software cross-platform;non è un web server e neanche un linguaggio;
-        è una piattaforma web che permette di eseguire codice JavaScript lato server.
-        Può essere usato per sviluppare un web server.
-        Caratteristiche: Single-threaded, Event-driven architecture, Asynchronous, Non blocking I/O model
-
- */
-var express = require('express');   //“Require” permette di includere moduli
-var app = express();
+var express = require('express');   // importa express. “Require” permette di includere moduli: specificando solo il nome del modulo da importare vene cercato nella cartella nodule_modules
+var app = express(); //crea l'applicazione express
 //var mongoose = require('mongoose')
 var bodyParser = require('body-parser');
 var cors = require('cors')
@@ -24,15 +17,15 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use('/static', express.static(__dirname + '/public'));
-
-var routes = require('./src/routes/webpage-router');
+//app.use('/static', express.static(__dirname + '/public'));          //__dirname richiede un path assoluto
+app.use(express.static(__dirname + '/public'));
+var routes = require('./src/routes/webpage-router');//importa le rotte e associarle all’istanza di express.
 routes(app);
-
+//prima dell'avvio del server viene eseguito il codice per gestire gli errori 404
 app.use(function(req, res) {
     res.status(404).send({url: req.originalUrl + ' not found'})
 });
 
-app.listen(PORT, function () {
+app.listen(PORT, function () {// mette il server in ascolto sulla porta PORT
     console.log('Node API server started on port '+PORT);
 });

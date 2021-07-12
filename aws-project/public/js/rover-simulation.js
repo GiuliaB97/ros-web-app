@@ -20,6 +20,7 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 <button @click="disconnect" class="btn btn-danger" v-if="connected">Disconnect!</button>
                 <button @click="connect" class="btn btn-success" v-else>Connect!</button>
             </div>
+ <!--
             <div class="log-message-container" style="max-height:200px; overflow:auto;">  
               <h3>Log messages</h3>
                 <div>
@@ -30,6 +31,7 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                     
                 </div>
             </div>
+            -->
         </div>
 
         <!--
@@ -171,14 +173,10 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             console.log('set camera method')
             this.cameraViewer = new MJPEGCANVAS.Viewer({
                 divID: 'mjpeg',
-                //host: '54.167.21.209',
-                //host: '192.168.178.22',
-                //host: '127.0.0.1',
                 host: 'localhost',
                 width: 640,
                 height: 480,
                 topic: '/camera/image_raw',
-                //topic: '/zed2/right_raw/image_raw_color',
                 port: 11315,
             })
         },

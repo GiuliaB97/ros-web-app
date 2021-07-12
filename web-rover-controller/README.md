@@ -1,9 +1,23 @@
 # web-rover-controller
 ```
+npm init
+```
+- Verrà creato il file package.json, che descrive tutte le dipendenze del progetto
+```
+npm install mongoose –save
+
 npm install express --save
+```
+Cambiamenti
+1. package.json: nell’elenco delle dipendenze è stato aggiunto express
+2. package-lock.json: aggiunto questo file che contiene un elenco dettagliato di TUTTE le
+dipendenze.
+3. node_modules: cartella che contiene il codice dei moduli important
+```
 npm i cors
 npm i axios
 npm audit fix
+
 ```
 ## Project setup
 ```
