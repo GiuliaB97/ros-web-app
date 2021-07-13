@@ -4,5 +4,6 @@ module.exports = function(app) {
     app.route('/api/users')
         .get(usersController.getAll())
         .post(usersController.insert_user());
+
     app.use(usersController.show_index);
 }

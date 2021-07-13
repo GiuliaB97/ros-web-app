@@ -19,9 +19,9 @@ module.exports = function(mongoose) {
     each one represents a field in the documents stored in MongoDB.
      */
     var UserSchema = new Schema({
-        name:  {String, unique: true, required: true},// String is shorthand for {type: String}
+        name:  {String, required: true},// String is shorthand for {type: String}
         surname: {String, required: true},
-        email: {String, required: true},
+        email: {String, unique: true, required: true},
         password: {String, required: true}//qui sarebbe meglio l'hash
 
     });

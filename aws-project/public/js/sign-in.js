@@ -40,7 +40,11 @@ const SignIn = {
     },
     methods: {
         submitted: function(){
-
+            axios.post('http://localhost:3000/api/users', this.userData)
+                .then(response => {
+                    this.userData.push(response.data);
+                })
+                .catch(error => (console.log(error)));
         }
     }
 
