@@ -16,10 +16,10 @@ module.exports = function(mongoose) {
     var Schema = mongoose.Schema;
     //A schema can have an arbitrary number of fields — each one represents a field in the documents stored in MongoDB.
     var UserSchema = new Schema({
-        name:  {String, required: true},// String is shorthand for {type: String}
-        surname: {String, required: true},
-        email: {String, unique: true, required: true},
-        password: {String, required: true}//qui sarebbe meglio l'hash
+        name:  String,// String is shorthand for {type: String}
+        surname: String,
+        email: String,
+        password: String,//qui sarebbe meglio l'hash
 
     });
     // Compile model from schema

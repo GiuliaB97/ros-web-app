@@ -23,11 +23,15 @@ This property is an object containing a property for each query string parameter
 
 
  */
-exports.getAll = function(req, res) {
-    res.send(User.find())
-}
+exports.list_users = function(req, res) {
+    User.find({}, function(err, user) {
+        if (err)
+            res.send(err);
+        res.json(user);
+    });
+};
 
-exports.insert_user = function( req, res){
+exports.create_user = function( req, res){
     let message;
     if(User.findOne({email: req.query.email})){
         message = "user exists";
@@ -43,11 +47,13 @@ exports.insert_user = function( req, res){
         });
     }
 };
-
+/*
 async function authenticate({ username, password }) {
     const user = await User.findOne({ username });
     if (user.password !== password) {
         message= "wrong password";
-        console.log(message)
+        console.log(message);
     }
-}
+};
+
+ */

@@ -9,8 +9,6 @@ const router = new VueRouter({
         // We'll talk about nested routes later.
 
         //riguarda route dinamiche
-        //{ path: '/sign-in', name: 'Sign-in', components: SignInButton},
-        //{ path: '/sign-up', name: 'Sign-up', components: SignUpButton},
         { path: '/', name: 'Home', component: HomePage },
         { path: '/sign-up', name: 'SignUp', component: SignUp },
         { path: '/sign-in', name: 'SignIn', component: SignIn },
