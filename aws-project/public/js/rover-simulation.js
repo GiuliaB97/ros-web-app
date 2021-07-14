@@ -1,5 +1,3 @@
-
-
 const RoverSimulation = {
     template: `
 		<div class="rover">
@@ -75,23 +73,33 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             <div class="col-md-12 text-center">
                 <button @click="backward" :disabled=" !connected" class="btn btn-primary">Go backward</button>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div id="mjpeg"></div>
-        </div> 
+            </div>
+            <div class="col-md-6">
+                <div id="mjpeg"></div>
+            </div> 
+            <!--nuova sezione per i dati dell'odometria-->
+            <div class="col-md-9">
+                <span id="modometry" > {{odom}} </span>
+            </div>
         
 		</div>
 	`,
 
     data: function(){
         return {
+            //to create a ROS node object to communicate with a rosbridge server
             connected: false,
             ros: null,
             ws_address: 'ws://localhost:9090/',
             logs: [],
+            odomData: ""
         }
     },
-    // helper methods to connect to ROS
+    // Helper methods to connect to ROS
+    // This adds a listener for a connection event to the ros object.
+    // The two blocks following the connection event listener do the same for error and close events.
+    // This way, we can monitor the connection to the rosbridge server.
+
     methods: {
         connect: function() {
             this.logs.unshift('connect to rosbridge server!!')
@@ -116,12 +124,19 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 this.logs.unshift((new Date()).toTimeString() + ' - Connected!')
                 this.connected = true
                 this.loading = false
+                //listeners
                 this.setCamera()
+                this.setOdom()
+                this.setCmdVel()
             })
         },
         disconnect: function() {
             this.ros.close()
         },
+        //A ROSLIB.Topic corresponds to a ROS Topic. The topic declares the topic name, message type, and passes in the ROS object from earlier.
+        // Topics can be used to subscribe or publish or both.
+        //To publish, we first need to create a new ROSLIB.Message.
+        // It takes in an object literal that matches up to the message definition on the ROS system.
         setTopic: function() {
             this.topic = new ROSLIB.Topic({
                 ros: this.ros,
@@ -129,6 +144,8 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 messageType: 'geometry_msgs/Twist'
             })
         },
+
+        //fter we have the message, we just pass it to the ROSLIB.Topic to publish.
         forward: function() {
             this.message = new ROSLIB.Message({
                 linear: { x: 1, y: 0, z: 0, },
@@ -179,6 +196,43 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 topic: '/camera/image_raw',
                 port: 11315,
             })
+        },
+
+        //listener for odometry topic
+        setOdom: function() {
+            var listener = new ROSLIB.Topic({
+                ros : ros,
+                name : '/zed2/odom',//check if t is really this
+                //Absolute 3D position and orientation relative to the Odometry frame (pure visual odometry for ZED, visual-inertial for ZED-M and ZED 2)
+                messageType: 'nav_msgs/Odometry' // to check if it is really this or not
+                //messageType : 'std_msgs/String'
+                ///battery
+                ///diagnostics
+                ///move_base/cancel
+                /*
+                name: '/cmd_vel',
+                messageType: 'geometry_msgs/Twist'
+
+                 */
+            });
+            console.log('set odom listener method')
+            this.listener.subscribe(function(message) {
+                console.log('Received message on ' + listener.name + ': ' + message.data);
+                alert('Receive odom msg')//listener.unsubscribe();
+                vm.odomData = listener.data
+            });
+        },
+        setCmdVel: function() {
+            var listener = new ROSLIB.Topic({
+                ros : ros,
+                name : '/cmd_vel',//check if t is really this
+                messageType: 'geometry_msgs/Twist' // to check if it is really this or not
+            });
+            console.log('set cmdVel listener method')
+            this.listener.subscribe(function(message) {
+                console.log('Received message on ' + listener.name + '; linear velocity' + message.data.linear+ ', angular velocity: ' + message.data.angular);
+                alert('Receive cmdVel msg')//listener.unsubscribe();
+            });
         },
     },
 }

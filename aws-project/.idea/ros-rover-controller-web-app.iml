@@ -10,5 +10,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="ionicons" level="application" />
     <orderEntry type="library" name="twitter-bootstrap" level="application" />
+    <orderEntry type="library" name="Chart.js" level="application" />
+    <orderEntry type="library" name="vue-chartjs" level="application" />
   </component>
 </module>
