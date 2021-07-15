@@ -1,5 +1,3 @@
-
-
 const RoverSimulation = {
     template: `
 		<div class="rover">
@@ -75,10 +73,14 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             <div class="col-md-12 text-center">
                 <button @click="backward" :disabled=" !connected" class="btn btn-primary">Go backward</button>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div id="mjpeg"></div>
-        </div> 
+            </div>
+            <div class="col-md-6">
+                <div id="mjpeg"></div>
+            </div> 
+            <!--nuova sezione per i dati dell'odometria-->
+            <div class="col-md-9">
+                <span id="modometry" > {{odom}} </span>
+            </div>
         
         <!--non sta funzionando-->
             <span id="odom">
@@ -88,8 +90,9 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
 		</div>
 	`,
 
-    data: function(){
+    data: function () {
         return {
+            //to create a ROS node object to communicate with a rosbridge server
             connected: false,
             ros: null,
             ws_address: 'ws://localhost:9090/',
@@ -97,9 +100,13 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             odom: "",
         }
     },
-    // helper methods to connect to ROS
+    // Helper methods to connect to ROS
+    // This adds a listener for a connection event to the ros object.
+    // The two blocks following the connection event listener do the same for error and close events.
+    // This way, we can monitor the connection to the rosbridge server.
+
     methods: {
-        connect: function() {
+        connect: function () {
             this.logs.unshift('connect to rosbridge server!!')
             this.ros = new ROSLIB.Ros({
                 url: this.ws_address
@@ -122,63 +129,69 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 this.logs.unshift((new Date()).toTimeString() + ' - Connected!')
                 this.connected = true
                 this.loading = false
+                //listeners
                 this.setCamera()
                 this.setOdomListener()
                 this.setCmdVelistener()
+
             })
         },
-        disconnect: function() {
+        disconnect: function () {
             this.ros.close()
         },
-        setTopic: function() {
+        //A ROSLIB.Topic corresponds to a ROS Topic. The topic declares the topic name, message type, and passes in the ROS object from earlier.
+        // Topics can be used to subscribe or publish or both.
+        //To publish, we first need to create a new ROSLIB.Message.
+        // It takes in an object literal that matches up to the message definition on the ROS system.
+        setTopic: function () {
             this.topic = new ROSLIB.Topic({
                 ros: this.ros,
                 name: '/cmd_vel',
                 messageType: 'geometry_msgs/Twist'
             })
         },
-
-        forward: function() {
+        //after we have the message, we just pass it to the ROSLIB.Topic to publish.
+        forward: function () {
             this.message = new ROSLIB.Message({
-                linear: { x: 1, y: 0, z: 0, },
-                angular: { x: 0, y: 0, z: 0, },
+                linear: {x: 1, y: 0, z: 0,},
+                angular: {x: 0, y: 0, z: 0,},
             })
             this.setTopic()
             this.topic.publish(this.message)
         },
-        stop: function() {
+        stop: function () {
             this.message = new ROSLIB.Message({
-                linear: { x: 0, y: 0, z: 0, },
-                angular: { x: 0, y: 0, z: 0, },
+                linear: {x: 0, y: 0, z: 0,},
+                angular: {x: 0, y: 0, z: 0,},
             })
             this.setTopic()
             this.topic.publish(this.message)
         },
-        backward: function() {
+        backward: function () {
             this.message = new ROSLIB.Message({
-                linear: { x: -1, y: 0, z: 0, },
-                angular: { x: 0, y: 0, z: 0, },
+                linear: {x: -1, y: 0, z: 0,},
+                angular: {x: 0, y: 0, z: 0,},
             })
             this.setTopic()
             this.topic.publish(this.message)
         },
-        turnLeft: function() {
+        turnLeft: function () {
             this.message = new ROSLIB.Message({
-                linear: { x: 0.5, y: 0, z: 0, },
-                angular: { x: 0, y: 0, z: 0.5, },
+                linear: {x: 0.5, y: 0, z: 0,},
+                angular: {x: 0, y: 0, z: 0.5,},
             })
             this.setTopic()
             this.topic.publish(this.message)
         },
-        turnRight: function() {
+        turnRight: function () {
             this.message = new ROSLIB.Message({
-                linear: { x: 0.5, y: 0, z: 0, },
-                angular: { x: 0, y: 0, z: -0.5, },
+                linear: {x: 0.5, y: 0, z: 0,},
+                angular: {x: 0, y: 0, z: -0.5,},
             })
             this.setTopic()
             this.topic.publish(this.message)
         },
-        setCamera: function() {
+        setCamera: function () {
             console.log('set camera method')
             this.cameraViewer = new MJPEGCANVAS.Viewer({
                 divID: 'mjpeg',
@@ -189,23 +202,23 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 port: 11315,
             })
         },
-        setOdomListener: function(){
+
+        setOdomListener: function () {
             listener = new ROSLIB.Topic({
-                ros : this.ros,
-                name : '/zed2/odom',
-                messageType : 'nav_msgs/Odometry'
+                ros: this.ros,
+                name: '/zed2/odom',
+                messageType: 'nav_msgs/Odometry'
             });
             // this.setListener()
             console.log('set odom listener')
-            listener.subscribe(function(message) {
-                console.log('Received message on ' +listener.name +  JSON.stringify(message)) ;
-                this.odom= listener.name
+            listener.subscribe(function (message) {
+                console.log('Received message on ' + listener.name + JSON.stringify(message));
+                this.odom = listener.name
             });
         },
-        setCmdVelistener: function(){
+        setCmdVelistener: function () {
             //problema se metto this.cmdVel non trova name idk why
             //to fix stringify
-
             cmdVelListener = new ROSLIB.Topic({
                 ros: this.ros,
                 name: '/cmd_vel',
@@ -213,9 +226,11 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             })
             // this.setListener()
             console.log('set cmdVel listener')
-            cmdVelListener.subscribe(function(message) {
-                console.log('Received message on ' + cmdVelListener.name +  JSON.stringify(message)) ;
+            cmdVelListener.subscribe(function (message) {
+                console.log('Received message on ' + cmdVelListener.name + JSON.stringify(message));
+
             });
-        }
-    },
-}
+        },
+    }
+}                //Absolute 3D position and orientation relative to the Odometry frame (pure visual odometry for ZED, visual-inertial for ZED-M and ZED 2)
+                // console.log('Received message on ' + listener.name + '; linear velocity' + message.data.linear+ ', angular velocity: ' + message.data.angular);
