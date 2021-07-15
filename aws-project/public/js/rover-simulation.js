@@ -80,6 +80,11 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             <div id="mjpeg"></div>
         </div> 
         
+        <!--non sta funzionando-->
+            <span id="odom">
+              {{ odom }}
+            </span>
+       
 		</div>
 	`,
 
@@ -89,6 +94,7 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             ros: null,
             ws_address: 'ws://localhost:9090/',
             logs: [],
+            odom: "",
         }
     },
     // helper methods to connect to ROS
@@ -193,7 +199,7 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             console.log('set odom listener')
             listener.subscribe(function(message) {
                 console.log('Received message on ' +listener.name +  JSON.stringify(message)) ;
-
+                this.odom= listener.name
             });
         },
         setCmdVelistener: function(){
