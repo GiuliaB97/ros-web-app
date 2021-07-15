@@ -1,5 +1,5 @@
-import VueFormulate from '@braid/vue-formulate'
-const VueFormulate = require('@braid/vue-formulate')
+//import VueFormulate from '@braid/vue-formulate'
+//const VueFormulate = require('@braid/vue-formulate')
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose')
@@ -9,7 +9,7 @@ var path = require('path');
 
 global.appRoot = path.resolve(__dirname);
 
-var PORT = 3000;
+var PORT = 7000;
 
 mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true, useFindAndModify: false });
 
@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 
 app.use('/static', express.static(__dirname + '/public'));
 
-var routes = require('./src/routes/usersRoutes');
+var routes = require('./src/routes/moviesRoutes');
 routes(app);
 
 app.use(function(req, res) {

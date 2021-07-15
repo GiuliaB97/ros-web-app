@@ -117,6 +117,8 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 this.connected = true
                 this.loading = false
                 this.setCamera()
+                this.setOdomListener()
+                this.setCmdVelistener()
             })
         },
         disconnect: function() {
@@ -129,6 +131,7 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 messageType: 'geometry_msgs/Twist'
             })
         },
+
         forward: function() {
             this.message = new ROSLIB.Message({
                 linear: { x: 1, y: 0, z: 0, },
@@ -180,5 +183,33 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 port: 11315,
             })
         },
+        setOdomListener: function(){
+            listener = new ROSLIB.Topic({
+                ros : this.ros,
+                name : '/zed2/odom',
+                messageType : 'nav_msgs/Odometry'
+            });
+            // this.setListener()
+            console.log('set odom listener')
+            listener.subscribe(function(message) {
+                console.log('Received message on ' +listener.name +  JSON.stringify(message)) ;
+
+            });
+        },
+        setCmdVelistener: function(){
+            //problema se metto this.cmdVel non trova name idk why
+            //to fix stringify
+
+            cmdVelListener = new ROSLIB.Topic({
+                ros: this.ros,
+                name: '/cmd_vel',
+                messageType: 'geometry_msgs/Twist'
+            })
+            // this.setListener()
+            console.log('set cmdVel listener')
+            cmdVelListener.subscribe(function(message) {
+                console.log('Received message on ' + cmdVelListener.name +  JSON.stringify(message)) ;
+            });
+        }
     },
 }
