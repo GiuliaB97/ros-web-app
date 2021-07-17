@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-//import VueFormulate from '@braid/vue-formulate'
-//const VueFormulate = require('@braid/vue-formulate')
-=======
->>>>>>> e9e705fca258fca91e9369dcdc98a75d8f554c51
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose')
@@ -24,11 +19,11 @@ app.use(bodyParser.json());
 
 app.use('/static', express.static(__dirname + '/public'));
 
-<<<<<<< HEAD
+
 var routes = require('./src/routes/moviesRoutes');
-=======
-var routes = require('./src/routes/userRoutes');
->>>>>>> e9e705fca258fca91e9369dcdc98a75d8f554c51
+
+//var routes = require('./src/routes/userRoutes');
+
 routes(app);
 
 app.use(function(req, res) {
