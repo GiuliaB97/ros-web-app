@@ -1,0 +1,51 @@
+version: "3.9"
+services:
+  leo:
+    build: 
+      context: ERC-Remote-Navigation-Sim
+      dockerfile: Dockerfile
+    container_name: leo
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+     - "DISPLAY"
+     - "ROS_HOSTNAME=leo"
+     - "ROS_MASTER_URI=http://localhost:11311"
+    restart: always
+
+  video:
+    build:
+      context: docker_ros-web-video-server
+      dockerfile: Dockerfile
+    environment:
+     - "ROS_HOSTNAME=video"
+     - "ROS_MASTER_URI=http://leo:11311"
+    depends_on:
+     - leo
+    ports:
+     - "11315:11315"
+    command:
+     - rosrun
+     - web_video_server
+     - web_video_server
+     - _port:=11315
+    restart: always
+      
+  bridge:
+    build: 
+      context: rosbridge_suite
+      dockerfile: Dockerfile
+    environment:
+     - "ROS_HOSTNAME=bridge"
+     - "ROS_MASTER_URI=http://leo:11311"
+    depends_on:
+     - leo
+    ports:
+      - "9090:9090"
+    command:
+     - roslaunch
+     - --wait
+     - rosbridge_server
+     - rosbridge_websocket.launch
+    restart: always
+

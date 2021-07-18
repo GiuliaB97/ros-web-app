@@ -76,6 +76,7 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             </div>
             <div class="col-md-6">
                 <div id="mjpeg"></div>
+                <div id="mjpeg2"></div>
             </div> 
             <!--nuova sezione per i dati dell'odometria-->
             <div class="col-md-9">
@@ -86,6 +87,11 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             <span id="odom">
               {{ odom }}
             </span>
+            <div class="col-md-6">
+                <div id="odom"></div>
+                hzhahshdh
+                {{ odom }}
+            </div> 
        
 		</div>
 	`,
@@ -212,7 +218,15 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             // this.setListener()
             console.log('set odom listener')
             listener.subscribe(function (message) {
-                console.log('Received message on ' + listener.name + JSON.stringify(message));
+                //var obj = JSON.parse(message);
+                //message.pose.pose.position.x
+                //message.pose.pose.position.y
+                //message.pose.pose.position.z
+                //message.pose.pose.orientation.x
+                //message.pose.pose.orientation.y
+                //message.pose.pose.orientation.z
+                //message.pose.pose.orientation.w
+                console.log('Received message on ' + listener.name + JSON.stringify(message)+ JSON.stringify(message.pose.pose.position.x));
                 this.odom = listener.name
             });
         },
