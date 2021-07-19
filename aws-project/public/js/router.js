@@ -13,7 +13,6 @@ const router = new VueRouter({
         { path: '/sign-up', name: 'SignUp', component: SignUp },
         { path: '/sign-in', name: 'SignIn', component: SignIn },
         { path: '/rover-simulation', name: 'RoverSimulation', component: RoverSimulation },
-        { path: '/random-chart', name: 'randomChart', component: DataChart },
         /*
         { path: '/', name: 'Home', component: Home },
         { path: '/movies', name: 'Movies', component: Movies },
