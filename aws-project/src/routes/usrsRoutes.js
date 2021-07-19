@@ -7,14 +7,14 @@ module.exports = function(app) {
 	*/
 
 	app.route('/api/usrs')
-		.get(usrsController.list_movies)
-		.post(usrsController.create_movie);
+		.get(usrsController.list_usrs)
+		.post(usrsController.create_usr);
 
 
 	app.route('/api/usrs/:id')
-		.get(usrsController.read_movie)
-		.put(usrsController.update_movie)
-		.delete(usrsController.delete_movie);
+		.get(usrsController.read_usr)
+		.put(usrsController.update_usr)
+		.delete(usrsController.delete_usr);
 
 	app.use(usrsController.show_index);
 };
