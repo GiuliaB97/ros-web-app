@@ -84,13 +84,14 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             </div>
         
         <!--non sta funzionando-->
-            <span id="odom">
-              {{ odom }}
-            </span>
+            
             <div class="col-md-6">
                 <div id="odom"></div>
-                hzhahshdh
-                {{ odom }}
+                hzhahshdh {{ odom }}
+                <span id="odom">
+                  {{ odom }}
+                </span>
+               
             </div> 
        
 		</div>
@@ -103,7 +104,7 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             ros: null,
             ws_address: 'ws://localhost:9090/',
             logs: [],
-            odom: "",
+            odom: ""
         }
     },
     // Helper methods to connect to ROS
@@ -226,8 +227,11 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 //message.pose.pose.orientation.y
                 //message.pose.pose.orientation.z
                 //message.pose.pose.orientation.w
-                console.log('Received message on ' + listener.name + JSON.stringify(message)+ JSON.stringify(message.pose.pose.position.x));
-                this.odom = listener.name
+                //JSON.stringify(message.pose.pose.position.x)
+                console.log('Received message on ' + listener.name + JSON.stringify(message));
+                this.odom = JSON.stringify(listener.name)
+                console.log('\n\n\n\n\n'+ this.odom)
+                
             });
         },
         setCmdVelistener: function () {
