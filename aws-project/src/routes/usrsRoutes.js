@@ -1,5 +1,5 @@
 module.exports = function(app) {
-	var moviesController = require('../controllers/usrsController');
+	var usrsController = require('../controllers/usrsController');
 
 	/*
 	app.route('/')
@@ -7,17 +7,17 @@ module.exports = function(app) {
 	*/
 
 	app.route('/api/lastmovie')
-		.get(moviesController.last_movie)
+		.get(usrsController.last_movie)
 
 	app.route('/api/movies')
-		.get(moviesController.list_movies)
-		.post(moviesController.create_movie);
+		.get(usrsController.list_movies)
+		.post(usrsController.create_movie);
 
 
 	app.route('/api/movies/:id')
-		.get(moviesController.read_movie)
-		.put(moviesController.update_movie)
-		.delete(moviesController.delete_movie);
+		.get(usrsController.read_movie)
+		.put(usrsController.update_movie)
+		.delete(usrsController.delete_movie);
 
-	app.use(moviesController.show_index);
+	app.use(usrsController.show_index);
 };
