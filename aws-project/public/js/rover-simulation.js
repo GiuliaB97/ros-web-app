@@ -3,6 +3,7 @@ const RoverSimulation = {
 		<div class="rover">
 			<div>
                     <h1>This is the rover simulation page</h1>
+                   
             </div>
 <!--
 In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa area centrale che visualizza i contenuti più importanti. Bootstrap la chiama jumbotron.
@@ -18,33 +19,7 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 <button @click="disconnect" class="btn btn-danger" v-if="connected">Disconnect!</button>
                 <button @click="connect" class="btn btn-success" v-else>Connect!</button>
             </div>
- <!--
-            <div class="log-message-container" style="max-height:200px; overflow:auto;">  
-              <h3>Log messages</h3>
-                <div>
-                
-                    <p v-for="log in logs">
-                        {{ log }}
-                    </p>
-                    
-                </div>
-            </div>
-            -->
-        </div>
-
-        <!--
-        <div class="col-md-6" style="max-height:200px; overflow:auto;">
-            <h3>Log messages</h3>
-            <div>
-            
-                <p v-for="log in logs">
-                    {{ log }}
-                </p>
-                
-            </div>
-        </div>
--->
-
+         </div>
         <hr>
         <div class="row">
             <div class="col-md-12 text-center">
@@ -86,12 +61,12 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
         <!--non sta funzionando-->
             
             <div class="col-md-6">
-                <div id="odom"></div>
+                <div id="odom" v-bind=odom></div>
                 hzhahshdh {{ odom }}
                 <span id="odom">
                   {{ odom }}
                 </span>
-               
+               <h1>{{odom}}</h1>
             </div> 
        
 		</div>
@@ -103,8 +78,8 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             connected: false,
             ros: null,
             ws_address: 'ws://localhost:9090/',
+            odom: '',
             logs: [],
-            odom: ""
         }
     },
     // Helper methods to connect to ROS
@@ -229,7 +204,7 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 //message.pose.pose.orientation.w
                 //JSON.stringify(message.pose.pose.position.x)
                 console.log('Received message on ' + listener.name + JSON.stringify(message));
-                this.odom = JSON.stringify(listener.name)
+                this.odom = listener.name
                 console.log('\n\n\n\n\n'+ this.odom)
                 
             });
