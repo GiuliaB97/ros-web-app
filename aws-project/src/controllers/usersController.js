@@ -47,13 +47,44 @@ exports.create_user = function( req, res){
         });
     }
 };
-/*
-async function authenticate({ username, password }) {
-    const user = await User.findOne({ username });
-    if (user.password !== password) {
-        message= "wrong password";
-        console.log(message);
-    }
-};
 
- */
+exports.registration = function(req, res) {
+    let usrtmp = req.body.params;
+    usrtmp.salt = bcrypt.genSaltSync(10);
+    usrtmp.password = bcrypt.hashSync(usrtmp.password, usrtmp.salt);
+
+    let newUser = new User(usrtmp);
+    newUser.save(function(err, gardener) {
+        if (err)
+            res.send(false);
+        res.status(201).send(true);
+    });
+}
+
+exports.login = function(req, res) {
+    let userId = req.body.params.userId;
+    let password = req.body.params.password;
+    Users.findOne({user_id: userId}, 'user_id password salt', function(err, user) {
+        if(err || user == null){
+            res.send({
+                result: false
+            });
+        } else {
+            if(bcrypt.compareSync(password ,user.password)) {
+                let token = jwt.sign({user: user.user_id, id: user._id}, PRIVATE_SECRET_KEY, {
+                    algorithm: 'HS512',
+                    expiresIn: '2d'
+                });
+                res.send({
+                    result: true,
+                    token: token,
+                    id: user._id
+                });
+            } else {
+                res.send({
+                    result: false
+                });
+            }
+        }
+    });
+}
