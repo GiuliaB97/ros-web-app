@@ -1,4 +1,4 @@
-//import VueRouter from 'vue-router'
+const MONGO_URL = "http://localhost:7000/api"
 
 const router = new VueRouter({
     mode: 'history',
