@@ -4,9 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>AWS project</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--Without adding this before new Vue you get the error vue is not defined-->
+    <!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <script src="https://npmcdn.com/vue-router/dist/vue-router.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+ -->
+
+    <!-- Robot management -->
+    <script src="https://cdn.jsdelivr.net/npm/eventemitter2@5.0.1/lib/eventemitter2.min.js"></script>
+    <script type="text/javascript" src="https://static.robotwebtools.org/mjpegcanvasjs/current/mjpegcanvas.min.js"></script>
+    <script type="text/javascript" src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+    <!--se aggiungo questo i pulsanti sono carini ma viene visualizzato solo il nav-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+
+    <!-- Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://npmcdn.com/vue-router/dist/vue-router.js"></script>
+
+    <!--Vue charts-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!--Style sheets-->
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+
+    <!--Component + router import-->
+    <script src="/static/js/navigation-bar.js"></script>
+    <script src="/static/js/home-page.js"></script>
+    <script src="/static/js/footer-section.js"></script>
+    <script src="/static/js/sign-up.js"></script>
+    <script src="/static/js/sign-in.js"></script>
+    <script src="/static/js/rover-simulation.js"></script>
+    <script src="/static/js/router.js"></script>
 </head>
 
 <body>
@@ -14,43 +60,11 @@
     <navigation-bar></navigation-bar>
     <home-page></home-page>
     <!--<footer-component></footer-component>-->
-
-
     <!-- route outlet -->
     <!-- component matched by the route will render here -->
     <router-view></router-view>
 
 </div>
-<!--Without adding this before new Vue you get the error vue is not defined-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="https://npmcdn.com/vue-router/dist/vue-router.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-<!--From previous project-->
-<script type="text/javascript" src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/eventemitter2@5.0.1/lib/eventemitter2.min.js"></script>
-<script type="text/javascript" src="https://static.robotwebtools.org/mjpegcanvasjs/current/mjpegcanvas.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script type="text/javascript" src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
-<!--se aggiungo questo i pulsanti sono carini ma viene visualizzato solo il nav-->
-<!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
-
-<!--vue charts-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-<script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
-
-
-<!--Component + router import-->
-<script src="/static/js/navigation-bar.js"></script>
-<script src="/static/js/home-page.js"></script>
-<script src="/static/js/footer-section.js"></script>
-<script src="/static/js/sign-up.js"></script>
-<script src="/static/js/sign-in.js"></script>
-<script src="/static/js/rover-simulation.js"></script>
-<script src="/static/js/router.js"></script>
 
 <script>
     var vm = new Vue({
