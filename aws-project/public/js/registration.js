@@ -79,12 +79,13 @@ const Registration = {
     },
     methods: {
         addUsr: function(){
+            let existingError=false
             if(this.form.password!==this.form.password2) {
                 this.passwordError = "Passwords do not match";
                 existingError = true;
             }
             if(this.form.email !==''){
-                axios.post(MONGO_URL + '/sign-up', {
+                axios.post(MONGO_URL + '/registration', {
                     params: {
                         name: this.form.name,
                         surname: this.form.surname,

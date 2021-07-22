@@ -19,7 +19,7 @@ exports.list_users = function(req, res) {
 
 exports.registration = function(req, res) {
 	let newUserTmp = req.body.params;
-
+	console.log("registration method receive:"+ req.body.params)
 	newUserTmp.salt = bcrypt.genSaltSync(10);
 	newUserTmp.password = bcrypt.hashSync(newUserTmp.password, newUserTmp.salt);
 
