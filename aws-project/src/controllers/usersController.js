@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 Usr = require("../models/userModel.js")(mongoose);
 
 exports.show_index = function(req, res) {
-	res.sendFile(appRoot  + '/www/index2.html');
+	res.sendFile(appRoot  + '/www/index.html');
 };
 
 exports.list_usrs = function(req, res) {
