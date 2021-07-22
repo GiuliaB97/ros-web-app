@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 
 app.use('/static', express.static(__dirname + '/public'));
 
-var routes = require('./src/routes/usrsRoutes');
+var routes = require('./src/routes/usersRoutes');
 
 //var routes = require('./src/routes/userRoutes');
 

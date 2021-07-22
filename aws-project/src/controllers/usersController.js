@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-Usr = require("../models/usrModel.js")(mongoose);
+Usr = require("../models/userModel.js")(mongoose);
 
 exports.show_index = function(req, res) {
 	res.sendFile(appRoot  + '/www/index2.html');

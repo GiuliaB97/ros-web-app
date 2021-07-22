@@ -1,5 +1,5 @@
 module.exports = function(app) {
-	var usrsController = require('../controllers/usrsController');
+	var usrsController = require('../controllers/usersController');
 
 	/*
 	app.route('/')
