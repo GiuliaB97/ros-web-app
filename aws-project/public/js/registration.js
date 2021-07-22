@@ -1,5 +1,5 @@
 
-const SignUp = {
+const Registration = {
     template: `
 	<div class="container">
         <div class="d-flex justify-content-center">
@@ -85,7 +85,7 @@ const SignUp = {
                 existingError = true;
             }
             if(this.form.email !==''){
-                axios.post(MONGO_URL + '/registration', {
+                axios.post(MONGO_URL + '/sign-up', {
                     params: {
                         name: this.form.name,
                         surname: this.form.surname,

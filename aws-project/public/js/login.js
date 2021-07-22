@@ -1,4 +1,4 @@
-const SignIn = {
+const Login = {
     template: `
             <div class="container">
         <div class="d-flex justify-content-center">
