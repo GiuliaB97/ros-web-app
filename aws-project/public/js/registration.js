@@ -1,4 +1,3 @@
-
 const Registration = {
     template: `
 	<div class="container">

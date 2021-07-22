@@ -10,8 +10,8 @@ const router = new VueRouter({
 
         //riguarda route dinamiche
         { path: '/', name: 'Home', component: HomePage },
-        { path: '/sign-up', name: 'SignUp', component: Registration },
-        { path: '/sign-in', name: 'SignIn', component: Login },
+        { path: '/registration', name: 'Registration', component: Registration },
+        { path: '/login', name: 'Login', component: Login },
         { path: '/rover-simulation', name: 'RoverSimulation', component: RoverSimulation },
         /*
         { path: '/', name: 'Home', component: Home },
