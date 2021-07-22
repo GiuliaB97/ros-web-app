@@ -22,7 +22,7 @@ exports.registration = function(req, res) {
 	newUserTmp.salt = bcrypt.genSaltSync(10);
 	newUserTmp.password = bcrypt.hashSync(newUserTmp.password, newGardenerTmp.salt);
 
-	let newUser = new Gardener(newGardenerTmp);
+	let newUser = new User(newUserTmp);
 	newUser.save(function(err, user) {
 		if (err)
 			res.send(false);
