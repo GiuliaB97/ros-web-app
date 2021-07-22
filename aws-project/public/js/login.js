@@ -1,6 +1,6 @@
 const Login = {
     template: `
-            <div class="container">
+      <div class="container">
         <div class="d-flex justify-content-center">
             <div class="mt-2 card col-12 col-sm-8 col-md-6 col-xl-5">
                 <div class="card-header">
