@@ -16,11 +16,11 @@ const NavigationBar =  {
         <!-- MENU -->
         <div class="nav-item ">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit" to="\rover-simulation">
-                <router-link to="/sign-up">Sign-Up</router-link>
+                <router-link to="/registration">Sign-Up</router-link>
             </button>
             
             <button class="btn btn-dark my-2 my-sm-0" type="submit" to="\rover-simulation">
-                <router-link to="/sign-in">Sign-In</router-link>
+                <router-link to="/login">Sign-In</router-link>
             </button>
         <!-- FINE RESPONSIVE MENU --> 
         </div>
