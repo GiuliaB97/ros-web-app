@@ -1,55 +1,79 @@
 var mongoose = require('mongoose');
-Usr = require("../models/userModel.js")(mongoose);
+User = require("../models/userModel.js")(mongoose);
+
+const bcrypt = require('bcrypt');
+const PRIVATE_SECRET_KEY = '4972DD665B421C97CDE1A933E54AAC067464593A1773A6C9A8B378F5CFCBBAD68B5023307F65AAEF858A6CA70D2D979A0CF3DE487359B366EAB20F3C7BDBFDA4';
+const jwt = require('jsonwebtoken');
 
 exports.show_index = function(req, res) {
 	res.sendFile(appRoot  + '/www/index.html');
 };
 
-exports.list_usrs = function(req, res) {
-	Usr.find({}, function(err, movie) {
+exports.list_users = function(req, res) {
+	User.find({}, function(err, users) {
 		if (err)
 			res.send(err);
-		res.json(movie);
+		res.json(users);
 	});
 };
 
-exports.read_usr = function(req, res) {
-	/*
-	TODO cast req.params.id to ObjectId
-	*/
-	Usr.findById(req.params.id, function(err, usr) {
+exports.registration = function(req, res) {
+	let newUserTmp = req.body.params;
+	newUserTmp.salt = bcrypt.genSaltSync(10);
+	newUserTmp.password = bcrypt.hashSync(newUserTmp.password, newGardenerTmp.salt);
+
+	let newUser = new Gardener(newGardenerTmp);
+	newUser.save(function(err, user) {
 		if (err)
-			res.send(err);
-		else{
-			if(usr==null){
-				res.status(404).send({
-					description: 'Usr not found'
+			res.send(false);
+		res.status(201).send(true);
+	});
+}
+
+exports.login = function(req, res) {
+	let userId = req.body.params.userId;
+	let password = req.body.params.password;
+	User.findOne({user_id: userId}, 'user_id password salt', function(err, user) {
+		if(err || user == null){
+			res.send({
+				result: false
+			});
+		} else {
+			if(bcrypt.compareSync(password ,user.password)) {
+				let token = jwt.sign({user: user.user_id, id: user._id}, PRIVATE_SECRET_KEY, {
+					algorithm: 'HS512',
+					expiresIn: '2d'
 				});
-			}
-			else{
-				res.json(usr);
+				res.send({
+					result: true,
+					token: token,
+					id: user._id
+				});
+			} else {
+				res.send({
+					result: false
+				});
 			}
 		}
 	});
-};
+}
 
-exports.create_usr = function(req, res) {
-	var new_usr = new Usr(req.body);
-	new_usr.save(function(err, movie) {
-		if (err)
-			res.send(err);
-		res.status(201).json(movie);
+exports.checkUsername = function(req, res) {
+	let requestUser = req.query.userId;
+	User.exists({user_id: requestUser}, function (err, result) {
+		res.send(result);
 	});
-};
+}
 
-exports.update_usr = function(req, res) {
-	Usr.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function(err, usr) {
+// NOT USE 4 NOW; DECIDE IF YOU WANT TO KEEP THEM OR NOT
+exports.update_user = function(req, res) {
+	User.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function(err, usr) {
 		if (err)
 			res.send(err);
 		else{
 			if(usr==null){
 				res.status(404).send({
-					description: 'Usr not found'
+					description: 'User not found'
 				});
 			}
 			else{
@@ -60,13 +84,13 @@ exports.update_usr = function(req, res) {
 };
 
 exports.delete_usr = function(req, res) {
-	Usr.deleteOne({_id: req.params.id}, function(err, result) {
+	User.deleteOne({_id: req.params.id}, function(err, result) {
 		if (err)
 			res.send(err);
 		else{
 			if(result.deletedCount==0){
 				res.status(404).send({
-					description: 'Usr not found'
+					description: 'User not found'
 				});
 			}
 			else{
