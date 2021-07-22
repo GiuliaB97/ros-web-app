@@ -10,7 +10,7 @@ const Login = {
                 </div>
                 <form v-if="!token" id="form-login" method="post" @submit.prevent="login">
                     <div class="pb-1">
-                        <h5>User credentials</h5>
+                        <!--<h5>User credentials</h5>-->
                             <div class="pb-2">
                                 <div class="col input-group input-group-sm ps-0">
                                     <input id="userLogin" v-model="emailLogin" class="form-control" :class="{ 'is-invalid': loginError }"
