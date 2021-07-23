@@ -9,7 +9,7 @@ const Registration = {
                     </div>
                 </div>
                 <div class="card-body">
-                    <form name="subscribe" method="post" @submit.prevent="addUsr">
+                    <form name="subscribe" method="post" @submit.prevent="addUser">
                         <div class="pb-1">
                             <h5>User data</h5>
                             <div class="pb-2">
@@ -61,50 +61,79 @@ const Registration = {
 
     data() { //The data() method returns an object
         return { //nested userData object to hold the first and last name, email and password properties
-                form: {
-                    name: '',
-                    surname: '',
-                    email: '',
-                    password1: '',
-                    password2: ''
-                },
-                nameError: "",
-                surnameError:"",
-                emailError:"",
-                passwordError:"",
-                registrationError: "",
-                registrationSuccess: "",
-                redirecting: false
+            form: {
+                name: '',
+                surname: '',
+                email: '',
+                password1: '',
+                password2: ''
+            },
+            nameError: "",
+            surnameError: "",
+            emailError: "",
+            passwordError: "",
+            registrationError: "",
+            registrationSuccess: "",
+            redirecting: false
         }
     },
     methods: {
-        addUsr: function(){
-            let existingError=false
-            if(this.form.password!==this.form.password2) {
+        addUser() {
+            console.log("add user i am in ")
+            let existingError = false
+            this.passwordError = "";
+            this.emailError = "";
+            this.registrationError = "";
+            this.registrationSuccess = "";
+
+            if (this.form.password !== this.form.password2) {
                 this.passwordError = "Passwords do not match";
                 existingError = true;
             }
-            if(this.form.email !==''){
-                axios.post(MONGO_URL + '/registration', {
-                    params: {
-                        name: this.form.name,
-                        surname: this.form.surname,
-                        email: this.form.email,
-                        password: this.form.password
-                    }
-                }).then(res=>{
-                    let usrCreated = res.data;
-                    if(usrCreated) {
-                        this.registrationSuccess = "User successfully created";
-                        this.redirecting = true;
-                        setTimeout(() => {this.$router.push('/')}, 1000)
-                    } else {
-                        this.registrationError = "Registration error, please try again";
-                    }
-                })
-                    .catch(err => {
-                        console.log(err);
-                    });
+
+            if (this.form.email !== '') {
+                console.log("if form i am in form values"+ this.form.email)
+                axios
+                    .get(MONGO_URL + '/registration', {
+                        params: {
+                            userId: this.form.email
+                        }
+                    })
+                    .then(res => {
+
+                        let existingUser = res.data;
+
+                        if (existingUser) {
+                            this.emailError = "Email already registered";
+                        } else if (!existingError) {
+
+
+                            axios.post(MONGO_URL + '/registration', {
+                                params: {
+                                    name: this.form.name,
+                                    surname: this.form.surname,
+                                    email: this.form.email,
+                                    password: this.form.password
+                                }
+                            })
+                                .then(res => {
+                                    console.log("2nd then reda data values are:"+ res.data)
+                                    let usrCreated = res.data;
+                                    if (usrCreated) {
+                                        this.registrationSuccess = "User successfully created, now you will be re-directed to the home page";
+                                        this.redirecting = true;
+                                        setTimeout(() => {
+                                            this.$router.push('/')
+                                        }, 2000)
+                                    } else {
+                                        this.registrationError = "Registration error, please try again";
+                                    }
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                });
+                        }
+                    })
             }
         }
     }

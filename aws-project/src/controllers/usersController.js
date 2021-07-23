@@ -61,6 +61,7 @@ exports.login = function(req, res) {
 
 exports.checkUsername = function(req, res) {
 	let requestUser = req.query.userId;
+	console.log("i am in check user function: "+ requestUser)
 	User.exists({user_id: requestUser}, function (err, result) {
 		res.send(result);
 	});
