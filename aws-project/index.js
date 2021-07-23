@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose')
-var bodyParser = require('body-parser');
+//var bodyParser = require('body-parser');
 var cors = require('cors')
 var path = require('path');
 
@@ -9,19 +9,19 @@ global.appRoot = path.resolve(__dirname);
 
 var PORT = 7000;
 
-mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true, useFindAndModify: false });
+mongoose.connect('mongodb://localhost/aws-ros-web-app', { useNewUrlParser: true, useFindAndModify: false });
 
 app.use(cors())
 
 //Per gestire i parametri passati nel corpo della richiesta http.
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.json());
+
+app.use(express.json());
 
 app.use('/static', express.static(__dirname + '/public'));
 
 var routes = require('./src/routes/usersRoutes');
-
-//var routes = require('./src/routes/userRoutes');
 
 routes(app);
 

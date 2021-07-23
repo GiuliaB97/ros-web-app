@@ -56,6 +56,7 @@ const Login = {
                 })
                 .then(res => {
                     let isLoginOk = res.data.result;
+                    console.log("login then data: "+res.data.result)
                     if(isLoginOk) {
                         let token = res.data.token;
                         localStorage.user = token;
