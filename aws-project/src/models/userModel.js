@@ -1,6 +1,6 @@
 module.exports = function(mongoose) {
     const Schema = mongoose.Schema;
-    const UsrSchema = new Schema({
+    const UserSchema = new Schema({
         user_id: String,
         name: String, // String is shorthand for {type: String}
         surname: String, // String is shorthand for {type: String}
@@ -8,5 +8,5 @@ module.exports = function(mongoose) {
         password: String,
         salt: String, // String is shorthand for {type: String}
     });
-    return mongoose.model('User', UsrSchema);
+    return mongoose.model('User', UserSchema);
 };
