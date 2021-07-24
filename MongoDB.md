@@ -50,8 +50,7 @@ __ROS USEFUL commands to check if it alright__
   ```shell_session
   show collections
   ``` 
-
-* ***Show collections data ***:
+  * ***Show collections data***:
   ```shell_session
   db.users.find().pretty()
   ``` 
