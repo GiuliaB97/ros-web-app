@@ -100,14 +100,10 @@ const Registration = {
                         }
                     })
                     .then(res => {
-
                         let existingUser = res.data;
-
                         if (existingUser) {
                             this.emailError = "Email already registered";
                         } else if (!existingError) {
-
-
                             axios.post(MONGO_URL + '/registration', {
                                 params: {
                                     name: this.form.name,
@@ -117,7 +113,7 @@ const Registration = {
                                 }
                             })
                                 .then(res => {
-                                    console.log("2nd then reda data values are:"+ res.data)
+                                    console.log("2nd then read data values are:"+ res.data)
                                     let usrCreated = res.data;
                                     if (usrCreated) {
                                         this.registrationSuccess = "User successfully created, now you will be re-directed to the home page";

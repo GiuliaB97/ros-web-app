@@ -34,33 +34,36 @@ exports.registration = function(req, res) {
 exports.login = function(req, res) {
 	let userId = req.body.params.userId;
 	let password = req.body.params.password;
-	User.findOne({user_id: userId}, 'user_id password salt', function(err, user) {
-		/*if(err || user == null){
+	/*res.send({
+		result:userId
+	});*/
+	User.findOne({email: userId}, 'user_id password salt', function(err, user) {
+		if (err!== null) {
 			res.send({
 				result: false
 			});
-		} else {*/
+		}if(user == null){
+			res.send({
+				result: false
+			});
+		}else {
 			if(bcrypt.compareSync(password ,user.password)) {
-				/*
 				let token = jwt.sign({user: user.user_id, id: user._id}, PRIVATE_SECRET_KEY, {
-
 					algorithm: 'HS512',
 					expiresIn: '2d'
 				});
-
-				 */
 				res.send({
 					result: true,
-					//token: token,
+					token: token,
 					id: user._id
 				});
 			} else {
-				console.
-				res.send({
+				console.res.send({
+					message: "last else",
 					result: false
 				});
 			}
-		//}
+		}
 	});
 }
 
@@ -70,4 +73,34 @@ exports.checkUsername = function(req, res) {
 	User.exists({user_id: requestUser}, function (err, result) {
 		res.send(result);
 	});
+}
+
+function auth(req, id) {
+	const token = req.headers['authorization'];
+	let res;
+	if(token == null) {
+		res = {
+			isValidToken: false
+		};
+	}
+
+	try {
+		const decodedToken = jwt.verify(token, PRIVATE_SECRET_KEY);
+		if(decodedToken.id === id) {
+			res = {
+				isValidToken: true,
+				token: decodedToken
+			}
+		} else {
+			res = {
+				isValidToken: false
+			}
+		}
+	} catch (e) {
+		res = {
+			isValidToken: false
+		};
+	}
+
+	return res;
 }
