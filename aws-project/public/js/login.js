@@ -65,7 +65,7 @@ const Login = {
                         this.passwordLogin = "";
                         this.$router.replace('/').catch(err => {});
                     } else {
-                        this.loginError = "Username o password errati";
+                        this.loginError = "Invalid credentials";
                     }
                 })
                 .catch(err => {
