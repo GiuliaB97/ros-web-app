@@ -77,7 +77,7 @@ const Login = {
             this.token = "";
             localStorage.idGardener = "";
             this.idGardener = "";
-            this.$router.replace('/').catch(err => {});
+            this.$router.replace('/rover-simulation').catch(err => {});
         },
 
     },
