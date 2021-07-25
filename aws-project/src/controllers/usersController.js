@@ -37,12 +37,9 @@ exports.login = function(req, res) {
 	/*res.send({
 		result:userId
 	});*/
+	//I cannot use userId field for now because match does not work
 	User.findOne({email: userId}, 'user_id password salt', function(err, user) {
-		if (err!== null) {
-			res.send({
-				result: false
-			});
-		}if(user == null){
+		if (err || user == null){
 			res.send({
 				result: false
 			});
@@ -59,7 +56,6 @@ exports.login = function(req, res) {
 				});
 			} else {
 				console.res.send({
-					message: "last else",
 					result: false
 				});
 			}
