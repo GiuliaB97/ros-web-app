@@ -8,18 +8,20 @@ const Login = {
                         <h3 class="text-center">Sign in</h3>
                     </div>
                 </div>
-                <form v-if="!token" id="form-login" method="post" @submit.prevent="login">
+                
+                <!--<form v-if="!token" id="form-login" method="post" @submit.prevent="login">-->
+                <form name="login" method="post" @submit.prevent="login">
                     <div class="pb-1">
                         <!--<h5>User credentials</h5>-->
                             <div class="pb-2">
                                 <div class="col input-group input-group-sm ps-0">
-                                    <input id="userLogin" v-model="emailLogin" class="form-control" :class="{ 'is-invalid': loginError }"
-                                         placeholder="email" type="text" alt="Email" required/>
+                                    <input id="userLogin" v-model.trim="emailLogin" class="form-control form-control-sm" :class="{ 'is-invalid': loginError }"
+                                         placeholder="email" type="email" alt="Email" required/>
                                 </div>
                               </div>
                               <div class="pb-2">
                                 <div class="col input-group input-group-sm pe-0">
-                                    <input id="passwordLogin" v-model="passwordLogin" class="form-control" :class="{ 'is-invalid': loginError }"
+                                    <input id="passwordLogin" v-model.trim="passwordLogin" class="form-control" :class="{ 'is-invalid': loginError }"
                                          placeholder="Password" type="password" alt="Password" required/>
                                 </div>   
                                 </div>     
@@ -29,6 +31,8 @@ const Login = {
                         <div id="form-button-container" class="col col-xl-4 col-5">
                             <input type="submit" value="Login" class="btn btn-success rounded-pill"/>
                         </div>
+                        
+
                     </div>
                 </form>
                 </div>
@@ -38,6 +42,10 @@ const Login = {
 	`,
     data() { //The data() method returns an object
         return { //nested userData object to hold the first and last name, email and password properties
+            form: {
+                email: '',
+                password: '',
+            },
             emailLogin: "",
             passwordLogin: "",
             loginError: "",
@@ -58,9 +66,9 @@ const Login = {
                     let isLoginOk = res.data.result;
                     console.log("login then data: "+res.data.result)
                     if(isLoginOk) {
-                        let token = res.data.token;
-                        localStorage.user = token;
-                        this.token = token;
+                        //let token = res.data.token;
+                        //localStorage.user = token;
+                        //this.token = token;
 
                         let id = res.data.id;
                         localStorage.idUsr = id;
@@ -79,8 +87,8 @@ const Login = {
         },
         logout() {
             localStorage.user = "";
-            this.token = "";
-            localStorage.idUsr = "";
+            //this.token = "";
+            //localStorage.idUsr = "";
             this.idUsr = "";
             this.$router.replace('/').catch(err => {});
         },

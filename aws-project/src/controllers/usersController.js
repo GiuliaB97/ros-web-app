@@ -35,27 +35,32 @@ exports.login = function(req, res) {
 	let userId = req.body.params.userId;
 	let password = req.body.params.password;
 	User.findOne({user_id: userId}, 'user_id password salt', function(err, user) {
-		if(err || user == null){
+		/*if(err || user == null){
 			res.send({
 				result: false
 			});
-		} else {
+		} else {*/
 			if(bcrypt.compareSync(password ,user.password)) {
+				/*
 				let token = jwt.sign({user: user.user_id, id: user._id}, PRIVATE_SECRET_KEY, {
+
 					algorithm: 'HS512',
 					expiresIn: '2d'
 				});
+
+				 */
 				res.send({
 					result: true,
-					token: token,
+					//token: token,
 					id: user._id
 				});
 			} else {
+				console.
 				res.send({
 					result: false
 				});
 			}
-		}
+		//}
 	});
 }
 
@@ -66,38 +71,3 @@ exports.checkUsername = function(req, res) {
 		res.send(result);
 	});
 }
-
-// NOT USE 4 NOW; DECIDE IF YOU WANT TO KEEP THEM OR NOT
-exports.update_user = function(req, res) {
-	User.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function(err, usr) {
-		if (err)
-			res.send(err);
-		else{
-			if(usr==null){
-				res.status(404).send({
-					description: 'User not found'
-				});
-			}
-			else{
-				res.json(usr);
-			}
-		}
-	});
-};
-
-exports.delete_usr = function(req, res) {
-	User.deleteOne({_id: req.params.id}, function(err, result) {
-		if (err)
-			res.send(err);
-		else{
-			if(result.deletedCount==0){
-				res.status(404).send({
-					description: 'User not found'
-				});
-			}
-			else{
-				res.json({ message: 'Task successfully deleted' });
-			}
-		}
-  });
-};

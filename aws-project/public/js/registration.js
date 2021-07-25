@@ -26,18 +26,18 @@ const Registration = {
                                 <small v-if="surnameError" class="invalid-feedback alert alert-danger"> {{ surnameError }} </small>
                             </div>
                             <div class="pb-2">
-                              <label class="control-label" for="email">email</label>
-                                <input type="text" class="form-control form-control-sm" id="email" :class="{ 'is-invalid': emailError }"
-                                       placeholder="Name" name="email" v-model.trim="form.email" required>
+                              <label class="control-label" for="email">Email</label>
+                                <input type="email" class="form-control form-control-sm" id="email" :class="{ 'is-invalid': emailError }"
+                                       placeholder="Email" name="email" v-model.trim="form.email" required>
                                 <small v-if="emailError" class="invalid-feedback alert alert-danger"> {{ emailError }} </small>
                             </div>
                             <div class="pb-2">
-                              <label class="contrInformazioniol-label" for="password">Password</label>
+                              <label class="control-label" for="password">Password</label>
                                 <input type="password" class="form-control form-control-sm" id="password"
                                        placeholder="Password" name="password" v-model.trim="form.password" required>
                             </div>
                             <div class="pb-2">
-                                <label class="control-label" for="password2">Conferma Password</label>
+                                <label class="control-label" for="password2">Confirm Password</label>
                                     <input type="password" class="form-control form-control-sm" id="password2" :class="{ 'is-invalid': passwordError }"
                                        placeholder="Confirm password" name="password2" v-model.trim="form.password2" required>
                                     <small v-if="passwordError" class="invalid-feedback alert alert-danger"> {{ passwordError }} </small>
