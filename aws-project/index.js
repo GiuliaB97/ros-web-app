@@ -4,7 +4,7 @@ var mongoose = require('mongoose')
 //var bodyParser = require('body-parser');
 var cors = require('cors')
 var path = require('path')
-var vuex = require('vuex')
+//var vuex = require('vuex')
 
 global.appRoot = path.resolve(__dirname);
 

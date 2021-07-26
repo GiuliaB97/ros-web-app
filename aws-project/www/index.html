@@ -29,8 +29,8 @@
     <script src="https://npmcdn.com/vue-router/dist/vue-router.js"></script>
 
     <!--Vue charts-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-    <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-apexcharts"></script>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -52,6 +52,7 @@
     <script src="/static/js/registration.js"></script>
     <script src="/static/js/login.js"></script>
     <script src="/static/js/rover-simulation.js"></script>
+    <script src="/static/js/graph.js"></script>
     <script src="/static/js/router.js"></script>
 </head>
 
@@ -64,6 +65,10 @@
 
 </div>
 
+
+
+
+
 <script>
     var vm = new Vue({
         router,
@@ -71,8 +76,11 @@
         components: {
             'navigationBar': NavigationBar,
             'footerComponent': FooterComponent,
-        }
+
+        },
+
     })
+
 
 //perchè non è necessario fare il mount? perchè non uso vue.use (router) ed export
 </script>
