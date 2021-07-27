@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{Chart.js, axios, ionicons, jquery, twitter-bootstrap, vue-chartjs, vue-router}" />
+    <file url="PROJECT" libraries="{Chart.js, apexcharts, axios, ionicons, jquery, jscharting, twitter-bootstrap, vue-apexcharts, vue-chartjs, vue-router}" />
   </component>
 </project>

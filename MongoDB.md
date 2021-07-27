@@ -30,6 +30,17 @@ __ROS USEFUL commands to check if it alright__
   ```shell_session
   sudo systemctl restart mongod
   ```
+  Run this also if you have the following error
+  ```shell_session
+MongoDB shell version v4.4.7
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Error: couldn't connect to server 127.0.0.1:27017, connection attempt failed: SocketException: Error connecting to 127.0.0.1:27017 :: caused by :: Connection refused :
+connect@src/mongo/shell/mongo.js:374:17
+@(connect):2:6
+exception: connect failed
+exiting with code 1
+
+  ```
 
   * ***Start MongoDB***:
   ```shell_session

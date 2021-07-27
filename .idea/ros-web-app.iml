@@ -15,5 +15,8 @@
     <orderEntry type="library" name="twitter-bootstrap" level="application" />
     <orderEntry type="library" name="vue-router" level="application" />
     <orderEntry type="library" name="axios" level="application" />
+    <orderEntry type="library" name="jscharting" level="application" />
+    <orderEntry type="library" name="apexcharts" level="application" />
+    <orderEntry type="library" name="vue-apexcharts" level="application" />
   </component>
 </module>
