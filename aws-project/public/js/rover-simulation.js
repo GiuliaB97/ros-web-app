@@ -1,11 +1,11 @@
 let odomPosePositionX= 0.0
-let odomPosePositionY= 0.0
+let odomPosePositionY= 0.2
+let odomPosePositionZ= 0.3
 const RoverSimulation = {
     template: `
 		<div class="rover">
 			<div>
-                    <h1>This is the rover simulation page</h1>
-                   
+                    <h1>This is the rover simulation page</h1>                 
             </div>
 <!--
 In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa area centrale che visualizza i contenuti più importanti. Bootstrap la chiama jumbotron.
@@ -88,13 +88,16 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             logs: [],
             series: [
                 {
-                data: [10, 41, 35, 51, 49, 62, 69, 91, 99]
+                    name: "x",
+                    data: [0.001, 0.002]
                 },
                 {
-                    data: [20, 29, 37, 36, 44, 45, 50, 58]
+                    name: "y",
+                    data: [0.003, 0.004]
                 },
                 {
-                    data: [20, 29, 37, 36, 44, 45, 50, 58]
+                    name: "z",
+                    data: [0.005, 0.006]
                 }
 
             ],
@@ -116,12 +119,6 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                     curve: 'straight',
                     width: 5,
                 },
-                // grid: {
-                //   padding: {
-                //     left: 0,
-                //     right: 0,
-                //   },
-                // },
                 dropShadow: {
                     enabled: true,
                     opacity: 0.3,
@@ -133,27 +130,18 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                     enabled: false,
                 },
                 title: {
-                    text: 'Line',
+                    text: 'Odometry Pose position',
                     align: 'left',
                     style: {
                         color: '#FFF',
                     },
                 },
                 xaxis: {
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-                    labels: {
-                        style: {
-                            colors: '#fff',
-                        },
-                    },
+                    categories: [1991,1992,1993,1994,1995,1996,1997, 1998,1999]
                 },
-                yaxis: {
-                    labels: {
-                        style: {
-                            color: '#fff',
-                        },
-                    },
-                },
+                offsetX: 1,
+                offsetY: 0
+
             },
         }
     },
@@ -296,7 +284,9 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 console.log('Received message on ' + listener.name + JSON.stringify(message));
                 this.odom = listener.name
                 odomPosePositionX = message.pose.pose.position.x
-                console.log('\n\n\n\n\n Odom value'+ this.odom + "pos x "+ odomPosePositionX)
+                odomPosePositionY = message.pose.pose.position.y
+                odomPosePositionZ = message.pose.pose.position.z
+                console.log('\n\n\n\n\n Odom value'+ this.odom + "pos x "+ odomPosePositionX +"pos x "+ odomPosePositionY)
                 /*
                                     setInterval(() => {
                                     console.log("\n\n odom from line chart"+ this.odomPosePositionX)
@@ -313,21 +303,48 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
         },
         setDataLineChart() {
             setInterval(() => {
-                console.log("\n\n odom from line chart"+ odomPosePositionX)
+                console.log("\n\n odom from line chart"+ odomPosePositionX + odomPosePositionY +"\n\n"+this.series[0].data+"\n"+this.series[1].data)
                 this.series[0].data.splice(0, 1);
                 this.series[0].data.push(odomPosePositionX);
+
+                this.series[1].data.splice(0,1);
+                this.series[1].data.push(odomPosePositionY);
+
+                this.series[2].data.splice(0,1);
+                this.series[2].data.push(odomPosePositionZ);
                 this.updateSeriesLine();
             }, 1000);
         },
         updateSeriesLine() {
+            /*
+            series: [
+                {
+                    data: [odomPosePositionX]
+                },
+                {
+                    data: [odomPosePositionY]
+                },
+                {
+                    data: [28, 79, 7, 35, 46, 35, 4, 8]
+                }
+
+            ],
+          */
             this.$refs.realtimeChart.updateSeries([{
                 data: this.series[0].data,
+            }, {data: this.series[1].data,}, {data: this.series[2].data,}], false, true);
+            /*
+            this.$refs.realtimeChart.updateSeries([{
+                data: this.series[1].data,
             }], false, true);
+            this.$refs.realtimeChart.updateSeries([{
+                data: this.series[2].data,
+            }], false, true);
+*/
         },
     },
     mounted() {
         this.setDataLineChart();
-        //this.setOdomListener();
     },
 }                //Absolute 3D position and orientation relative to the Odometry frame (pure visual odometry for ZED, visual-inertial for ZED-M and ZED 2)
-                // console.log('Received message on ' + listener.name + '; linear velocity' + message.data.linear+ ', angular velocity: ' + message.data.angular);
+                    // console.log('Received message on ' + listener.name + '; linear velocity' + message.data.linear+ ', angular velocity: ' + message.data.angular);
