@@ -116,7 +116,7 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                     },
                 },
                 stroke: {
-                    curve: 'straight',
+                    curve: 'stepline',
                     width: 5,
                 },
                 dropShadow: {
@@ -137,10 +137,16 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                     },
                 },
                 xaxis: {
-                    categories: [1991,1992,1993,1994,1995,1996,1997, 1998,1999]
+                    tooltip: {
+                        enabled: false
+                    },
+                    labels: {
+                        show: true
+                    },
+                    axisTicks: {
+                        show: false
+                    }
                 },
-                offsetX: 1,
-                offsetY: 0
 
             },
         }
@@ -313,24 +319,11 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 this.series[2].data.splice(0,1);
                 this.series[2].data.push(odomPosePositionZ);
                 this.updateSeriesLine();
-            }, 1000);
+            }, 2000);
         },
         updateSeriesLine() {
-            /*
-            series: [
-                {
-                    data: [odomPosePositionX]
-                },
-                {
-                    data: [odomPosePositionY]
-                },
-                {
-                    data: [28, 79, 7, 35, 46, 35, 4, 8]
-                }
-
-            ],
-          */
-            this.$refs.realtimeChart.updateSeries([{
+            //updateSeries
+            this.$refs.realtimeChart.appendSeries([{
                 data: this.series[0].data,
             }, {data: this.series[1].data,}, {data: this.series[2].data,}], false, true);
             /*
