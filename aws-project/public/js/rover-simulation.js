@@ -1,3 +1,4 @@
+let odomPosePositionX= 0.0
 const RoverSimulation = {
     template: `
 		<div class="rover">
@@ -78,14 +79,13 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
     data: function () {
         return {
             //to create a ROS node object to communicate with a rosbridge server
-            odomPosePositionX:0.0,
+
             connected: false,
             ros: null,
             ws_address: 'ws://localhost:9090/',
             odom: '',
             logs: [],
             series: [{
-                name: 'Desktops',
                 data: [10, 41, 35, 51, 49, 62, 69, 91, 99],
             }],
             chartOptions: {
@@ -250,31 +250,6 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             })
         },
 
-        setOdomListener: function () {
-            listener = new ROSLIB.Topic({
-                ros: this.ros,
-                name: '/zed2/odom',
-                messageType: 'nav_msgs/Odometry'
-            });
-            // this.setListener()
-            console.log('set odom listener')
-            listener.subscribe(function (message) {
-                //var obj = JSON.parse(message);
-                //message.pose.pose.position.x
-                //message.pose.pose.position.y
-                //message.pose.pose.position.z
-                //message.pose.pose.orientation.x
-                //message.pose.pose.orientation.y
-                //message.pose.pose.orientation.z
-                //message.pose.pose.orientation.w
-                //JSON.stringify(message.pose.pose.position.x)
-                console.log('Received message on ' + listener.name + JSON.stringify(message));
-                this.odom = listener.name
-                this.odomPosePositionX=message.pose.pose.position.x
-                console.log('\n\n\n\n\n Odom value'+ this.odom + "pos x "+ this.odomPosePositionX)
-                
-            });
-        },
         setCmdVelistener: function () {
             //problema se metto this.cmdVel non trova name idk why
             //to fix stringify
@@ -290,15 +265,80 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
 
             });
         },
+
+        setOdomListener() {
+            listener = new ROSLIB.Topic({
+                ros: this.ros,
+                name: '/zed2/odom',
+                messageType: 'nav_msgs/Odometry'
+            });
+            console.log('set odom listener')
+            listener.subscribe(function (message) {
+                //var obj = JSON.parse(message);
+                //message.pose.pose.position.x
+                //message.pose.pose.position.y
+                //message.pose.pose.position.z
+                //message.pose.pose.orientation.x
+                //message.pose.pose.orientation.y
+                //message.pose.pose.orientation.z
+                //message.pose.pose.orientation.w
+                //JSON.stringify(message.pose.pose.position.x)
+                console.log('Received message on ' + listener.name + JSON.stringify(message));
+                this.odom = listener.name
+                this.odomPosePositionX = message.pose.pose.position.x
+                console.log('\n\n\n\n\n Odom value'+ this.odom + "pos x "+ this.odomPosePositionX)
+/*
+                    setInterval(() => {
+                    console.log("\n\n odom from line chart"+ this.odomPosePositionX)
+                    this.series[0].data.splice(0, 1);
+                    this.series[0].data.push(this.getRandomArbitrary(0, 99));
+                    this.updateSeriesLine();
+                    }, 1000);
+*/
+                
+            });
+        },
+
+        setOdomListener() {
+            listener = new ROSLIB.Topic({
+                ros: this.ros,
+                name: '/zed2/odom',
+                messageType: 'nav_msgs/Odometry'
+            });
+            console.log('set odom listener')
+            listener.subscribe(function (message) {
+                //var obj = JSON.parse(message);
+                //message.pose.pose.position.x
+                //message.pose.pose.position.y
+                //message.pose.pose.position.z
+                //message.pose.pose.orientation.x
+                //message.pose.pose.orientation.y
+                //message.pose.pose.orientation.z
+                //message.pose.pose.orientation.w
+                //JSON.stringify(message.pose.pose.position.x)
+                console.log('Received message on ' + listener.name + JSON.stringify(message));
+                this.odom = listener.name
+                odomPosePositionX = message.pose.pose.position.x
+                console.log('\n\n\n\n\n Odom value'+ this.odom + "pos x "+ odomPosePositionX)
+                /*
+                                    setInterval(() => {
+                                    console.log("\n\n odom from line chart"+ this.odomPosePositionX)
+                                    this.series[0].data.splice(0, 1);
+                                    this.series[0].data.push(this.getRandomArbitrary(0, 99));
+                                    this.updateSeriesLine();
+                                    }, 1000);
+                */
+                return this.odomPosePositionX
+            });
+        },
         getRandomArbitrary(min, max) {
             return Math.floor(Math.random() * 99);
         },
         setDataLineChart() {
             setInterval(() => {
-                let data=this.odom
-                console.log("\n\n odom from line chart"+ this.odomPosePositionX)
+                console.log("\n\n odom from line chart"+ odomPosePositionX)
                 this.series[0].data.splice(0, 1);
-                this.series[0].data.push(this.getRandomArbitrary(0, 99));
+                this.series[0].data.push(odomPosePositionX);
                 this.updateSeriesLine();
             }, 1000);
         },
@@ -310,6 +350,7 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
     },
     mounted() {
         this.setDataLineChart();
+        //this.setOdomListener();
     },
 }                //Absolute 3D position and orientation relative to the Odometry frame (pure visual odometry for ZED, visual-inertial for ZED-M and ZED 2)
                 // console.log('Received message on ' + listener.name + '; linear velocity' + message.data.linear+ ', angular velocity: ' + message.data.angular);
