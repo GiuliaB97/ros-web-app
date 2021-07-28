@@ -1,4 +1,5 @@
 let odomPosePositionX= 0.0
+let odomPosePositionY= 0.0
 const RoverSimulation = {
     template: `
 		<div class="rover">
@@ -85,9 +86,18 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             ws_address: 'ws://localhost:9090/',
             odom: '',
             logs: [],
-            series: [{
-                data: [10, 41, 35, 51, 49, 62, 69, 91, 99],
-            }],
+            series: [
+                {
+                data: [10, 41, 35, 51, 49, 62, 69, 91, 99]
+                },
+                {
+                    data: [20, 29, 37, 36, 44, 45, 50, 58]
+                },
+                {
+                    data: [20, 29, 37, 36, 44, 45, 50, 58]
+                }
+
+            ],
             chartOptions: {
                 colors: ['#FCCF31', '#17ead9', '#f02fc2'],
                 chart: {
@@ -285,39 +295,6 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 //JSON.stringify(message.pose.pose.position.x)
                 console.log('Received message on ' + listener.name + JSON.stringify(message));
                 this.odom = listener.name
-                this.odomPosePositionX = message.pose.pose.position.x
-                console.log('\n\n\n\n\n Odom value'+ this.odom + "pos x "+ this.odomPosePositionX)
-/*
-                    setInterval(() => {
-                    console.log("\n\n odom from line chart"+ this.odomPosePositionX)
-                    this.series[0].data.splice(0, 1);
-                    this.series[0].data.push(this.getRandomArbitrary(0, 99));
-                    this.updateSeriesLine();
-                    }, 1000);
-*/
-                
-            });
-        },
-
-        setOdomListener() {
-            listener = new ROSLIB.Topic({
-                ros: this.ros,
-                name: '/zed2/odom',
-                messageType: 'nav_msgs/Odometry'
-            });
-            console.log('set odom listener')
-            listener.subscribe(function (message) {
-                //var obj = JSON.parse(message);
-                //message.pose.pose.position.x
-                //message.pose.pose.position.y
-                //message.pose.pose.position.z
-                //message.pose.pose.orientation.x
-                //message.pose.pose.orientation.y
-                //message.pose.pose.orientation.z
-                //message.pose.pose.orientation.w
-                //JSON.stringify(message.pose.pose.position.x)
-                console.log('Received message on ' + listener.name + JSON.stringify(message));
-                this.odom = listener.name
                 odomPosePositionX = message.pose.pose.position.x
                 console.log('\n\n\n\n\n Odom value'+ this.odom + "pos x "+ odomPosePositionX)
                 /*
@@ -328,7 +305,7 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                                     this.updateSeriesLine();
                                     }, 1000);
                 */
-                return this.odomPosePositionX
+
             });
         },
         getRandomArbitrary(min, max) {
