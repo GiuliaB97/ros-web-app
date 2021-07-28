@@ -3,6 +3,11 @@ let odomPosePositionY= 0.2
 let odomPosePositionZ= 0.3
 const RoverSimulation = {
     template: `
+
+  <body>
+    <div id="wrapper">
+      <div class="content-area">
+        <div class="container-fluid">
 		<div class="rover">
 			<div>
                     <h1>This is the rover simulation page</h1>                 
@@ -51,25 +56,27 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 <button @click="backward" :disabled=" !connected" class="btn btn-primary">Go backward</button>
             </div>
             </div>
-            <div class="col-md-6">
+            <div class=""row">
+            <div class="col-md-12 text-center">
                 <div id="mjpeg"></div>
                 <div id="mjpeg2"></div>
             </div> 
-            <!--nuova sezione per i dati dell'odometria-->
-            <div class="col-md-9">
-                <span id="modometry" > {{odom}} </span>
             </div>
-        
-        <!--non sta funzionando-->
-            
-            <apexchart
+             <div class="row">
+            <div class="col-md-6 text-center">
+                 <apexchart
       ref="realtimeChart"
       type="line"
       height="200"
       :options="chartOptions"
       :series="series"
   />
-       
+            </div> 
+            </div>
+                  
+		</div>
+		</div>
+		</div>
 		</div>
 	`,
     components: {
