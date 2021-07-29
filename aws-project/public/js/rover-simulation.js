@@ -1,10 +1,10 @@
-let odomPosePositionX= 0.0
-let odomPosePositionY= 0.2
-let odomPosePositionZ= 0.3
-let odomPoseOrientationX=0.1
-let odomPoseOrientationY=0.2
-let odomPoseOrientationZ=0.3
-let odomPoseOrientationW=0.4
+let odomPosePositionX= 0.001
+let odomPosePositionY= 0.001
+let odomPosePositionZ= 0.001
+let odomPoseOrientationX=0.001
+let odomPoseOrientationY=0.001
+let odomPoseOrientationZ=0.001
+let odomPoseOrientationW=0.001
 let arrayPosition=[]
 const RoverSimulation = {
     template: `
@@ -389,9 +389,7 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
 
             });
         },
-        getRandomArbitrary(min, max) {
-            return Math.floor(Math.random() * 99);
-        },
+
         setDataLineChart() {
             setInterval(() => {
                 //splice rimuove l'elemento in testa, così l0'array ha sempre lo stesso numero di elementi con cui è stato inizializzato --> se no il grafico diventa illegibile
