@@ -1,12 +1,8 @@
-let odomPosePositionX= 0.0
-let odomPosePositionY= 0.2
-let odomPosePositionZ= 0.3
-let odomPoseOrientationX=0.1
-let odomPoseOrientationY=0.2
-let odomPoseOrientationZ=0.3
-let odomPoseOrientationW=0.4
-let arrayPosition=[]
-const RoverSimulation = {
+
+let arrayPositionX=[0.1, 0.2]
+let arrayPositionY=[0.3, 0.4]
+let arrayPositionZ=[0.5, 0.6]
+const RoverSimulation2 = {
     template: `
 
   <body>
@@ -70,20 +66,11 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             </div>
              <div class="row">
             <div class="col-md-6 text-center">
-                 <apexchart
-      ref="realtimeChart"
-      type="line"
-      height="200"
-      :options="chartOptions"
-      :series="series"
-  />
-   <apexchart
-      ref="realtimeChart2"
-      type="bar"
-      height="200"
-      :options="chartOptions2"
-      :series="series2"
-  />
+                 
+          <div>
+        <apexchart width="500" type="bar" :options="chartOptions" :series="series"></apexchart>
+    </div>
+    
             </div> 
             </div>
                   
@@ -106,135 +93,29 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             ws_address: 'ws://localhost:9090/',
             odom: '',
             logs: [],
-            series: [
-                {
-                    name: "x",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,],
-                },
-                {
-                    name: "y",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,],
-                },
-                {
-                    name: "z",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,],
-                }
 
-            ],
+            series: [{
+                        name: 'X',
+                        data: arrayPositionX
+                    },
+                    {
+                        name: 'Y',
+                        data: arrayPositionX
+                    },
+                    {
+                        name: 'Z',
+                        data: arrayPositionX
+                    },
+                ],
+
             chartOptions: {
-                colors: ['#FCCF31', '#17ead9', '#f02fc2'],
                 chart: {
-                    height: 350,
-                },
-                grid: {
-                    show: true,
-                    strokeDashArray: 0,
-                    xaxis: {
-                        lines: {
-                            show: true,
-                        },
-                    },
-                },
-                stroke: {
-                    curve: 'stepline',
-                    width: 5,
-                },
-                dropShadow: {
-                    enabled: true,
-                    opacity: 0.3,
-                    blur: 5,
-                    left: -7,
-                    top: 22,
-                },
-                dataLabels: {
-                    enabled: false,
-                },
-                title: {
-                    text: 'Odometry Pose position',
-                    align: 'left',
-                    style: {
-                        color: '#FFF',
-                    },
+                    id: 'vuechart-example'
                 },
                 xaxis: {
-                    tooltip: {
-                        enabled: false
-                    },
-                    labels: {
-                        show: true
-                    },
-                    axisTicks: {
-                        show: false
-                    }
-                },
-
-            },
-            series2: [
-                {
-                    name: "x",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,]
-                },
-                {
-                    name: "y",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,]
-                },
-                {
-                    name: "z",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,]
-                },
-                {
-                    name: "w",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,]
+                    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
                 }
-
-            ],
-            chartOptions2: {
-                colors: ['#FCCF31', '#17ead9', '#f02fc2'],
-                chart: {
-                    height: 350,
-                },
-                grid: {
-                    show: true,
-                    strokeDashArray: 0,
-                    xaxis: {
-                        lines: {
-                            show: true,
-                        },
-                    },
-                },
-                stroke: {
-                    curve: 'stepline',
-                    width: 5,
-                },
-                dropShadow: {
-                    enabled: true,
-                    opacity: 0.3,
-                    blur: 5,
-                    left: -7,
-                    top: 22,
-                },
-                dataLabels: {
-                    enabled: false,
-                },
-                title: {
-                    text: 'Odometry Pose position',
-                    align: 'left',
-                    style: {
-                        color: '#FFF',
-                    },
-                },
-                xaxis: {
-                    tooltip: {
-                        enabled: false
-                    },
-                    labels: {
-                        show: true
-                    },
-                    axisTicks: {
-                        show: false
-                    }
-                },
-            }
+            },
         }
     },
     // Helper methods to connect to ROS
@@ -375,26 +256,20 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 //JSON.stringify(message.pose.pose.position.x)
                 console.log('Received message on ' + listener.name + JSON.stringify(message));
                 this.odom = listener.name
-                odomPosePositionX = message.pose.pose.position.x
-                odomPosePositionY = message.pose.pose.position.y
-                odomPosePositionZ = message.pose.pose.position.z
-                odomPoseOrientationX = message.pose.pose.orientation.x
-                odomPoseOrientationY = message.pose.pose.orientation.y
-                odomPoseOrientationZ = message.pose.pose.orientation.z
-                odomPoseOrientationW = message.pose.pose.orientation.w
-                arrayPosition[arrayPosition.length] = [message.pose.pose.position.x, message.pose.pose.position.y, message.pose.pose.position.z];
-                console.log('\n\n\n\n\n Odom value'+ this.odom + "pos x "+ odomPosePositionX )
+                arrayPositionX = message.pose.pose.position.x
+                arrayPositionY = message.pose.pose.position.y
+                arrayPositionZ = message.pose.pose.position.z
 
-                console.log('\n array'+ console.table(arrayPosition) )
+                console.log('\n\n\n\n\n Odom value'+ this.odom + "pos x "+ arrayPositionX )
 
             });
         },
+        /*
         getRandomArbitrary(min, max) {
             return Math.floor(Math.random() * 99);
         },
         setDataLineChart() {
             setInterval(() => {
-                //splice rimuove l'elemento in testa, così l0'array ha sempre lo stesso numero di elementi con cui è stato inizializzato --> se no il grafico diventa illegibile
                 //console.log("\n\n odom from line chart"+ odomPosePositionX + odomPosePositionY +"\n\n"+this.series[0].data+"\n"+this.series[1].data)
                 this.series[0].data.splice(0, 1);
                 this.series[0].data.push(odomPosePositionX);
@@ -404,34 +279,31 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
 
                 this.series[2].data.splice(0,1);
                 this.series[2].data.push(odomPosePositionZ);
-
-
-                this.series2[0].data.splice(0,1);
-                this.series2[0].data.push(odomPoseOrientationX);
-
-                this.series2[1].data.splice(0,1);
-                this.series2[1].data.push(odomPoseOrientationY);
-
-                this.series2[2].data.splice(0,1);
-                this.series2[2].data.push(odomPoseOrientationZ);
-
-                this.series2[3].data.splice(0,1);
-                this.series2[3].data.push(odomPoseOrientationW);
                 this.updateSeriesLine();
-            }, 5000);
+            }, 2000);
         },
         updateSeriesLine() {
             //updateSeries
             this.$refs.realtimeChart.appendSeries([{
                 data: this.series[0].data,
             }, {data: this.series[1].data,}, {data: this.series[2].data,}], false, true);
-            this.$refs.realtimeChart2.appendSeries([{
-                data: this.series2[0].data,
-            }, {data: this.series2[1].data,}, {data: this.series2[2].data,}, {data: this.series2[3].data,}], false, true);
         },
+
+        updateChart() {
+            const max = 90;
+            const min = 20;
+
+            // In the same way, update the series option
+            this.series = [{
+                data: {arrayPositionX, arrayPositionY,arrayPositionZ}
+            }]
+        }
+*/
+
     },
     mounted() {
-        this.setDataLineChart();
+        //this.setDataLineChart();
+        this.updateChart()
     },
 }                //Absolute 3D position and orientation relative to the Odometry frame (pure visual odometry for ZED, visual-inertial for ZED-M and ZED 2)
-                    // console.log('Received message on ' + listener.name + '; linear velocity' + message.data.linear+ ', angular velocity: ' + message.data.angular);
+// console.log('Received message on ' + listener.name + '; linear velocity' + message.data.linear+ ', angular velocity: ' + message.data.angular);

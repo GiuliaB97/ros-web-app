@@ -13,6 +13,7 @@ const router = new VueRouter({
         { path: '/registration', name: 'Registration', component: Registration },
         { path: '/login', name: 'Login', component: Login },
         { path: '/rover-simulation', name: 'RoverSimulation', component: RoverSimulation },
+        { path: '/rover-simulation2', name: 'RoverSimulation2', component: RoverSimulation2 },
         { path: '/graph', name: 'Chart', component: VueChart },
         { path: '/rtGraph', name: 'RealTimeChart', component: rtGraph },
        // { path: '404', component: NotFound },
