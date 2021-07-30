@@ -1,11 +1,11 @@
-let odomPosePositionX= 0.001
-let odomPosePositionY= 0.001
-let odomPosePositionZ= 0.001
-let odomPoseOrientationX=0.001
-let odomPoseOrientationY=0.001
-let odomPoseOrientationZ=0.001
-let odomPoseOrientationW=0.001
-let arrayPosition=[]
+let odomPosePositionX = 0.001
+let odomPosePositionY = 0.001
+let odomPosePositionZ = 0.001
+let odomPoseOrientationX = 0.001
+let odomPoseOrientationY = 0.001
+let odomPoseOrientationZ = 0.001
+let odomPoseOrientationW = 0.001
+let arrayPosition = []
 const RoverSimulation = {
     template: `
 
@@ -13,84 +13,87 @@ const RoverSimulation = {
     <div id="wrapper">
       <div class="content-area">
         <div class="container-fluid">
-		<div class="rover">
-			<div>
-                    <h1>This is the rover simulation page</h1>                 
+            <div class="header">
+                <div>
+                        <h1>Marsyard simulation</h1>                 
+                </div>
+                <!--
+                In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa area centrale che visualizza i contenuti più importanti. Bootstrap la chiama jumbotron.
+                -->
+                <hr>
+                    <div class="jumbotron ">
+                        <div class="connection-status-container"><!--"col-md-6">-->
+                            <h3>Connection status</h3>
+                          
+                            <label>Websocket server address</label>
+                            <input type="text" v-model="ws_address" />
+                        
+                            <button @click="disconnect" class="btn btn-danger" v-if="connected">Disconnect!</button>
+                            <button @click="connect" class="btn btn-success" v-else>Connect!</button>
+                        </div>
+                    </div>
+                <hr>
             </div>
-<!--
-In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa area centrale che visualizza i contenuti più importanti. Bootstrap la chiama jumbotron.
--->
-    <hr>
-        <div class="jumbotron ">
-            <div class="connection-status-container"><!--"col-md-6">-->
-                <h3>Connection status</h3>
-              
-                <label>Websocket server address</label>
-                <input type="text" v-model="ws_address" />
+            <div id="rover controller"v-if="connected" class="row" >
+                <div class="col-md-12 text-center">
+                    <h5>Commands</h5>
+                </div>
+
+                <!-- 1st row -->
+                <div class="col-md-12 text-center">
+                    <button @click="forward" :disabled="!connected" class="btn btn-primary">Go forward</button>
+                    <br><br>
+                </div>
+
+                <!-- 2nd row -->
+                <div class="col-md-4 text-center">
+                    <button @click="turnLeft" :disabled="!connected" class="btn btn-primary">Turn left</button>
+                </div>
+                <div class="col-md-4 text-center">
+                    <button @click="stop" :disabled="!connected" class="btn btn-danger">Stop</button>
+                    <br><br>
+                </div>
+                <div class="col-md-4 text-center">
+                    <button @click="turnRight" :disabled=" !connected" class="btn btn-primary">Turn right</button>
+                </div>
+
+                <!-- 3rd row -->
+                <div class="col-md-12 text-center">
+                    <button @click="backward" :disabled=" !connected" class="btn btn-primary">Go backward</button>
+                </div>
+            </div>
             
-                
-                <button @click="disconnect" class="btn btn-danger" v-if="connected">Disconnect!</button>
-                <button @click="connect" class="btn btn-success" v-else>Connect!</button>
-            </div>
-         </div>
-        <hr>
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h5>Commands</h5>
-            </div>
-
-            <!-- 1st row -->
-            <div class="col-md-12 text-center">
-                <button @click="forward" :disabled="!connected" class="btn btn-primary">Go forward</button>
-                <br><br>
-            </div>
-
-            <!-- 2nd row -->
-            <div class="col-md-4 text-center">
-                <button @click="turnLeft" :disabled="!connected" class="btn btn-primary">Turn left</button>
-            </div>
-            <div class="col-md-4 text-center">
-                <button @click="stop" :disabled="!connected" class="btn btn-danger">Stop</button>
-                <br><br>
-            </div>
-            <div class="col-md-4 text-center">
-                <button @click="turnRight" :disabled=" !connected" class="btn btn-primary">Turn right</button>
-            </div>
-
-            <!-- 3rd row -->
-            <div class="col-md-12 text-center">
-                <button @click="backward" :disabled=" !connected" class="btn btn-primary">Go backward</button>
-            </div>
-            </div>
             <div class=""row">
-            <div class="col-md-12 text-center">
-                <div id="mjpeg"></div>
-                <div id="mjpeg2"></div>
-            </div> 
+                <div class="col-md-12 text-center">
+                    <div id="mjpeg"></div>
+                </div> 
             </div>
-             <div class="row">
-            <div class="col-md-6 text-center">
-                 <apexchart
-      ref="realtimeChart"
-      type="line"
-      height="200"
-      :options="chartOptions"
-      :series="series"
-  />
-   <apexchart
-      ref="realtimeChart2"
-      type="bar"
-      height="200"
-      :options="chartOptions2"
-      :series="series2"
-  />
-            </div> 
-            </div>
-                  
-		</div>
-		</div>
-		</div>
-		</div>
+             <div class="row" v-if="connected">
+              <button @click="hide" class="btn btn-danger" v-if="showed">Hide data charts</button>
+              <button @click="show" class="btn btn-success" v-else>Show data charts</button>
+                <div class="col-md-6 text-center"  v-if="showed">
+                     <apexchart
+                          ref="realtimeChart"
+                          type="line"
+                          height="200"
+                          :options="chartOptions"
+                          :series="series"
+                      />
+                </div>
+                <div class="col-md-6 text-center" v-if="showed">
+                   <apexchart
+                      ref="realtimeChart2"
+                      type="bar"
+                      height="200"
+                      :options="chartOptions2"
+                      :series="series2"
+                  />
+                </div> 
+            </div>     
+        </div>
+      </div>
+	</div>
+  </body>
 	`,
     components: {
         'apexchart': VueApexCharts
@@ -100,7 +103,7 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
     data: function () {
         return {
             //to create a ROS node object to communicate with a rosbridge server
-
+            showed:false,
             connected: false,
             ros: null,
             ws_address: 'ws://localhost:9090/',
@@ -243,6 +246,13 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
     // This way, we can monitor the connection to the rosbridge server.
 
     methods: {
+        show: function(){
+            this.showed=true
+            this.setDataLineChart();
+        },
+        hide: function(){
+            this.showed=false
+        },
         connect: function () {
             this.logs.unshift('connect to rosbridge server!!')
             this.ros = new ROSLIB.Ros({
@@ -274,6 +284,7 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
             })
         },
         disconnect: function () {
+
             this.ros.close()
         },
         //A ROSLIB.Topic corresponds to a ROS Topic. The topic declares the topic name, message type, and passes in the ROS object from earlier.
@@ -383,9 +394,9 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 odomPoseOrientationZ = message.pose.pose.orientation.z
                 odomPoseOrientationW = message.pose.pose.orientation.w
                 arrayPosition[arrayPosition.length] = [message.pose.pose.position.x, message.pose.pose.position.y, message.pose.pose.position.z];
-                console.log('\n\n\n\n\n Odom value'+ this.odom + "pos x "+ odomPosePositionX )
+                console.log('\n\n\n\n\n Odom value' + this.odom + "pos x " + odomPosePositionX)
 
-                console.log('\n array'+ console.table(arrayPosition) )
+                console.log('\n array' + console.table(arrayPosition))
 
             });
         },
@@ -397,23 +408,23 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
                 this.series[0].data.splice(0, 1);
                 this.series[0].data.push(odomPosePositionX);
 
-                this.series[1].data.splice(0,1);
+                this.series[1].data.splice(0, 1);
                 this.series[1].data.push(odomPosePositionY);
 
-                this.series[2].data.splice(0,1);
+                this.series[2].data.splice(0, 1);
                 this.series[2].data.push(odomPosePositionZ);
 
 
-                this.series2[0].data.splice(0,1);
+                this.series2[0].data.splice(0, 1);
                 this.series2[0].data.push(odomPoseOrientationX);
 
-                this.series2[1].data.splice(0,1);
+                this.series2[1].data.splice(0, 1);
                 this.series2[1].data.push(odomPoseOrientationY);
 
-                this.series2[2].data.splice(0,1);
+                this.series2[2].data.splice(0, 1);
                 this.series2[2].data.push(odomPoseOrientationZ);
 
-                this.series2[3].data.splice(0,1);
+                this.series2[3].data.splice(0, 1);
                 this.series2[3].data.push(odomPoseOrientationW);
                 this.updateSeriesLine();
             }, 5000);
@@ -429,7 +440,7 @@ In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa 
         },
     },
     mounted() {
-        this.setDataLineChart();
+
     },
 }                //Absolute 3D position and orientation relative to the Odometry frame (pure visual odometry for ZED, visual-inertial for ZED-M and ZED 2)
-                    // console.log('Received message on ' + listener.name + '; linear velocity' + message.data.linear+ ', angular velocity: ' + message.data.angular);
+// console.log('Received message on ' + listener.name + '; linear velocity' + message.data.linear+ ', angular velocity: ' + message.data.angular);

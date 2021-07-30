@@ -15,7 +15,7 @@ const NavigationBar =  {
         <!-- RESPONSIVE MENU-->      
         <!-- MENU -->
         <div class="nav-item ">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit" to="\rover-simulation">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit" to="\registration">
                 <router-link to="/registration">Sign-Up</router-link>
             </button>
             

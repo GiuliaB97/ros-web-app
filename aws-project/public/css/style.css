@@ -175,6 +175,9 @@ html, body {
     }
 }
 
+.hide {
+    visibility: hidden !important;
+}
 
 
 
