@@ -3,20 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>AWS project</title>
+    <title>Rover web controller</title>
+
+    <!-- Here you must add the site icon-->
+    <!--TODO--->
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-
-    <!--Without adding this before new Vue you get the error vue is not defined-->
-    <!--
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-
-    <script src="https://npmcdn.com/vue-router/dist/vue-router.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
- -->
-
     <!-- Robot management -->
     <script src="https://cdn.jsdelivr.net/npm/eventemitter2@5.0.1/lib/eventemitter2.min.js"></script>
     <script type="text/javascript" src="https://static.robotwebtools.org/mjpegcanvasjs/current/mjpegcanvas.min.js"></script>
@@ -38,21 +31,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
-
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!--Style sheets-->
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
 
-    <!--Component + router import-->
+    <!--Components + router import-->
     <script src="/static/js/navigation-bar.js"></script>
     <script src="/static/js/home-page.js"></script>
     <script src="/static/js/footer-section.js"></script>
     <script src="/static/js/registration.js"></script>
     <script src="/static/js/login.js"></script>
     <script src="/static/js/rover-simulation.js"></script>
-    <script src="/static/js/rover-simulation2.js"></script>
     <script src="/static/js/graph.js"></script>
     <script src="/static/js/rtGraph.js"></script>
     <script src="/static/js/router.js"></script>
@@ -60,11 +51,9 @@
 
 <body>
 <div id="rover-app">
-    <navigation-bar></navigation-bar>
+    <!--<navigation-bar></navigation-bar>-->
     <home-page></home-page>
-
     <router-view></router-view>
-
 </div>
 
 
@@ -77,9 +66,16 @@
         el: '#rover-app',
         components: {
             'navigationBar': NavigationBar,
-            'footerComponent': FooterComponent,
-
+            //'footerComponent': FooterComponent,
         },
+        methods:{
+            openRegistrationForm: function() {
+                this.$router.replace('/registration').catch(err => {});
+            },
+            openLoginForm() {
+                this.$router.replace('/login').catch(err => {});
+            },
+        }
 
     })
 
