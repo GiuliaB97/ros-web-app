@@ -2,6 +2,12 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Docker/ERC-Remote-Navigation-Sim" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Docker/ERC-Remote-Navigation-Sim/ERC-Remote-Navigation-Sim" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Docker/ERC-Remote-Navigation-Sim/ERC-Remote-Navigation-Sim/src/leo_erc_common" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Docker/ERC-Remote-Navigation-Sim/ERC-Remote-Navigation-Sim/src/leo_erc_desktop" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Docker/ERC-Remote-Navigation-Sim/src/leo_erc_common" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Docker/ERC-Remote-Navigation-Sim/src/leo_erc_desktop" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/ros/ERC-Remote-Navigation-Sim" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/ros/ERC-Remote-Navigation-Sim/ERC-Remote-Navigation-Sim" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/ros/ERC-Remote-Navigation-Sim/ERC-Remote-Navigation-Sim/src/leo_erc_common" vcs="Git" />

@@ -2,28 +2,42 @@ const Login = {
     template: `
 
     <div class="card card-container">
-    <form id="form-login" method="post" @submit.prevent="login" class="col-xxl-5 col-lg-8 col-sm-12 col-12">
-                <div class="row mx-0 align-items-center">
-                    <div class="col col-xl-8 col-7">
-                        <div class="row mx-0">
-                            <div class="col input-group input-group-sm ps-0">
-                                <input id="userLogin" v-model="usernameLogin" class="form-control" :class="{ 'is-invalid': loginError }"
-                                     placeholder="User" type="text" alt="Username" required/>
-                            </div>
-                            <div class="col input-group input-group-sm pe-0">
-                                <input id="passwordLogin" v-model="passwordLogin" class="form-control" :class="{ 'is-invalid': loginError }"
-                                     placeholder="Password" type="password" alt="Password" required/>
-                            </div>        
-                        </div>
-                        <div v-if="loginError" class="login-alert-error text-center mt-1"> {{ loginError }} </div>
-                    </div>                    
-                    <div id="form-button-container" class="col col-xl-4 col-5">
-                        <input type="submit" value="Login" class="btn btn-success rounded-pill"/>
-                        
-                        
+        <div class="d-flex justify-content-center">
+            <div class="mt-2 card col-12 col-sm-8 col-md-6 col-xl-5">
+                <div class="card-header">
+                    <div class="row">
+                        <h3 class="text-center">Sign in</h3>
                     </div>
                 </div>
-            </form>
+                <div class="card-body">
+                <form id="form-login" method="post" @submit.prevent="login" class="col-xxl-5 col-lg-8 col-sm-12 col-12">
+                    <div class="row mx-0 align-items-center">
+                        
+                            <div class="row ">
+                                <div class="pb-2">
+                                    <input id="userLogin" v-model="usernameLogin" class="form-control" :class="{ 'is-invalid': loginError }"
+                                         placeholder="Type here the user email" type="text" alt="Username" required/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="pb-2">
+                                    <input id="passwordLogin" v-model="passwordLogin" class="form-control" :class="{ 'is-invalid': loginError }"
+                                         placeholder="Type here the user password" type="password" alt="Password" required/>
+                                </div>        
+                            </div>
+                            <div class="row">
+                            <div v-if="loginError" class="login-alert-error text-center mt-1"> {{ loginError }} </div>
+                            </div>
+                         
+                                         
+                        <div id="form-button-container" class="row">
+                            <input type="submit" value="Login" class="btn btn-success rounded-pill btn-lg btn-block" />
+                            
+                            
+                        </div>
+                    </div>
+                </form>
+                </div>
      </div>
   
   `,
