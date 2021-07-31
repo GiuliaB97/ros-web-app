@@ -10,32 +10,32 @@ const Login = {
                     </div>
                 </div>
                 <div class="card-body">
-                <form id="form-login" method="post" @submit.prevent="login" >
-                    <div class="row  align-items-center">
-                        
-                            <div class="row ">
-                                <div class="pb-2">
-                                    <input id="userLogin" v-model="usernameLogin" class="form-control" :class="{ 'is-invalid': loginError }"
-                                         placeholder="Type here the user email" type="text" alt="Username" required/>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="pb-2">
-                                    <input id="passwordLogin" v-model="passwordLogin" class="form-control" :class="{ 'is-invalid': loginError }"
-                                         placeholder="Type here the user password" type="password" alt="Password" required/>
-                                </div>        
-                            </div>
-                            <div class="row">
-                            <div v-if="loginError" class="login-alert-error text-center mt-1"> {{ loginError }} </div>
-                            </div>
-                         
+                <form id="form-login" method="post" @submit.prevent="login"  class="align-items-center">
+                      <div class="row">
+                          <label for="inputPassword" class="col-sm-3 col-form-label">Email</label>
+                          <div class="col-sm-9">
+                            <input id="userLogin" v-model="usernameLogin" class="form-control" :class="{ 'is-invalid': loginError }"
+                                   placeholder="Type here the user email" type="text" alt="Username" required/>
+                          </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                          <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
+                          <div class="col-sm-9">
+                                <input id="passwordLogin" v-model="passwordLogin" class="form-control" :class="{ 'is-invalid': loginError }"
+                                     placeholder="Type here the user password" type="password" alt="Password" required/>
+                          </div>        
+                      </div>
+                      
+                    <div class="row">
+                      <div v-if="loginError" class="login-alert-error text-center mt-1"> {{ loginError }} </div>
+                    </div>
+                  <br>
                                          
                         <div id="form-button-container" class="row">
-                            <input type="submit" value="Login" class="btn btn-success rounded-pill btn-lg btn-block" data-toggle="tooltip" data-placement="top" title="Click here to submit your data "/>
-                            
-                            
+                            <input type="submit" value="Login" class="btn btn-success rounded-pill btn-lg btn-block" data-toggle="tooltip" data-placement="top" title="Click here to submit your data "/>                            
                         </div>
-                    </div>
+                    
                 </form>
                 </div>
      </div>
