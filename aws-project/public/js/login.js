@@ -10,8 +10,8 @@ const Login = {
                     </div>
                 </div>
                 <div class="card-body">
-                <form id="form-login" method="post" @submit.prevent="login" class="col-xxl-5 col-lg-8 col-sm-12 col-12">
-                    <div class="row mx-0 align-items-center">
+                <form id="form-login" method="post" @submit.prevent="login" >
+                    <div class="row  align-items-center">
                         
                             <div class="row ">
                                 <div class="pb-2">
@@ -31,7 +31,7 @@ const Login = {
                          
                                          
                         <div id="form-button-container" class="row">
-                            <input type="submit" value="Login" class="btn btn-success rounded-pill btn-lg btn-block" />
+                            <input type="submit" value="Login" class="btn btn-success rounded-pill btn-lg btn-block" data-toggle="tooltip" data-placement="top" title="Click here to submit your data "/>
                             
                             
                         </div>

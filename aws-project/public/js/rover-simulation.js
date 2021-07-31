@@ -28,8 +28,8 @@ const RoverSimulation = {
                             <label>Websocket server address</label>
                             <input type="text" v-model="ws_address" />
                         
-                            <button @click="disconnect" class="btn btn-danger" v-if="connected">Disconnect!</button>
-                            <button @click="connect" class="btn btn-success" v-else>Connect!</button>
+                            <button @click="disconnect" class="btn btn-danger" v-if="connected"  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
+                            <button @click="connect" class="btn btn-success" v-else  data-toggle="tooltip" data-placement="top" title="Click here to connect to the simulation">Connect!</button>
                         </div>
                     </div>
                 <hr>
@@ -63,14 +63,14 @@ const RoverSimulation = {
                 </div>
             </div>
             
-            <div class=""row">
+            <div class="row">
                 <div class="col-md-12 text-center">
                     <div id="mjpeg"></div>
                 </div> 
             </div>
              <div class="row" v-if="connected">
               <button @click="hide" class="btn btn-danger" v-if="showed">Hide data charts</button>
-              <button @click="show" class="btn btn-success" v-else>Show data charts</button>
+              <button @click="show" class="btn btn-success" v-else >Show data charts</button>
                 <div class="col-md-6 text-center"  v-if="showed">
                      <apexchart
                           ref="realtimeChart"
@@ -92,7 +92,6 @@ const RoverSimulation = {
             </div>     
         </div>
       </div>
-	</div>
   </body>
 	`,
     components: {

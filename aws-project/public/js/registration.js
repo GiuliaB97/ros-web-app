@@ -48,7 +48,7 @@ const Registration = {
                             <div v-if="registrationSuccess" class="alert alert-success"> {{ registrationSuccess }} </div>
                         </div>
                         <div class="form-group text-end pt-2">
-                            <input type="submit" value="Confirm" class="btn btn-success rounded-pill" :class="{ 'disabled': redirecting}">
+                            <input type="submit" value="Confirm" class="btn btn-success rounded-pill" :class="{ 'disabled': redirecting}"  data-toggle="tooltip" data-placement="top" title="Click here to confirm your data ">
                         </div>
                     </form>
                 </div>
