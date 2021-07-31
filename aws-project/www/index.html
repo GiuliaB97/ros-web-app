@@ -44,15 +44,17 @@
     <script src="/static/js/registration.js"></script>
     <script src="/static/js/login.js"></script>
     <script src="/static/js/rover-simulation.js"></script>
+    <script src="/static/js/router.js"></script>
+
+    <!-- TMP components just to test libraries-->
     <script src="/static/js/graph.js"></script>
     <script src="/static/js/rtGraph.js"></script>
-    <script src="/static/js/router.js"></script>
 </head>
 
 <body>
 <div id="rover-app">
-    <!--<navigation-bar></navigation-bar>-->
-    <home-page></home-page>
+    <!--<navigation-bar></navigation-bar>
+    <home-page></home-page>-->
     <router-view></router-view>
 </div>
 
@@ -68,16 +70,7 @@
             'navigationBar': NavigationBar,
             //'footerComponent': FooterComponent,
         },
-        methods:{
-            openRegistrationForm: function() {
-                this.$router.replace('/registration').catch(err => {});
-            },
-            openLoginForm() {
-                this.$router.replace('/login').catch(err => {});
-            },
-        }
-
-    })
+            })
 
 
 //perchè non è necessario fare il mount? perchè non uso vue.use (router) ed export
