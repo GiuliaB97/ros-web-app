@@ -28,13 +28,6 @@ const HomePage = {
 	`,
 
     method: {
-        openRegistrationForm: function() {
-            this.$router.replace('/registration').catch(err => {});
-            console.log("regist")
-        },
-        openLoginForm() {
-            this.$router.replace('/login').catch(err => {});
-        },
     },
 
 }
