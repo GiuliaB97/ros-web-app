@@ -66,7 +66,7 @@ const Login = {
                 })
                 .then(res => {
                     let isLoginOk = res.data.result;
-                    console.log("USernameLogn "+ this.usernameLogin);
+                    console.log("USername Login "+ this.usernameLogin);
                     console.log("VUE Login data result "+ res.data.result);
                     if(isLoginOk) {
                         console.log("Login isLoginOk");
@@ -75,12 +75,14 @@ const Login = {
                         this.token = token;
 
                         let id = res.data.id;
-                        localStorage.idGardener = id;
-                        this.idGardener = id;
+                        localStorage.idUser = id;
+                        this.idUser = id;
 
                         this.usernameLogin = "";
                         this.passwordLogin = "";
-                        this.$router.replace('/').catch(err => {});
+                        this.$router.replace('/rover-simulation').catch(err => {});
+                        //TODO
+            //+ this.$router.replace('/rover-simulation/' + this.idUser).catch(err => {});
                     } else {
                         this.loginError = "Invalid credentials";
                     }
@@ -92,9 +94,9 @@ const Login = {
         logout() {
             localStorage.user = "";
             this.token = "";
-            localStorage.idGardener = "";
-            this.idGardener = "";
-            this.$router.replace('/rover-simulation').catch(err => {});
+            localStorage.idUser = "";
+            this.idUser = "";
+            this.$router.replace('/').catch(err => {});
         },
 
     },
@@ -102,8 +104,8 @@ const Login = {
         if (localStorage.user) {
             this.token = localStorage.user;
         }
-        if (localStorage.idGardener) {
-            this.idGardener = localStorage.idGardener;
+        if (localStorage.idUser) {
+            this.idGardener = localStorage.idUser;
         }
     }
 }

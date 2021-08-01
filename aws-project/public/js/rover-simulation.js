@@ -440,7 +440,14 @@ const RoverSimulation = {
         },
     },
     mounted() {
-
+/*
+if (localStorage.user && localStorage.idUser) {
+			this.token = localStorage.user;
+			this.getUserName();
+		} else {
+			this.$router.replace('/').catch(err => {});
+		}
+ */
     },
 }                //Absolute 3D position and orientation relative to the Odometry frame (pure visual odometry for ZED, visual-inertial for ZED-M and ZED 2)
 // console.log('Received message on ' + listener.name + '; linear velocity' + message.data.linear+ ', angular velocity: ' + message.data.angular);
