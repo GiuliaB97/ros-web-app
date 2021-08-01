@@ -2,9 +2,6 @@ const HomePage = {
       template: `
         
 		<div class="homeContainer">
-
-
-      
 			<div>
                     <h1>This is the home page</h1>
             </div>
@@ -20,7 +17,7 @@ const HomePage = {
                     <li class="list-inline-item"><a href="#">Terms</a></li>
                     <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
                 </ul>
-                <p class="copyright">Company Name © 2018</p>
+                <p class="copyright">Alma-X © 2018</p>
             </footer>
         </div>
 		</div>
