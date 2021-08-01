@@ -5,10 +5,12 @@ const Registration = {
             <div class="mt-2 card col-12 col-sm-8 col-md-6 col-xl-5">
                 <div class="card-header">
                     <div  class="justify-content-center">
-                      <img src="/static/img/almaxLogo.jpeg" alt="Almax Logo" id="almaxIcon">
+                      <img src="/static/img/almaxLogo.jpeg" alt="Almax Icon" id="almaxIcon">
                     </div>
-                    <br>
+                 
+                   <br>
                     <div class="row">
+                      
                         <h3 class="text-center">Sign Up</h3>
                     </div>
                 </div>
