@@ -4,6 +4,10 @@ const Registration = {
         <div class="d-flex justify-content-center">
             <div class="mt-2 card col-12 col-sm-8 col-md-6 col-xl-5">
                 <div class="card-header">
+                    <div  class="justify-content-center">
+                      <img src="/static/img/almaxLogo.jpeg" alt="Almax Logo" id="almaxIcon">
+                    </div>
+                    <br>
                     <div class="row">
                         <h3 class="text-center">Sign Up</h3>
                     </div>

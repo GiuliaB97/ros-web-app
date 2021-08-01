@@ -1,6 +1,8 @@
 const NavigationBar =  {
     template: `
    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+        
+        <img src="/static/img/almaxLogoExtended.png" alt="Almax Logo" id="almaxLogo">
         <!-- BRAND -->
         <a class="navbar-brand">RosWebApp</a>
 <button class="btn btn-secondary my-2 my-sm-0" type="submit" to="\\registration">
