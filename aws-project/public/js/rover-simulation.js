@@ -440,6 +440,7 @@ const RoverSimulation = {
         },
     },
     mounted() {
+        //TODO
 /*
 if (localStorage.user && localStorage.idUser) {
 			this.token = localStorage.user;
