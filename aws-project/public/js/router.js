@@ -14,8 +14,8 @@ const router = new VueRouter({
         { path: '/login', name: 'Login', component: Login },
         { path: '/rover-simulation', name: 'RoverSimulation', component: RoverSimulation },
         { path: '/homeUpdated', name: 'HomeUpdated', component: HomeUpdated },
-       // { path: '/graph', name: 'Chart', component: VueChart },
-      // { path: '/rtGraph', name: 'RealTimeChart', component: rtGraph },
+        { path: '/graph', name: 'Chart', component: VueChart },
+         { path: '/rtGraph', name: 'RealTimeChart', component: rtGraph },
         { path: '/404', component: NotFound },
         { path: '*', redirect: '/404' }//*: match anything
 
