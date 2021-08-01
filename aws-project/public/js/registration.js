@@ -40,7 +40,7 @@ const Registration = {
                                 <label class="control-label" for="password2">Confirm Password</label>
                                     <input type="password" class="form-control form-control-sm" id="password2" :class="{ 'is-invalid': passwordError }"
                                        placeholder="Confirm password" name="password2" v-model.trim="form.password2" required>
-                              <small id="emailHelp" class="form-text text-muted">Your password will not be stored in clear.</small>
+                              <small id="emailHelp" class="form-text text-muted">Type exactly the same password of the previous section.</small>
                                     <small v-if="passwordError" class="invalid-feedback alert alert-danger"> {{ passwordError }} </small>
                             </div>
                         </div>
