@@ -26,7 +26,7 @@ const Login = {
                                   <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
                                   <div class="col-sm-9">
                                         <input id="passwordLogin" v-model="passwordLogin" class="form-control" :class="{ 'is-invalid': loginError }"
-                                             placeholder="Type here the user password" type="password" alt="Password" required/>
+                                             placeholder="Type here the user password" type="pa5ssword" alt="Password" required/>
                                   </div>        
                               </div>
                               

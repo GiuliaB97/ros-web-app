@@ -1,6 +1,6 @@
 const NavigationBar =  {
     template: `
-   <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+   <nav class="navbar navbar-expand-lg navbar-light bg-white justify-content-between" id="navigationbar">
         
         <img src="/static/img/almaxLogoExtended.png" alt="Almax Logo" id="almaxLogo">
         <!-- BRAND -->
