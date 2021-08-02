@@ -106,7 +106,7 @@ const RoverSimulation = {
   </body>
 	`,
     components: {
-        'apexchart': VueApexCharts,
+        //'apexchart': VueApexCharts,
         'roverCommands': RoverCommands,
         'roverVideo': RoverVideo,
         'roverCharts': RoverCharts,
