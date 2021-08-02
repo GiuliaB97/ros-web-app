@@ -66,6 +66,7 @@ const RoverSimulation = {
             -->
           <rover-video></rover-video>
           <rover-commands></rover-commands>
+          <rover-charts></rover-charts>
                 
           <!--
             <div class="row">
@@ -74,6 +75,8 @@ const RoverSimulation = {
                 </div> 
             </div>
             -->
+         
+          <!--
              <div class="row" v-if="connected">
               <button @click="hide" class="btn btn-danger" v-if="showed">Hide data charts</button>
               <button @click="show" class="btn btn-success" v-else >Show data charts</button>
@@ -96,6 +99,7 @@ const RoverSimulation = {
                   />
                 </div> 
               </div>     
+          -->
         </div>
       </div>
       </div>
@@ -105,17 +109,19 @@ const RoverSimulation = {
         'apexchart': VueApexCharts,
         'roverCommands': RoverCommands,
         'roverVideo': RoverVideo,
+        'roverCharts': RoverCharts,
     },
 
     data: function () {
         return {
             //to create a ROS node object to communicate with a rosbridge server
-            showed:false,
+            //showed:false,
             connected: false,
             ros: null,
             ws_address: 'ws://localhost:9090/',
             odom: '',
             logs: [],
+            /*
             series: [
                 {
                     name: "x",
@@ -244,7 +250,7 @@ const RoverSimulation = {
                         show: false
                     }
                 },
-            }
+            }*/
         }
     },
     // Helper methods to connect to ROS
@@ -253,13 +259,14 @@ const RoverSimulation = {
     // This way, we can monitor the connection to the rosbridge server.
 
     methods: {
-        show: function(){
+        /*show: function(){
             this.showed=true
             this.setDataLineChart();
         },
         hide: function(){
             this.showed=false
         },
+        */
         connect: function () {
             this.logs.unshift('connect to rosbridge server!!')
             this.ros = new ROSLIB.Ros({
@@ -412,7 +419,7 @@ const RoverSimulation = {
 
             });
         },
-
+/*
         setDataLineChart() {
             setInterval(() => {
                 //splice rimuove l'elemento in testa, così l0'array ha sempre lo stesso numero di elementi con cui è stato inizializzato --> se no il grafico diventa illegibile
@@ -450,7 +457,10 @@ const RoverSimulation = {
                 data: this.series2[0].data,
             }, {data: this.series2[1].data,}, {data: this.series2[2].data,}, {data: this.series2[3].data,}], false, true);
         },
+ */
     },
+
+
     mounted() {
         //TODO
 /*
