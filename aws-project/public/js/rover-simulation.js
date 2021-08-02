@@ -90,8 +90,9 @@ const RoverSimulation = {
                       :series="series2"
                   />
                 </div> 
-            </div>     
+              </div>     
         </div>
+      </div>
       </div>
   </body>
 	`,

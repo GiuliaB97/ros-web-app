@@ -7,7 +7,7 @@ const rtGraph = {
       :options="chartOptions"
       :series="series"
   />
-</template>
+
 `,     components: {
         'apexchart': VueApexCharts
     },
