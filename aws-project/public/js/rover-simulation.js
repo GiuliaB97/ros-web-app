@@ -110,6 +110,7 @@ const RoverSimulation = {
         'roverCommands': RoverCommands,
         'roverVideo': RoverVideo,
         'roverCharts': RoverCharts,
+        'roverSettings': RoverSettings,
     },
 
     data: function () {
