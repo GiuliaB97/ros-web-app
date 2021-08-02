@@ -64,12 +64,16 @@ const RoverSimulation = {
                 </div>
             </div>
             -->
-          <commands></commands>
+          <rover-video></rover-video>
+          <rover-commands></rover-commands>
+                
+          <!--
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div id="mjpeg"></div>
                 </div> 
             </div>
+            -->
              <div class="row" v-if="connected">
               <button @click="hide" class="btn btn-danger" v-if="showed">Hide data charts</button>
               <button @click="show" class="btn btn-success" v-else >Show data charts</button>
@@ -99,7 +103,8 @@ const RoverSimulation = {
 	`,
     components: {
         'apexchart': VueApexCharts,
-        'commands': Commands,
+        'roverCommands': RoverCommands,
+        'roverVideo': RoverVideo,
     },
 
     data: function () {
@@ -278,10 +283,11 @@ const RoverSimulation = {
                 this.logs.unshift((new Date()).toTimeString() + ' - Connected!')
                 this.connected = true
                 this.loading = false
+
                 //listeners
-                this.setCamera()
+                //this.setCamera()
                 this.setOdomListener()
-                this.setCmdVelistener()
+                //this.setCmdVelistener()
 
             })
         },
@@ -342,6 +348,7 @@ const RoverSimulation = {
             this.topic.publish(this.message)
         },
 */
+        /*
         setCamera: function () {
             console.log('set camera method')
             this.cameraViewer = new MJPEGCANVAS.Viewer({
@@ -352,8 +359,10 @@ const RoverSimulation = {
                 topic: '/camera/image_raw',
                 port: 11315,
             })
-        },
+        },*/
 
+        //I do not think i will use this
+        /*
         setCmdVelistener: function () {
             //problema se metto this.cmdVel non trova name idk why
             //to fix stringify
@@ -369,7 +378,7 @@ const RoverSimulation = {
 
             });
         },
-
+*/
         setOdomListener() {
             listener = new ROSLIB.Topic({
                 ros: this.ros,

@@ -1,5 +1,6 @@
-const Commands = {
+const RoverCommands = {
     props: ['connected'],
+
     template: `
      <!-- <div id="rover controller"v-if="connected" class="row" >-->
      <div id="rover controller" class="row">
