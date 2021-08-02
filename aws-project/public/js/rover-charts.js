@@ -10,8 +10,8 @@ const RoverCharts = {
       <h5>Odometry data charts</h5>
     </div>
     <div class="row">
-      <button @click="hide" class="btn btn-danger" v-if="showed">Hide data charts</button>
-      <button @click="show" class="btn btn-success" v-else >Show data charts</button>
+      <button @click="hide" class="btn btn-danger" v-if="showed" :disabled="!connected">Hide data charts</button>
+      <button @click="show" class="btn btn-success" v-else :disabled="!connected">Show data charts</button>
 
     </div>
       <div class="col-md-6 text-center"  v-if="showed">

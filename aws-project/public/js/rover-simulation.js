@@ -403,7 +403,7 @@ const RoverSimulation = {
                 //message.pose.pose.orientation.z
                 //message.pose.pose.orientation.w
                 //JSON.stringify(message.pose.pose.position.x)
-                console.log('Received message on ' + listener.name + JSON.stringify(message));
+                //console.log('Received message on ' + listener.name + JSON.stringify(message));
                 this.odom = listener.name
                 odomPosePositionX = message.pose.pose.position.x
                 odomPosePositionY = message.pose.pose.position.y
@@ -412,10 +412,10 @@ const RoverSimulation = {
                 odomPoseOrientationY = message.pose.pose.orientation.y
                 odomPoseOrientationZ = message.pose.pose.orientation.z
                 odomPoseOrientationW = message.pose.pose.orientation.w
-                arrayPosition[arrayPosition.length] = [message.pose.pose.position.x, message.pose.pose.position.y, message.pose.pose.position.z];
-                console.log('\n\n\n\n\n Odom value' + this.odom + "pos x " + odomPosePositionX)
+                //arrayPosition[arrayPosition.length] = [message.pose.pose.position.x, message.pose.pose.position.y, message.pose.pose.position.z];
+                //console.log('\n\n\n\n\n Odom value' + this.odom + "pos x " + odomPosePositionX)
 
-                console.log('\n array' + console.table(arrayPosition))
+                //console.log('\n array' + console.table(arrayPosition))
 
             });
         },
