@@ -34,19 +34,19 @@ const RoverSimulation = {
                     </div>
                 <hr>
             </div>
-          
+          <!--
             <div id="rover controller"v-if="connected" class="row" >
                 <div class="col-md-12 text-center">
                     <h5>Commands</h5>
                 </div>
 
-                <!-- 1st row -->
+                
                 <div class="col-md-12 text-center">
                     <button @click="forward" :disabled="!connected" class="btn btn-primary">Go forward</button>
                     <br><br>
                 </div>
 
-                <!-- 2nd row -->
+                
                 <div class="col-md-4 text-center">
                     <button @click="turnLeft" :disabled="!connected" class="btn btn-primary">Turn left</button>
                 </div>
@@ -58,12 +58,13 @@ const RoverSimulation = {
                     <button @click="turnRight" :disabled=" !connected" class="btn btn-primary">Turn right</button>
                 </div>
 
-                <!-- 3rd row -->
+                
                 <div class="col-md-12 text-center">
                     <button @click="backward" :disabled=" !connected" class="btn btn-primary">Go backward</button>
                 </div>
             </div>
-            
+            -->
+          <commands></commands>
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div id="mjpeg"></div>
@@ -97,9 +98,9 @@ const RoverSimulation = {
   </body>
 	`,
     components: {
-        'apexchart': VueApexCharts
+        'apexchart': VueApexCharts,
+        'commands': Commands,
     },
-
 
     data: function () {
         return {
@@ -285,7 +286,6 @@ const RoverSimulation = {
             })
         },
         disconnect: function () {
-
             this.ros.close()
         },
         //A ROSLIB.Topic corresponds to a ROS Topic. The topic declares the topic name, message type, and passes in the ROS object from earlier.
@@ -300,6 +300,7 @@ const RoverSimulation = {
             })
         },
         //after we have the message, we just pass it to the ROSLIB.Topic to publish.
+        /*
         forward: function () {
             this.message = new ROSLIB.Message({
                 linear: {x: 1, y: 0, z: 0,},
@@ -340,6 +341,7 @@ const RoverSimulation = {
             this.setTopic()
             this.topic.publish(this.message)
         },
+*/
         setCamera: function () {
             console.log('set camera method')
             this.cameraViewer = new MJPEGCANVAS.Viewer({
