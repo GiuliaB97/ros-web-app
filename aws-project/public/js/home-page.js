@@ -90,7 +90,7 @@ const HomePage = {
           }
     },
 
-    method: {
+    methods: {
         onSlideStart(slide) {
             this.sliding = true
         },

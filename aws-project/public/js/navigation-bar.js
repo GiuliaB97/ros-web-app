@@ -1,49 +1,22 @@
 const NavigationBar =  {
     template: `
    <nav class="navbar navbar-expand-lg navbar-light bg-white justify-content-between" id="navigationbar">
-        
         <img src="/static/img/almaxLogoExtended.png" alt="Almax Logo" id="almaxLogo">
         <!-- BRAND -->
         <a class="navbar-brand">RosWebApp</a>
-<button class="btn btn-secondary my-2 my-sm-0" type="submit" to="\\registration">
-                <router-link to="/registration">Sign-Up</router-link>
-            </button>
-            
-            <button class="btn btn-dark my-2 my-sm-0" type="submit" to="\\rover-simulation">
-                <router-link to="/login">Sign-In</router-link>
-            </button>
-<!--TODO: uncomment this to make the nav section disappear
-            <button @click="login" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Click here to open the login form">Login!</button>
-          
-           
--->           
-           
-           
-            <!--
-        <div class="nav-item ">
-         <button @click="openLoginForm">Sign In</button>
-         <button  @click="openRegistrationForm" class="btn-dark my-2 my-sm-0" >SIgn up</button>
-        -->
-        <!--
-        <input type="button" @click="openRegistrationForm" value="Login" v-class="btn btn-success rounded-pill"/>Sign-Up</input>
-        
-            <button class="btn btn-dark my-2 my-sm-0" type="submit" @click="openLoginForm">Sign-In</button>
-        -->
-        </div>
-      </nav>
+        <button @click="openRegistrationForm" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Click here to open the registration form">Registration!</button>
+        <button @click="openLoginForm" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Click here to open the login form">Login!</button>
+   </nav>
     `,
 
-    method: {
-        login: function () {
-
-        },
+    methods: {
         openRegistrationForm: function() {
-            console.log("i am in")
+            console.log("nav-bar registration form")
             this.$router.replace('/registration').catch(err => {});
 
         },
         openLoginForm() {
-            console.log("i am in")
+            console.log("nav-bar login form")
             this.$router.replace('/login').catch(err => {});
         },
     },
