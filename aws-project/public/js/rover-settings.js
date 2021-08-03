@@ -1,11 +1,16 @@
 const RoverSettings = {
     template: `
-      
+
   
   `,
-    methods:{
+  data: function () {
+    return {
 
-    },
+    }
+  },
+  methods: {
+
+  },
 
     mounted(){
 

@@ -1,4 +1,4 @@
-const Footer = {
+const HomeFooter = {
     template: `
         <div class="footer-basic">
             <footer>

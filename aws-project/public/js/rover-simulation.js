@@ -13,6 +13,7 @@ const RoverSimulation = {
     <div id="wrapper">
       <div class="content-area">
         <div class="container-fluid">
+          <rover-settings></rover-settings>
             <div class="header">
                 <div>
                         <h1>Marsyard simulation</h1>                 
@@ -21,17 +22,18 @@ const RoverSimulation = {
                 In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa area centrale che visualizza i contenuti più importanti. Bootstrap la chiama jumbotron.
                 -->
                 <hr>
-                    <div class="jumbotron ">
-                        <div class="connection-status-container"><!--"col-md-6">-->
-                            <h3>Connection status</h3>
-                          
-                            <label>Websocket server address</label>
-                            <input type="text" v-model="ws_address" />
-                        
-                            <button @click="disconnect" class="btn btn-danger" v-if="connected"  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
-                            <button @click="connect" class="btn btn-success" v-else  data-toggle="tooltip" data-placement="top" title="Click here to connect to the simulation">Connect!</button>
-                        </div>
+                
+                <div class="jumbotron ">
+                    <div class="connection-status-container"><!--"col-md-6">-->
+                        <h3>Connection status</h3>
+                      
+                        <label>Websocket server address</label>
+                        <input type="text" v-model="ws_address" />
+                    
+                        <button @click="disconnect" class="btn btn-danger" v-if="connected"  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
+                        <button @click="connect" class="btn btn-success" v-else  data-toggle="tooltip" data-placement="top" title="Click here to connect to the simulation">Connect!</button>
                     </div>
+                </div>
                 <hr>
             </div>
           <!--

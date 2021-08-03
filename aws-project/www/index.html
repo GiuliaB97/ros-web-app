@@ -10,8 +10,6 @@
     <!-- Web Page Icon -->
     <link rel="shortcut icon" href="/static/img/almaxLogo.png" />
 
-
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Robot management -->
     <script src="https://cdn.jsdelivr.net/npm/eventemitter2@5.0.1/lib/eventemitter2.min.js"></script>
@@ -37,6 +35,14 @@
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+    <!--Material-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    </body>
+
+
     <!--Style sheets-->
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
 
@@ -48,8 +54,9 @@
     <!--Components + router import-->
     <script src="/static/js/404.js"></script>
     <script src="/static/js/navigation-bar.js"></script>
+
+    <script src="/static/js/home-footer.js"></script>
     <script src="/static/js/home-page.js"></script>
-    <script src="/static/js/footer-section.js"></script>
     <script src="/static/js/registration.js"></script>
     <script src="/static/js/login.js"></script>
     <script src="/static/js/rover-commands.js"></script>
@@ -61,7 +68,6 @@
     <!--Router component must be the last one added if not it will not be able to localize the components correctly-->
     <script src="/static/js/router.js"></script>
 
-
 </head>
 
 <body>
@@ -70,17 +76,12 @@
     <router-view></router-view>
 </div>
 
-
-
-
-
 <script>
     var vm = new Vue({
         router,
         el: '#rover-app',
         components: {
             'navigationBar': NavigationBar,
-            //'footerComponent': FooterComponent,
         },
     })
 
