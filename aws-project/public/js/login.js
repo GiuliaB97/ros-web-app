@@ -13,7 +13,7 @@ const Login = {
                         </div>
                     </div>
                     <div class="card-body">
-                        <form id="form-login" method="post" @submit.prevent="login"  class="align-items-center">
+                        <form id="form-login" Leone1method="post" @submit.prevent="login"  class="align-items-center">
                               <div class="row">
                                   <label for="inputPassword" class="col-sm-3 col-form-label">Email</label>
                                   <div class="col-sm-9">
