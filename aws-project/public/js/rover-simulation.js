@@ -24,9 +24,9 @@ const RoverSimulation = {
                 -->
                     <div class="connection-status-container"><!--"col-md-6">-->
                         <h3>Connection status</h3>
-                        <label>Websocket server address is: {{ws_address}} </label>
+                        <label>Websocket server address is: {{ws_address}}    {{connected}} </label>
                       
-                        <button @click="disconnect" class="btn btn-danger" v-if="connected "  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
+                        <button @click="disconnect" class="btn btn-danger" v-if="connected"  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
                         <button @click="connect" class="btn btn-success" v-else  data-toggle="tooltip" data-placement="top" title="Click here to connect to the simulation">Connect!</button>
                       
                         <button @click="showAdvanced" class="btn btn-success" v-if="connected & !advanced"  data-toggle="tooltip" data-placement="top" title="Click here to show the advanced option ">Show Advanced option</button>
@@ -58,9 +58,7 @@ const RoverSimulation = {
         'roverCommands': RoverCommands,
         'roverVideo': RoverVideo,
         'roverCharts': RoverCharts,
-        'roverSettings': RoverSettings,
     },
-
     data: function () {
         return {
             //to create a ROS node object to communicate with a rosbridge server

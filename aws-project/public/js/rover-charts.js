@@ -36,6 +36,13 @@ const RoverCharts = {
 
   
   `,
+    watch: {
+        connected: function (val) {
+            console.log("watch")
+            this.connected = val
+        },
+
+    },
     data: function() {
 
         return {
