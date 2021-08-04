@@ -26,12 +26,21 @@ const RoverSimulation = {
                 <div class="jumbotron ">
                     <div class="connection-status-container"><!--"col-md-6">-->
                         <h3>Connection status</h3>
-                      
+                        
                         <label>Websocket server address</label>
                         <input type="text" v-model="ws_address" />
-                    
+
                         <button @click="disconnect" class="btn btn-danger" v-if="connected"  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
                         <button @click="connect" class="btn btn-success" v-else  data-toggle="tooltip" data-placement="top" title="Click here to connect to the simulation">Connect!</button>
+                        <button @click="advanced" class="btn btn-danger" v-if="connected"  data-toggle="tooltip" data-placement="top" title="Click here to show the advanced option ">Show Advanced option</button>
+                        <div>
+                          <input type="text" class="form-control form-control-sm" id="ws_address">
+                                 placeholder="Workspace address" v-model="ws_address" required>  
+                        </div>
+                      <label for="inputWorkspace" class="col-sm-3 col-form-label">Workspace</label>
+                      <div class="col-sm-9">
+                        <input id="workspace" v-model="ws_address" class="form-control" placeholder="Type address of the workspace" type="pa5ssword" alt="Password" required/>
+                      </div>
                     </div>
                 </div>
                 <hr>
@@ -119,10 +128,11 @@ const RoverSimulation = {
         return {
             //to create a ROS node object to communicate with a rosbridge server
             //showed:false,
-            connected: false,
+            advanced: false, //variable to show advanced menu to set url
+            connected: false, //variable to establish connection w/ ROS applicaation
             ros: null,
-            ws_address: 'ws://localhost:9090/',
-            odom: '',
+            ws_address: 'ws://localhost:9090/',  //address to at which ROS reply--> rosbridge node establish the connection on this port
+            odom: '',  //TMP variable to check odom values read
             logs: [],
             /*
             series: [
