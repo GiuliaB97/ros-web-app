@@ -18,99 +18,38 @@ const RoverSimulation = {
                 <div>
                         <h1>Marsyard simulation</h1>                 
                 </div>
-                <!--
-                In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa area centrale che visualizza i contenuti più importanti. Bootstrap la chiama jumbotron.
-                -->
-                <hr>
                 
-                <div class="jumbotron ">
+                <hr>
+                <div class="jumbotron "><!--In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa area centrale che visualizza i contenuti più importanti. Bootstrap la chiama jumbotron.
+                -->
                     <div class="connection-status-container"><!--"col-md-6">-->
                         <h3>Connection status</h3>
                         
                         <label>Websocket server address</label>
                         <input type="text" v-model="ws_address" />
 
-                        <button @click="disconnect" class="btn btn-danger" v-if="connected"  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
+                        <button @click="disconnect" class="btn btn-danger" v-if="connected "  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
                         <button @click="connect" class="btn btn-success" v-else  data-toggle="tooltip" data-placement="top" title="Click here to connect to the simulation">Connect!</button>
-                        <button @click="advanced" class="btn btn-danger" v-if="connected"  data-toggle="tooltip" data-placement="top" title="Click here to show the advanced option ">Show Advanced option</button>
-                        <div>
-                          <input type="text" class="form-control form-control-sm" id="ws_address">
-                                 placeholder="Workspace address" v-model="ws_address" required>  
+                      
+                        <button @click="showAdvanced" class="btn btn-success" v-if="connected & !advanced"  data-toggle="tooltip" data-placement="top" title="Click here to show the advanced option ">Show Advanced option</button>
+                        
+                        <div v-if="advanced" >
+                          <label for="inputWorkspace" class="col-sm-3 col-form-label">Workspace</label>
+                          <input type="text" class="form-control form-control-sm" id="ws_address"
+                                 placeholder="Workspace address" v-model="ws_address" placeholder="Type address of the workspace">
+                          <button @click="hideAdvanced" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Click here to hide the advanced option ">Hide Advanced option</button>
+
                         </div>
-                      <label for="inputWorkspace" class="col-sm-3 col-form-label">Workspace</label>
-                      <div class="col-sm-9">
-                        <input id="workspace" v-model="ws_address" class="form-control" placeholder="Type address of the workspace" type="pa5ssword" alt="Password" required/>
-                      </div>
+                      
                     </div>
                 </div>
                 <hr>
             </div>
-          <!--
-            <div id="rover controller"v-if="connected" class="row" >
-                <div class="col-md-12 text-center">
-                    <h5>Commands</h5>
-                </div>
-
-                
-                <div class="col-md-12 text-center">
-                    <button @click="forward" :disabled="!connected" class="btn btn-primary">Go forward</button>
-                    <br><br>
-                </div>
-
-                
-                <div class="col-md-4 text-center">
-                    <button @click="turnLeft" :disabled="!connected" class="btn btn-primary">Turn left</button>
-                </div>
-                <div class="col-md-4 text-center">
-                    <button @click="stop" :disabled="!connected" class="btn btn-danger">Stop</button>
-                    <br><br>
-                </div>
-                <div class="col-md-4 text-center">
-                    <button @click="turnRight" :disabled=" !connected" class="btn btn-primary">Turn right</button>
-                </div>
-
-                
-                <div class="col-md-12 text-center">
-                    <button @click="backward" :disabled=" !connected" class="btn btn-primary">Go backward</button>
-                </div>
-            </div>
-            -->
+          
           <rover-video></rover-video>
           <rover-commands></rover-commands>
           <rover-charts></rover-charts>
                 
-          <!--
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <div id="mjpeg"></div>
-                </div> 
-            </div>
-            -->
-         
-          <!--
-             <div class="row" v-if="connected">
-              <button @click="hide" class="btn btn-danger" v-if="showed">Hide data charts</button>
-              <button @click="show" class="btn btn-success" v-else >Show data charts</button>
-                <div class="col-md-6 text-center"  v-if="showed">
-                     <apexchart
-                          ref="realtimeChart"
-                          type="line"
-                          height="200"
-                          :options="chartOptions"
-                          :series="series"
-                      />
-                </div>
-                <div class="col-md-6 text-center" v-if="showed">
-                   <apexchart
-                      ref="realtimeChart2"
-                      type="bar"
-                      height="200"
-                      :options="chartOptions2"
-                      :series="series2"
-                  />
-                </div> 
-              </div>     
-          -->
         </div>
       </div>
       </div>
@@ -134,136 +73,7 @@ const RoverSimulation = {
             ws_address: 'ws://localhost:9090/',  //address to at which ROS reply--> rosbridge node establish the connection on this port
             odom: '',  //TMP variable to check odom values read
             logs: [],
-            /*
-            series: [
-                {
-                    name: "x",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,],
-                },
-                {
-                    name: "y",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,],
-                },
-                {
-                    name: "z",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,],
-                }
 
-            ],
-            chartOptions: {
-                colors: ['#FCCF31', '#17ead9', '#f02fc2'],
-                chart: {
-                    height: 350,
-                },
-                grid: {
-                    show: true,
-                    strokeDashArray: 0,
-                    xaxis: {
-                        lines: {
-                            show: true,
-                        },
-                    },
-                },
-                stroke: {
-                    curve: 'stepline',
-                    width: 5,
-                },
-                dropShadow: {
-                    enabled: true,
-                    opacity: 0.3,
-                    blur: 5,
-                    left: -7,
-                    top: 22,
-                },
-                dataLabels: {
-                    enabled: false,
-                },
-                title: {
-                    text: 'Odometry Pose position',
-                    align: 'left',
-                    style: {
-                        color: '#FFF',
-                    },
-                },
-                xaxis: {
-                    tooltip: {
-                        enabled: false
-                    },
-                    labels: {
-                        show: true
-                    },
-                    axisTicks: {
-                        show: false
-                    }
-                },
-
-            },
-            series2: [
-                {
-                    name: "x",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,]
-                },
-                {
-                    name: "y",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,]
-                },
-                {
-                    name: "z",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,]
-                },
-                {
-                    name: "w",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,]
-                }
-
-            ],
-            chartOptions2: {
-                colors: ['#FCCF31', '#17ead9', '#f02fc2'],
-                chart: {
-                    height: 350,
-                },
-                grid: {
-                    show: true,
-                    strokeDashArray: 0,
-                    xaxis: {
-                        lines: {
-                            show: true,
-                        },
-                    },
-                },
-                stroke: {
-                    curve: 'stepline',
-                    width: 5,
-                },
-                dropShadow: {
-                    enabled: true,
-                    opacity: 0.3,
-                    blur: 5,
-                    left: -7,
-                    top: 22,
-                },
-                dataLabels: {
-                    enabled: false,
-                },
-                title: {
-                    text: 'Odometry Pose position',
-                    align: 'left',
-                    style: {
-                        color: '#FFF',
-                    },
-                },
-                xaxis: {
-                    tooltip: {
-                        enabled: false
-                    },
-                    labels: {
-                        show: true
-                    },
-                    axisTicks: {
-                        show: false
-                    }
-                },
-            }*/
         }
     },
     // Helper methods to connect to ROS
@@ -272,14 +82,12 @@ const RoverSimulation = {
     // This way, we can monitor the connection to the rosbridge server.
 
     methods: {
-        /*show: function(){
-            this.showed=true
-            this.setDataLineChart();
+        showAdvanced: function() {
+            this.advanced=true;
         },
-        hide: function(){
-            this.showed=false
+        hideAdvanced: function() {
+            this.advanced=false;
         },
-        */
         connect: function () {
             this.logs.unshift('connect to rosbridge server!!')
             this.ros = new ROSLIB.Ros({
@@ -326,79 +134,7 @@ const RoverSimulation = {
             })
         },
         //after we have the message, we just pass it to the ROSLIB.Topic to publish.
-        /*
-        forward: function () {
-            this.message = new ROSLIB.Message({
-                linear: {x: 1, y: 0, z: 0,},
-                angular: {x: 0, y: 0, z: 0,},
-            })
-            this.setTopic()
-            this.topic.publish(this.message)
-        },
-        stop: function () {
-            this.message = new ROSLIB.Message({
-                linear: {x: 0, y: 0, z: 0,},
-                angular: {x: 0, y: 0, z: 0,},
-            })
-            this.setTopic()
-            this.topic.publish(this.message)
-        },
-        backward: function () {
-            this.message = new ROSLIB.Message({
-                linear: {x: -1, y: 0, z: 0,},
-                angular: {x: 0, y: 0, z: 0,},
-            })
-            this.setTopic()
-            this.topic.publish(this.message)
-        },
-        turnLeft: function () {
-            this.message = new ROSLIB.Message({
-                linear: {x: 0.5, y: 0, z: 0,},
-                angular: {x: 0, y: 0, z: 0.5,},
-            })
-            this.setTopic()
-            this.topic.publish(this.message)
-        },
-        turnRight: function () {
-            this.message = new ROSLIB.Message({
-                linear: {x: 0.5, y: 0, z: 0,},
-                angular: {x: 0, y: 0, z: -0.5,},
-            })
-            this.setTopic()
-            this.topic.publish(this.message)
-        },
-*/
-        /*
-        setCamera: function () {
-            console.log('set camera method')
-            this.cameraViewer = new MJPEGCANVAS.Viewer({
-                divID: 'mjpeg',
-                host: 'localhost',
-                width: 640,
-                height: 480,
-                topic: '/camera/image_raw',
-                port: 11315,
-            })
-        },*/
 
-        //I do not think i will use this
-        /*
-        setCmdVelistener: function () {
-            //problema se metto this.cmdVel non trova name idk why
-            //to fix stringify
-            cmdVelListener = new ROSLIB.Topic({
-                ros: this.ros,
-                name: '/cmd_vel',
-                messageType: 'geometry_msgs/Twist'
-            })
-            // this.setListener()
-            console.log('set cmdVel listener')
-            cmdVelListener.subscribe(function (message) {
-                console.log('Received message on ' + cmdVelListener.name + JSON.stringify(message));
-
-            });
-        },
-*/
         setOdomListener() {
             listener = new ROSLIB.Topic({
                 ros: this.ros,
@@ -432,45 +168,6 @@ const RoverSimulation = {
 
             });
         },
-/*
-        setDataLineChart() {
-            setInterval(() => {
-                //splice rimuove l'elemento in testa, così l0'array ha sempre lo stesso numero di elementi con cui è stato inizializzato --> se no il grafico diventa illegibile
-                //console.log("\n\n odom from line chart"+ odomPosePositionX + odomPosePositionY +"\n\n"+this.series[0].data+"\n"+this.series[1].data)
-                this.series[0].data.splice(0, 1);
-                this.series[0].data.push(odomPosePositionX);
-
-                this.series[1].data.splice(0, 1);
-                this.series[1].data.push(odomPosePositionY);
-
-                this.series[2].data.splice(0, 1);
-                this.series[2].data.push(odomPosePositionZ);
-
-
-                this.series2[0].data.splice(0, 1);
-                this.series2[0].data.push(odomPoseOrientationX);
-
-                this.series2[1].data.splice(0, 1);
-                this.series2[1].data.push(odomPoseOrientationY);
-
-                this.series2[2].data.splice(0, 1);
-                this.series2[2].data.push(odomPoseOrientationZ);
-
-                this.series2[3].data.splice(0, 1);
-                this.series2[3].data.push(odomPoseOrientationW);
-                this.updateSeriesLine();
-            }, 5000);
-        },
-        updateSeriesLine() {
-            //updateSeries
-            this.$refs.realtimeChart.appendSeries([{
-                data: this.series[0].data,
-            }, {data: this.series[1].data,}, {data: this.series[2].data,}], false, true);
-            this.$refs.realtimeChart2.appendSeries([{
-                data: this.series2[0].data,
-            }, {data: this.series2[1].data,}, {data: this.series2[2].data,}, {data: this.series2[3].data,}], false, true);
-        },
- */
     },
 
 
