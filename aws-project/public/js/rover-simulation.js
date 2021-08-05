@@ -16,7 +16,7 @@ const RoverSimulation = {
           <rover-settings></rover-settings>
             <div class="header">
                 <div>
-                        <h1>Marsyard simulation {{this.userName}}</h1>                 
+                        <h1>Welcome to the Marsyard simulation {{userName}}</h1>                 
                 </div>
                 
                 <hr>
@@ -24,7 +24,7 @@ const RoverSimulation = {
                 -->
                     <div class="connection-status-container"><!--"col-md-6">-->
                         <h3>Connection status</h3>
-                        <label>Websocket server address is: {{ws_address}}    {{connected}} </label>
+                        <label>Websocket server address is: {{ws_address}} actual connection status is: {{connected}} </label>
                       
                         <button @click="disconnect" class="btn btn-danger" v-if="connected"  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
                         <button @click="connect" class="btn btn-success" v-else  data-toggle="tooltip" data-placement="top" title="Click here to connect to the simulation">Connect!</button>
@@ -58,7 +58,7 @@ const RoverSimulation = {
         'roverVideo': RoverVideo,
         'roverCharts': RoverCharts,
     },
-    data: function () {
+    data () {
         return {
             //to create a ROS node object to communicate with a rosbridge server
             //showed:false,
@@ -109,10 +109,8 @@ const RoverSimulation = {
                 this.loading = false
 
                 //listeners
-                //this.setCamera()
                 this.setOdomListener()
-                //this.setCmdVelistener()
-
+                //this.$emit('connected', this.connected)
             })
         },
         disconnect: function () {
@@ -139,15 +137,7 @@ const RoverSimulation = {
             });
             console.log('set odom listener')
             listener.subscribe(function (message) {
-                //var obj = JSON.parse(message);
-                //message.pose.pose.position.x
-                //message.pose.pose.position.y
-                //message.pose.pose.position.z
-                //message.pose.pose.orientation.x
-                //message.pose.pose.orientation.y
-                //message.pose.pose.orientation.z
-                //message.pose.pose.orientation.w
-                //JSON.stringify(message.pose.pose.position.x)
+
                 //console.log('Received message on ' + listener.name + JSON.stringify(message));
                 this.odom = listener.name
                 odomPosePositionX = message.pose.pose.position.x
@@ -159,7 +149,6 @@ const RoverSimulation = {
                 odomPoseOrientationW = message.pose.pose.orientation.w
                 //arrayPosition[arrayPosition.length] = [message.pose.pose.position.x, message.pose.pose.position.y, message.pose.pose.position.z];
                 //console.log('\n\n\n\n\n Odom value' + this.odom + "pos x " + odomPosePositionX)
-
                 //console.log('\n array' + console.table(arrayPosition))
 
             });
@@ -172,11 +161,10 @@ const RoverSimulation = {
                     }
                 })
                 .then(response => {
-                    console.log("then get "+ response.data.name)
+                    console.log("getUSerName then get "+ response.data.name)
                     this.userName = response.data.name
                 })
                 .catch(error => {
-                    /*(console.log(error));*/
                     this.$router.replace('/401').catch(err => {});
                 });
         },

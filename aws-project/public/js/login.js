@@ -91,13 +91,7 @@ this.$router.replace('/rover-simulation/' + this.idUser).catch(err => {});
                     console.log(err);
                 });
         },
-        logout() {
-            localStorage.user = "";
-            this.token = "";
-            localStorage.idUser = "";
-            this.idUser = "";
-            this.$router.replace('/').catch(err => {});
-        },
+
 
     },
     mounted() {
