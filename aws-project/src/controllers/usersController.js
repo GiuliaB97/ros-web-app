@@ -17,6 +17,22 @@ exports.list_users = function(req, res) {
 	});
 };
 
+exports.user_info = function(req, res) {
+	let userId = req.params.id;
+	let authResult = auth(req, userId);
+	if(authResult.isValidToken) {
+		let token = authResult.token;
+		User.findOne({user_id: token.user}, function(err, user) {
+			if (err) {
+				res.status(500).send(err);
+			}
+			res.json(user);
+		});
+	} else {
+		res.status(401).send("Unauthorized access");
+	}
+};
+
 exports.registration = function(req, res) {
 	let newUserTmp = req.body.params;
 	console.log("registration method receive:"+ req.body.params)
@@ -100,3 +116,4 @@ function auth(req, id) {
 
 	return res;
 }
+

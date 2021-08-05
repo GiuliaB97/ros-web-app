@@ -13,7 +13,6 @@ const NavigationBar =  {
         openRegistrationForm: function() {
             console.log("nav-bar registration form")
             this.$router.replace('/registration').catch(err => {});
-
         },
         openLoginForm() {
             console.log("nav-bar login form")

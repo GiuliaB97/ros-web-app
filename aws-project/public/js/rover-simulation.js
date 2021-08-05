@@ -16,7 +16,7 @@ const RoverSimulation = {
           <rover-settings></rover-settings>
             <div class="header">
                 <div>
-                        <h1>Marsyard simulation</h1>                 
+                        <h1>Marsyard simulation {{this.userName}}</h1>                 
                 </div>
                 
                 <hr>
@@ -54,7 +54,6 @@ const RoverSimulation = {
   </body>
 	`,
     components: {
-        //'apexchart': VueApexCharts,
         'roverCommands': RoverCommands,
         'roverVideo': RoverVideo,
         'roverCharts': RoverCharts,
@@ -69,6 +68,7 @@ const RoverSimulation = {
             ws_address: 'ws://localhost:9090/',  //address to at which ROS reply--> rosbridge node establish the connection on this port
             odom: '',  //TMP variable to check odom values read
             logs: [],
+            userName: '',
 
         }
     },
@@ -164,19 +164,32 @@ const RoverSimulation = {
 
             });
         },
+        getUserName: function() {
+            axios
+                .get(MONGO_URL + "/user/" + this.$route.params.id, {
+                    headers: {
+                        Authorization: this.token
+                    }
+                })
+                .then(response => {
+                    console.log("then get "+ response.data.name)
+                    this.userName = response.data.name
+                })
+                .catch(error => {
+                    /*(console.log(error));*/
+                    this.$router.replace('/401').catch(err => {});
+                });
+        },
     },
 
 
     mounted() {
-        //TODO
-/*
-if (localStorage.user && localStorage.idUser) {
+        if (localStorage.user && localStorage.idUser) {
 			this.token = localStorage.user;
 			this.getUserName();
 		} else {
 			this.$router.replace('/').catch(err => {});
 		}
- */
     },
 }                //Absolute 3D position and orientation relative to the Odometry frame (pure visual odometry for ZED, visual-inertial for ZED-M and ZED 2)
 // console.log('Received message on ' + listener.name + '; linear velocity' + message.data.linear+ ', angular velocity: ' + message.data.angular);

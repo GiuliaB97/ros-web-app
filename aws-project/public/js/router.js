@@ -12,7 +12,7 @@ const router = new VueRouter({
         { path: '/', name: 'Home', component: HomePage },
         { path: '/registration', name: 'Registration', component: Registration },
         { path: '/login', name: 'Login', component: Login },
-        { path: '/rover-simulation', name: 'RoverSimulation', component: RoverSimulation },
+        { path: '/rover-simulation/:id', name: 'RoverSimulation', component: RoverSimulation },
         { path: '/graph', name: 'Chart', component: VueChart },
         { path: '/rtGraph', name: 'RealTimeChart', component: rtGraph },
         { path: '/404', component: NotFound },
