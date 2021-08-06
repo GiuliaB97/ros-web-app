@@ -46,6 +46,7 @@
     <script src="/static/js/404.js"></script>
     <script src="/static/js/navigation-bar.js"></script>
 
+    <script src="/static/js/home-slider.js"></script>
     <script src="/static/js/home-footer.js"></script>
     <script src="/static/js/home-page.js"></script>
     <script src="/static/js/registration.js"></script>
@@ -66,16 +67,15 @@
 <div id="rover-app">
     <navigation-bar></navigation-bar>
     <router-view></router-view>
-
+<!--
     <div class="rounded mx-auto d-block" style="max-width:80%">
         <img class="mySlides" src="/static/img/erc1.jpg" style="width:100%">
         <img class="mySlides" src="/static/img/erc4.jpg" style="width:100%">
         <img class="mySlides" src="/static/img/erc3.jpeg" style="width:100%">
     </div>
+    -->
     <home-footer></home-footer>
 </div>
-
-<style></style>
 
 <script>
     var vm = new Vue({
@@ -83,10 +83,10 @@
         el: '#rover-app',
         components: {
             'navigationBar': NavigationBar,
-            HomeFooter: HomeFooter,
+            //HomeFooter: HomeFooter,
         },
     })
-
+/*
     var myIndex = 0;
     carousel();
 
@@ -101,7 +101,7 @@
         x[myIndex-1].style.display = "block";
         setTimeout(carousel, 2000); // Change image every 2 seconds
     }
-
+*/
 </script>
 </body>
 </html>

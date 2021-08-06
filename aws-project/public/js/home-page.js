@@ -5,13 +5,14 @@ const HomePage = {
 			<div>
               <h1>This is the home page</h1>
             </div>
-            
-            //<home-footer></home-footer>
+            <homeslider></homeslider>
+            <home-footer></home-footer>
 	</div>
 		
 	`,
     components:{
-      //HomeFooter: HomeFooter,
+      'homefooter': HomeFooter,
+        'homeslider': HomeSlider,
     },
     data: function(){
           return{

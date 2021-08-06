@@ -35,4 +35,12 @@ const NavigationBar =  {
         },
 
     },
+    mounted() {
+        if (localStorage.user) {
+            this.token = localStorage.user;
+        }
+        if (localStorage.idUser) {
+            this.idGardener = localStorage.idGardener;
+        }
+    }
 }

@@ -94,12 +94,5 @@ this.$router.replace('/rover-simulation/' + this.idUser).catch(err => {});
 
 
     },
-    mounted() {
-        if (localStorage.user) {
-            this.token = localStorage.user;
-        }
-        if (localStorage.idUser) {
-            this.idGardener = localStorage.idGardener;
-        }
-    }
+
 }
