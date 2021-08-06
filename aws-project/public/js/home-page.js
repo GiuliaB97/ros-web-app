@@ -11,7 +11,7 @@ const HomePage = {
 		
 	`,
     components:{
-      HomeFooter: HomeFooter,
+      //HomeFooter: HomeFooter,
     },
     data: function(){
           return{

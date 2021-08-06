@@ -58,8 +58,6 @@
     <!--Router component must be the last one added if not it will not be able to localize the components correctly-->
     <script src="/static/js/router.js"></script>
 
-
-
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 </head>
@@ -68,14 +66,39 @@
 <div id="rover-app">
     <navigation-bar></navigation-bar>
     <router-view></router-view>
+    <div class="w3-content w3-section" style="max-width:100%">
+        <img class="mySlides" src="/static/img/almaxLogoExtended.png" style="width:100%">
+        <img class="mySlides" src="/static/img/404.jpg" style="width:100%">
+        <img class="mySlides" src="/static/img/almaxLogoExtended.png" style="width:100%">
+    </div>
+    <home-footer></home-footer>
 </div>
 
+<style></style>
+
 <script>
+
+    var myIndex = 0;
+    carousel();
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        myIndex++;
+        if (myIndex > x.length) {myIndex = 1}
+        x[myIndex-1].style.display = "block";
+        setTimeout(carousel, 2000); // Change image every 2 seconds
+    }
+
     var vm = new Vue({
         router,
         el: '#rover-app',
         components: {
             'navigationBar': NavigationBar,
+            HomeFooter: HomeFooter,
         },
     })
 
