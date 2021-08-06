@@ -44,10 +44,10 @@ const RoverSimulation = {
                 <hr>
             </div>
           
-          <rover-video></rover-video>
-          <rover-commands></rover-commands>
-          <rover-charts></rover-charts>
-                
+          <rover-video :connected="connected"></rover-video>
+          <rover-commands :connected="connected"></rover-commands>
+          <rover-charts :connected="connected"></rover-charts>
+          <rover-sidebar></rover-sidebar>
         </div>
       </div>
       </div>
@@ -57,6 +57,7 @@ const RoverSimulation = {
         'roverCommands': RoverCommands,
         'roverVideo': RoverVideo,
         'roverCharts': RoverCharts,
+        'roverSidebar': RoverSidebar,
     },
     data () {
         return {

@@ -239,17 +239,6 @@ html, body {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 .hidden {
     visibility: hidden;
 }
@@ -349,7 +338,7 @@ button:focus {
     opacity: 0;
 }
 #image-slider {
-    height:900px;
+    height:700px;
     width:80%
 }
 .prev, .next {

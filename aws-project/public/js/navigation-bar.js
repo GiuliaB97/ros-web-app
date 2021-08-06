@@ -3,15 +3,17 @@ const NavigationBar =  {
    <nav class="navbar navbar-expand-lg navbar-light bg-white justify-content-between" id="navigationbar">
         <img src="/static/img/almaxLogoExtended.png" alt="Almax Logo" id="almaxLogo">
         <!-- BRAND -->
-        <figure >
+        <div class="position-absolute top-5 start-50" >
           <a id="appName">RosWebApp</a>
-        </figure>
-        <div  v-if="!token"></div>
-            <button @click="openRegistrationForm" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Click here to open the registration form">Registration!</button>
-            <button @click="openLoginForm" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Click here to open the login form">Login!</button>
-        <div v-else>
-          <button @click="logout" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Click here to logout">Logout!</button>
         </div>
+        <div class="position-absolute top-10 end-0">
+        <div v-if="!token" id="nav-button "></div>
+            <button @click="openRegistrationForm" class="btn btn-success btn-lg" data-toggle="tooltip" data-placement="top" title="Click here to open the registration form">Registration!</button>
+            <button @click="openLoginForm" class="btn btn-success btn-lg" data-toggle="tooltip" data-placement="top" title="Click here to open the login form">Login!</button>
+        <div v-else>
+          <button @click="logout" class="btn btn-danger btn-lg" data-toggle="tooltip" data-placement="top" title="Click here to logout">Logout!</button>
+        </div>
+   </div>
    </nav>
     `,
     data(){
