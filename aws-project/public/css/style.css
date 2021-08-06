@@ -1,3 +1,15 @@
+*{
+    font-family: Helvetica, sans-serif;
+}
+h1{
+    font-weight: bold;
+    font-size: 40px;
+}
+#appName{
+    font-variant: small-caps;
+    font-weight: normal;
+    font-size: 30px;
+}
 .homeContainer{
     margin-bottom: 200px;
 }
@@ -49,7 +61,7 @@
 
 
 
-
+/*footer properties*/
 .text-end{
     padding-right: 15px;
     padding-bottom: 20px;
@@ -317,23 +329,6 @@ button:focus {
 #burger.active .burger-bar--3 {
     transform: rotate(-45deg)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*slider proprieties*/
