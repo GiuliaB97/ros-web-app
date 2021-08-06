@@ -50,11 +50,14 @@
 
 
 
-
+.text-end{
+    padding-right: 15px;
+    padding-bottom: 20px;
+}
 .footer-basic {
     position: fixed;
-    height: 150px; /*Without use these attributes the footer jump up and down during the slider-images transitions*/
-    bottom: 40px;
+    height: 250px; /*Without use these attributes the footer jump up and down during the slider-images transitions*/
+    bottom: 20px;
     width: 100%;
     padding:40px 0;
     background-color:#ffffff;
@@ -333,19 +336,11 @@ button:focus {
 
 
 
-
-
-
-
-
-
-
-
-
+/*slider proprieties*/
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: all 0.5s ease;
+    transition: all 0.9s ease;
     overflow: hidden;
     visibility: visible;
     position: absolute;
@@ -359,7 +354,7 @@ button:focus {
     opacity: 0;
 }
 #image-slider {
-    height:600px;
+    height:900px;
     width:80%
 }
 .prev, .next {
@@ -387,24 +382,3 @@ button:focus {
 .prev:hover, .next:hover {
     background-color: rgba(0,0,0,0.9);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
