@@ -6,7 +6,7 @@ const HomePage = {
               <h1>This is the home page</h1>
             </div>
             <homeslider></homeslider>
-            <home-footer></home-footer>
+            <homefooter></homefooter>
 	</div>
 		
 	`,

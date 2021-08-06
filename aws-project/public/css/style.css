@@ -52,6 +52,10 @@
 
 
 .footer-basic {
+    position: fixed;
+    height: 150px; /*Without use these attributes the footer jump up and down during the slider-images transitions/
+    bottom: 40px;
+    width: 100%;
     padding:40px 0;
     background-color:#ffffff;
     color:#4b4c4d;
@@ -341,7 +345,7 @@ button:focus {
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: all 0.9s ease;
+    transition: all 0.5s ease;
     overflow: hidden;
     visibility: visible;
     position: absolute;
