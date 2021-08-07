@@ -1,8 +1,9 @@
 const RoverVideo = {
     props: ['connected'],
     template: `
-      <div  id="roverVideo" class="row" v-if="connected">
-          <div class="col-md-12 text-center">
+      
+      <div id="roverVideo" class="row" >
+          <div class="col-md-12 text-center" >
             <h5>Streaming video</h5>
           </div>
           

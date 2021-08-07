@@ -4,35 +4,36 @@ const RoverCharts = {
         'apexchart': VueApexCharts,
     },
     template: `
-    <div class="col-md-12 text-center row" v-if="connected">
-      <h5>Odometry data charts</h5>
-    </div>
-    <div class="row">
-      <button @click="hide" class="btn btn-danger" v-if="showed" :disabled="!connected">Hide data charts</button>
-      <button @click="show" class="btn btn-success" v-else :disabled="!connected">Show data charts</button>
-
-    </div>
-      <div class="col-md-6 text-center"  v-if="showed">
-        <apexchart
-            ref="realtimeChart"
-            type="line"
-            height="200"
-            :options="chartOptions"
-            :series="series"
-        />
-      </div>
-      <div class="col-md-6 text-center" v-if="showed">
-        <apexchart
-            ref="realtimeChart2"
-            type="bar"
-            height="200"
-            :options="chartOptions2"
-            :series="series2"
-        />
-      </div>
-      </div>
-
-  
+    <div id="roverChart" class="row">
+   
+        <div class="col-md-12 text-center">
+          <h5>Odometry data charts</h5>
+        </div>
+        <div class="text-center">
+          <button @click="hide" class="btn btn-danger" v-if="showed" :disabled="!connected">Hide data charts</button>
+          <button @click="show" class="btn btn-info" v-else :disabled="!connected">Show data charts</button>
+        </div>
+        <div class="row">
+          <div class="col-md-6 text-center"  v-if="showed">
+            <apexchart
+                ref="realtimeChart"
+                type="line"
+                height="200"
+                :options="chartOptions"
+                :series="series"
+            />
+          </div>
+          <div class="col-md-6 text-center" v-if="showed">
+            <apexchart
+                ref="realtimeChart2"
+                type="bar"
+                height="200"
+                :options="chartOptions2"
+                :series="series2"
+            />
+          </div>
+        </div>
+    <div>
   `,
     watch: {
         connected: function (val) {

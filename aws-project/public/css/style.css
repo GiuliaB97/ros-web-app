@@ -5,6 +5,9 @@ h1{
     font-weight: bold;
     font-size: 40px;
 }
+h3, h5{
+    font-weight: bold;
+}
 #appName{
     font-variant: small-caps;
     font-weight: normal;
@@ -63,8 +66,8 @@ h1{
     padding-top:20px;
 }
 
-#roverVideo{
-    padding-top:20px;
+#roverChart, #roverVideo, #roverController{
+    padding-top:30px;
 }
 
 

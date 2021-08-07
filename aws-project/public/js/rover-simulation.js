@@ -23,44 +23,29 @@ const RoverSimulation = {
               <button class="btn btn-secondary btn-lg position-absolute end-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Settings</button>
               
             </div>
-           
-            <hr>
-           
-            
-              
-
-
-
-
-                
-                
-            
+            <!--offcanvas-->
                 <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                   <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Workspace advanced configuration</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                   </div>
                   <div class="offcanvas-body">
-                    <div class=" row">
-                      <label class="row col-form-label font-weight-bold">Connection status:</label>
-                      <div class="row">
+                    <div class=" mt-3">
+                      <label class="row col-form-label">Connection status:</label>
                         <input type="text" class="form-control" id="connectionStatus" v-if="connected" value="connected" readonly>
                         <input type="text" class="form-control" id="connectionStatus" v-else value="Not connected" readonly>
-                      </div>
-
+                      
                     </div>
-                    <div class=" row">
+                    <div class=" mt-3">
                       <label class="col-form-label">Websocket server address is:</label>
-                      <div class="row">
                         <input type="text" class="form-control" id="ws_address" v-model="ws_address" readonly>
-                      </div>
-                      <div class="row">
-                        <div class="dropdown mt-3">
-                          <!-- Button trigger modal -->
-                          <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" >
-                            Advanced options</button>
-                          
-                        </div>
+                    </div>
+                    
+                    <div class="mt-3">
+                      <!-- Button trigger modal -->
+                      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" >Advanced options</button>
+                      
+                    </div>
                        
                       </div>
                     </div>
@@ -79,23 +64,25 @@ const RoverSimulation = {
                                 <label for="ws_address" class="row">WorkSpace address:</label>
                               </div>
                               <div class="row">
-                                <input type="text" class="form-control" id="ws_address" v-model="ws_address">
+                                <input type="text" class="form-control" v-model="ws_address">
                               </div>
 
                             </form>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
                           </div>
                         </div>
                       </div>
                     </div>
-            <rover-video :connected="connected"></rover-video>
+            <div v-if="connected">
+              <rover-video :connected="connected"></rover-video>
+
+              <rover-commands :connected="connected"></rover-commands>
+
+              <rover-charts :connected="connected"></rover-charts>
+            </div>
             
-            <rover-commands :connected="connected"></rover-commands>
-            
-            <rover-charts :connected="connected"></rover-charts>
           
         </div>
       </div>
