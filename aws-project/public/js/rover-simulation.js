@@ -13,12 +13,88 @@ const RoverSimulation = {
       <div id="wrapper">
         <div class="content-area">
           <div class="container-fluid">
-            <div class="row position-absolute top-5 start-50 translate-middle" >
+            <div class="row text-center" >
               <h1>Welcome to the Marsyard simulation {{userName}}</h1>                 
             </div>
-            <rover-settings :connected="connected"></rover-settings>
+            <hr>
+            <div class="text-center">
+              <button type="button" @click="disconnect" class="btn btn-danger rounded-pill btn-lg" v-if="connected"  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
+              <button  type="button"  @click="connect" class="btn btn-success rounded-pill btn-lg" v-else  data-toggle="tooltip" data-placement="top" title="Click here to connect to the simulation">Connect!</button>
+              <button class="btn btn-secondary btn-lg position-absolute end-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Settings</button>
+              
+            </div>
+           
+            <hr>
+           
+            
+              
+
+
+
+
+                
+                
+            
+                <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+                  <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Workspace advanced configuration</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  </div>
+                  <div class="offcanvas-body">
+                    <div class=" row">
+                      <label class="row col-form-label font-weight-bold">Connection status:</label>
+                      <div class="row">
+                        <input type="text" class="form-control" id="connectionStatus" v-if="connected" value="connected" readonly>
+                        <input type="text" class="form-control" id="connectionStatus" v-else value="Not connected" readonly>
+                      </div>
+
+                    </div>
+                    <div class=" row">
+                      <label class="col-form-label">Websocket server address is:</label>
+                      <div class="row">
+                        <input type="text" class="form-control" id="ws_address" v-model="ws_address" readonly>
+                      </div>
+                      <div class="row">
+                        <div class="dropdown mt-3">
+                          <!-- Button trigger modal -->
+                          <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                            Advanced options</button>
+                          
+                        </div>
+                       
+                      </div>
+                    </div>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLabel">Worksapce Advanced Settings</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <form>
+                              <div class="row">
+                                <label for="ws_address" class="row">WorkSpace address:</label>
+                              </div>
+                              <div class="row">
+                                <input type="text" class="form-control" id="ws_address" v-model="ws_address">
+                              </div>
+
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
             <rover-video :connected="connected"></rover-video>
+            
             <rover-commands :connected="connected"></rover-commands>
+            
             <rover-charts :connected="connected"></rover-charts>
           
         </div>
@@ -30,13 +106,9 @@ const RoverSimulation = {
         'roverCommands': RoverCommands,
         'roverVideo': RoverVideo,
         'roverCharts': RoverCharts,
-        'roverSettings': RoverSettings,
     },
     data () {
         return {
-            //to create a ROS node object to communicate with a rosbridge server
-            //showed:false,
-            advanced: false, //variable to show advanced menu to set url
             connected: false, //variable to establish connection w/ ROS applicaation
             ros: null,
             ws_address: 'ws://localhost:9090/',  //address to at which ROS reply--> rosbridge node establish the connection on this port
@@ -52,21 +124,16 @@ const RoverSimulation = {
     // This way, we can monitor the connection to the rosbridge server.
 
     methods: {
-        showAdvanced: function() {
-            this.advanced=true;
-        },
-        hideAdvanced: function() {
-            this.advanced=false;
-        },
         connect: function () {
             this.logs.unshift('connect to rosbridge server!!')
             this.ros = new ROSLIB.Ros({
                 url: this.ws_address
             })
             this.ros.on('connection', () => {
-                this.connected = true
-                this.logs.unshift('Connected!')
+                this.logs.unshift('Connected!'+ new Date().toTimeString())
                 console.log('Connected!')
+                this.connected = true
+                this.setOdomListener()
             })
             this.ros.on('error', (error) => {
                 this.logs.unshift('Error connecting to websocket server')
@@ -76,15 +143,6 @@ const RoverSimulation = {
                 this.connected = false
                 this.logs.unshift('Connection to websocker server closed')
                 console.log('Connection to websocket server closed.')
-            })
-            this.ros.on('connection', () => {
-                this.logs.unshift((new Date()).toTimeString() + ' - Connected!')
-                this.connected = true
-                this.loading = false
-
-                //listeners
-                this.setOdomListener()
-                //this.$emit('connected', this.connected)
             })
         },
         disconnect: function () {

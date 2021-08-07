@@ -1,17 +1,8 @@
-const RoverVideo = {
+const RoverConfiguration = {
     props: ['connected'],
     template: `
-      <div  id="roverVideo" class="row" v-if="connected">
-          <div class="col-md-12 text-center">
-            <h5>Streaming video</h5>
-          </div>
+
           
-          <div class="col-md-12 text-center">
-            <div id="mjpeg"></div>
-          </div>
-          
-      </div>
-  
   `,
     methods:{
         setCamera: function () {

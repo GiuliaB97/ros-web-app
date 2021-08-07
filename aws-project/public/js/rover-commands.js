@@ -1,9 +1,9 @@
 const RoverCommands = {
     props: ['connected'],
     template: `
-      <div id="rover controller"v-if="connected" class="row" >
+      <div id="rover controller" class="row" v-if="connected" >
       <!--<div id="rover controller" class="row">-->
-       <div class="col-md-12 text-center">
+       <div class="col-md-12 text-center row">
          <h5>Commands</h5>
          
        </div>
