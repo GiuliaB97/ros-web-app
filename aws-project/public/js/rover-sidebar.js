@@ -2,7 +2,7 @@ const RoverSidebar = {
     template: `
       <div class="advanced-settings">
       <div class="modal fade mt-5"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-           aria-labelledby="staticBackdropLabel" aria-hidden="true"><!--:id="this.$props.modalid"-->
+           aria-labelledby="staticBackdropLabel" aria-hidden="false" :id="this.$props.modalid">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -34,7 +34,7 @@ const RoverSidebar = {
       </div>
     `,
     props: {
-
+        modalid: {}
     },
     watch:{
 

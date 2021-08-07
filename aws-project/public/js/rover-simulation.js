@@ -18,14 +18,20 @@ const RoverSimulation = {
                 <div>
                         <h1>Welcome to the Marsyard simulation {{userName}}</h1>                 
                 </div>
-                
+              <rover-sidebar></rover-sidebar>
                 <hr>
                 <div class="jumbotron "><!--In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa area centrale che visualizza i contenuti più importanti. Bootstrap la chiama jumbotron.
                 -->
                     <div class="connection-status-container"><!--"col-md-6">-->
                         <h3>Connection status</h3>
+                      <div class="mb-3 row">
+                      <label class="col-sm-2 col-form-label">Websocket server address is:</label>
+                        <div class="col-sm-10">
+                        <input class="form-control-plaintext" type="text" value="{{ws_address}}" aria-label="readonly input example" readonly>
+                       </div>
+                        <!--
                         <label>Websocket server address is: {{ws_address}} actual connection status is: {{connected}} </label>
-                      
+                      -->
                         <button @click="disconnect" class="btn btn-danger" v-if="connected"  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
                         <button @click="connect" class="btn btn-success" v-else  data-toggle="tooltip" data-placement="top" title="Click here to connect to the simulation">Connect!</button>
                       
@@ -47,7 +53,7 @@ const RoverSimulation = {
           <rover-video :connected="connected"></rover-video>
           <rover-commands :connected="connected"></rover-commands>
           <rover-charts :connected="connected"></rover-charts>
-          <rover-sidebar></rover-sidebar>
+          
         </div>
       </div>
       </div>
