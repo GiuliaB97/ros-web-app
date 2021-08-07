@@ -9,50 +9,17 @@ let arrayPosition = []
 const RoverSimulation = {
     template: `
 
-  <body>
-    <div id="wrapper">
-      <div class="content-area">
-        <div class="container-fluid">
-          <rover-settings></rover-settings>
-            <div class="header">
-                <div>
-                        <h1>Welcome to the Marsyard simulation {{userName}}</h1>                 
-                </div>
-              <rover-sidebar></rover-sidebar>
-                <hr>
-                <div class="jumbotron "><!--In aggiunta all'header e i link di navigazione, molti siti web hanno una grossa area centrale che visualizza i contenuti più importanti. Bootstrap la chiama jumbotron.
-                -->
-                    <div class="connection-status-container"><!--"col-md-6">-->
-                        <h3>Connection status</h3>
-                      <div class="mb-3 row">
-                      <label class="col-sm-2 col-form-label">Websocket server address is:</label>
-                        <div class="col-sm-10">
-                        <input class="form-control-plaintext" type="text" value="{{ws_address}}" aria-label="readonly input example" readonly>
-                       </div>
-                        <!--
-                        <label>Websocket server address is: {{ws_address}} actual connection status is: {{connected}} </label>
-                      -->
-                        <button @click="disconnect" class="btn btn-danger" v-if="connected"  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
-                        <button @click="connect" class="btn btn-success" v-else  data-toggle="tooltip" data-placement="top" title="Click here to connect to the simulation">Connect!</button>
-                      
-                        <button @click="showAdvanced" class="btn btn-success" v-if="connected & !advanced"  data-toggle="tooltip" data-placement="top" title="Click here to show the advanced option ">Show Advanced option</button>
-                        
-                        <div v-if="advanced"  class="row">
-                          <label for="inputWorkspace" class="col-sm-3 col-form-label">Workspace</label>
-                          <input type="text" id="ws_address" placeholder="Workspace address" v-model="ws_address" placeholder="Type address of the workspace">
-                          
-                          <button @click="hideAdvanced" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Click here to hide the advanced option ">Hide Advanced option</button>
-
-                        </div>
-                      
-                    </div>
-                </div>
-                <hr>
+    <body>
+      <div id="wrapper">
+        <div class="content-area">
+          <div class="container-fluid">
+            <div class="row position-absolute top-5 start-50 translate-middle" >
+              <h1>Welcome to the Marsyard simulation {{userName}}</h1>                 
             </div>
-          
-          <rover-video :connected="connected"></rover-video>
-          <rover-commands :connected="connected"></rover-commands>
-          <rover-charts :connected="connected"></rover-charts>
+            <rover-settings :connected="connected"></rover-settings>
+            <rover-video :connected="connected"></rover-video>
+            <rover-commands :connected="connected"></rover-commands>
+            <rover-charts :connected="connected"></rover-charts>
           
         </div>
       </div>
@@ -63,7 +30,7 @@ const RoverSimulation = {
         'roverCommands': RoverCommands,
         'roverVideo': RoverVideo,
         'roverCharts': RoverCharts,
-        'roverSidebar': RoverSidebar,
+        'roverSettings': RoverSettings,
     },
     data () {
         return {

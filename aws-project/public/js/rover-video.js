@@ -1,6 +1,6 @@
 const RoverVideo = {
     template: `
-      <div  id="rover video" class="row">
+      <div  id="roverVideo" class="row" v-if="connected">
           <div class="col-md-12 text-center">
             <h5>Streaming video</h5>
           </div>

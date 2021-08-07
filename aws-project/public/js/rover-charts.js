@@ -4,9 +4,7 @@ const RoverCharts = {
         'apexchart': VueApexCharts,
     },
     template: `
-    <!--  <div class="row" v-if="connected">-->
-    <div id="rover charts" class="row">
-    <div class="col-md-12 text-center">
+    <div class="col-md-12 text-center row" v-if="connected">
       <h5>Odometry data charts</h5>
     </div>
     <div class="row">
