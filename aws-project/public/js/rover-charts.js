@@ -8,7 +8,6 @@ const RoverCharts = {
    
         <div class="col-md-12 text-center">
           <h5>Odometry data charts</h5>
-        </div>
         <div class="text-center">
           <button @click="hide" class="btn btn-danger" v-if="showed" :disabled="!connected">Hide data charts</button>
           <button @click="show" class="btn btn-info" v-else :disabled="!connected">Show data charts</button>
@@ -33,7 +32,8 @@ const RoverCharts = {
             />
           </div>
         </div>
-    <div>
+    </div>
+    </div>
   `,
     watch: {
         connected: function (val) {

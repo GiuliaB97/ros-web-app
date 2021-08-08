@@ -24,64 +24,64 @@ const RoverSimulation = {
               
             </div>
             <!--offcanvas-->
-                <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-                  <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Workspace advanced configuration</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Workspace advanced configuration</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">
+                <div class=" mt-3">
+                  <label class="row col-form-label">Connection status:</label>
+                    <input type="text" class="form-control" id="connectionStatus" v-if="connected" value="connected" readonly>
+                    <input type="text" class="form-control" id="connectionStatus" v-else value="Not connected" readonly>
+                  
+                </div>
+                <div class=" mt-3">
+                  <label class="col-form-label">Websocket server address is:</label>
+                    <input type="text" class="form-control" id="ws_address" v-model="ws_address" readonly>
+                </div>
+                
+                <div class="mt-3">
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" >Advanced options</button>
+                  
+                </div>
+                   
                   </div>
-                  <div class="offcanvas-body">
-                    <div class=" mt-3">
-                      <label class="row col-form-label">Connection status:</label>
-                        <input type="text" class="form-control" id="connectionStatus" v-if="connected" value="connected" readonly>
-                        <input type="text" class="form-control" id="connectionStatus" v-else value="Not connected" readonly>
-                      
-                    </div>
-                    <div class=" mt-3">
-                      <label class="col-form-label">Websocket server address is:</label>
-                        <input type="text" class="form-control" id="ws_address" v-model="ws_address" readonly>
-                    </div>
-                    
-                    <div class="mt-3">
-                      <!-- Button trigger modal -->
-                      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" >Advanced options</button>
-                      
-                    </div>
-                       
+                </div>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLabel">Worksapce Advanced Settings</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <div class="row">
+                            <label for="ws_address" class="row">WorkSpace address:</label>
+                          </div>
+                          <div class="row">
+                            <input type="text" class="form-control" v-model="ws_address">
+                          </div>
+
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                       </div>
                     </div>
-                    
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="ModalLabel">Worksapce Advanced Settings</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <form>
-                              <div class="row">
-                                <label for="ws_address" class="row">WorkSpace address:</label>
-                              </div>
-                              <div class="row">
-                                <input type="text" class="form-control" v-model="ws_address">
-                              </div>
+                  </div>
+                </div>
+        <div v-if="connected">
+          <rover-video :connected="connected"></rover-video>
 
-                            </form>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-            <div v-if="connected">
-              <rover-video :connected="connected"></rover-video>
+          <rover-commands :connected="connected"></rover-commands>
 
-              <rover-commands :connected="connected"></rover-commands>
-
-              <rover-charts :connected="connected"></rover-charts>
-            </div>
+          <rover-charts :connected="connected"></rover-charts>
+        </div>
             
           
         </div>
