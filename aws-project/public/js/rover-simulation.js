@@ -14,7 +14,7 @@ const RoverSimulation = {
         <div class="content-area">
           <div class="container-fluid">
             <div class="row text-center" >
-              <h1>Welcome to the Marsyard simulation {{userName}}</h1>                 
+              <h1>Welcome to the Marsyard simulation {{userName}}   {{ws_address}}</h1>                 
             </div>
             <hr>
             <div class="text-center">
@@ -24,38 +24,11 @@ const RoverSimulation = {
 
             </div>
             <rover-setting :connected="connected" :ws_address="ws_address"></rover-setting>
-
-                
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="ModalLabel">Worksapce Advanced Settings</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <form>
-                          <div class="row">
-                            <label for="ws_address" class="row">WorkSpace address:</label>
-                          </div>
-                          <div class="row">
-                            <input type="text" class="form-control" v-model="ws_address">
-                          </div>
-
-                        </form>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            
+            <rover-setting-advanced-option :connected="connected" :ws_address="ws_address" ><rover-setting-advanced-option>
         <div v-if="connected">
           <rover-video :connected="connected"></rover-video>
-
           <rover-commands :connected="connected"></rover-commands>
-
           <rover-charts :connected="connected"></rover-charts>
         </div>
             
@@ -70,6 +43,7 @@ const RoverSimulation = {
         'roverVideo': RoverVideo,
         'roverCharts': RoverCharts,
         'roverSetting': RoverSetting,
+        'roverSettingAdvancedOption': RoverSettingAdvancedOption,
     },
     data () {
         return {
@@ -164,6 +138,7 @@ const RoverSimulation = {
                     this.$router.replace('/401').catch(err => {});
                 });
         },
+
     },
 
 
