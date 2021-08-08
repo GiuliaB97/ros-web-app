@@ -25,16 +25,13 @@ const RoverSimulation = {
             </div>
             <rover-setting :connected="connected" :ws_address="ws_address"></rover-setting>
             
-            <rover-setting-advanced-option :connected="connected" :ws_address="ws_address" ><rover-setting-advanced-option>
+            <rover-setting-advanced-option :connected="connected" :ws_address="ws_address" @update-ws="update_ws_address"><rover-setting-advanced-option>
         <div v-if="connected">
           <rover-video :connected="connected"></rover-video>
           <rover-commands :connected="connected"></rover-commands>
           <rover-charts :connected="connected"></rover-charts>
         </div>
-            
-          
-        </div>
-      </div>
+
       </div>
   </body>
 	`,
@@ -138,6 +135,9 @@ const RoverSimulation = {
                     this.$router.replace('/401').catch(err => {});
                 });
         },
+        update_ws_address(ws_address_updated) {
+            this.ws_address = ws_address_updated
+        }
 
     },
 

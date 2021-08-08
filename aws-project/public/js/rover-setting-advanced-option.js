@@ -19,7 +19,8 @@ const RoverSettingAdvancedOption = {
                   <label for="ws_address" class="row">WorkSpace address:</label>
                 </div>
                 <div class="row">
-                  <input type="text" class="form-control" v-model="ws_address">
+                  <input type="text" class="form-control" v-model="ws_address" v-on:input="updateWsAddress($event.target.value)">
+                  
                 </div>
 
               </form>
@@ -39,7 +40,10 @@ const RoverSettingAdvancedOption = {
 
     },
     methods:{
-
+        updateWsAddress (ws_address) {
+            console.log("rover advanced settings " + ws_address )
+            this.$emit('update-ws', this.$props.ws_address)
+        }
     },
     mounted(){
 

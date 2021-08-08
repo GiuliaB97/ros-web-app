@@ -25,7 +25,8 @@ const RoverSetting = {
 
         <div class="mt-3">
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" >Advanced options</button>
+          <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal"  >Advanced options</button>
+          
 
         </div>
 
