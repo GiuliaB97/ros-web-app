@@ -1,20 +1,12 @@
-let odomPosePositionX = 0.001
-let odomPosePositionY = 0.001
-let odomPosePositionZ = 0.001
-let odomPoseOrientationX = 0.001
-let odomPoseOrientationY = 0.001
-let odomPoseOrientationZ = 0.001
-let odomPoseOrientationW = 0.001
 let arrayPosition = []
 const RoverSimulation = {
     template: `
-
     <body>
       <div id="wrapper">
         <div class="content-area">
           <div class="container-fluid">
             <div class="row text-center" >
-              <h1>Welcome to the Marsyard simulation {{userName}} </h1>                 
+              <h1>Welcome to the Marsyard simulation {{userName}} {{arrayPosition}}</h1>                 
             </div>
             <hr>
             <div class="text-center">
@@ -30,7 +22,7 @@ const RoverSimulation = {
         <div v-if="connected">
           <rover-video :connected="connected"></rover-video>
           <rover-commands :connected="connected"></rover-commands>
-          <rover-charts :connected="connected"></rover-charts>
+          <rover-charts :connected="connected" ></rover-charts>
         </div>
 
           </div>     
@@ -53,7 +45,6 @@ const RoverSimulation = {
             odom: '',  //TMP variable to check odom values read
             logs: [],
             userName: '',
-
         }
     },
     // Helper methods to connect to ROS
@@ -110,13 +101,18 @@ const RoverSimulation = {
 
                 //console.log('Received message on ' + listener.name + JSON.stringify(message));
                 this.odom = listener.name
-                odomPosePositionX = message.pose.pose.position.x
-                odomPosePositionY = message.pose.pose.position.y
-                odomPosePositionZ = message.pose.pose.position.z
-                odomPoseOrientationX = message.pose.pose.orientation.x
-                odomPoseOrientationY = message.pose.pose.orientation.y
-                odomPoseOrientationZ = message.pose.pose.orientation.z
-                odomPoseOrientationW = message.pose.pose.orientation.w
+
+                arrayPosition=[]
+                arrayPosition.push(message.pose.pose.position.x)
+                arrayPosition.push(message.pose.pose.position.y)
+                arrayPosition.push(message.pose.pose.position.z)
+                arrayPosition.push(message.pose.pose.orientation.x)
+                arrayPosition.push(message.pose.pose.orientation.y)
+                arrayPosition.push(message.pose.pose.orientation.z)
+                arrayPosition.push(message.pose.pose.orientation.w)
+
+                console.log("array" +arrayPosition )
+
                 //arrayPosition[arrayPosition.length] = [message.pose.pose.position.x, message.pose.pose.position.y, message.pose.pose.position.z];
                 //console.log('\n\n\n\n\n Odom value' + this.odom + "pos x " + odomPosePositionX)
                 //console.log('\n array' + console.table(arrayPosition))

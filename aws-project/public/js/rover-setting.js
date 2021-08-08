@@ -5,6 +5,7 @@ const RoverSetting = {
     },
     template: `
     <div id="roverSetting">
+    
     <!--offcanvas-->
     <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
       <div class="offcanvas-header">

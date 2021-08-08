@@ -36,10 +36,6 @@ const RoverCharts = {
     </div>
   `,
     watch: {
-        connected: function (val) {
-            console.log("watch")
-            this.connected = val
-        },
 
     },
     data: function() {
@@ -190,26 +186,26 @@ const RoverCharts = {
                 //splice rimuove l'elemento in testa, così l0'array ha sempre lo stesso numero di elementi con cui è stato inizializzato --> se no il grafico diventa illegibile
                 //console.log("\n\n odom from line chart"+ odomPosePositionX + odomPosePositionY +"\n\n"+this.series[0].data+"\n"+this.series[1].data)
                 this.series[0].data.splice(0, 1);
-                this.series[0].data.push(odomPosePositionX);
+                //this.$props.arrayPosition[0]
+                this.series[0].data.push(arrayPosition[0]);
 
                 this.series[1].data.splice(0, 1);
-                this.series[1].data.push(odomPosePositionY);
+                this.series[1].data.push(arrayPosition[1]);
 
                 this.series[2].data.splice(0, 1);
-                this.series[2].data.push(odomPosePositionZ);
-
+                this.series[2].data.push(arrayPosition[2]);
 
                 this.series2[0].data.splice(0, 1);
-                this.series2[0].data.push(odomPoseOrientationX);
+                this.series2[0].data.push(arrayPosition[3]);
 
                 this.series2[1].data.splice(0, 1);
-                this.series2[1].data.push(odomPoseOrientationY);
+                this.series2[1].data.push(arrayPosition[4]);
 
                 this.series2[2].data.splice(0, 1);
-                this.series2[2].data.push(odomPoseOrientationZ);
+                this.series2[2].data.push(arrayPosition[5]);
 
                 this.series2[3].data.splice(0, 1);
-                this.series2[3].data.push(odomPoseOrientationW);
+                this.series2[3].data.push(arrayPosition[6]);
                 this.updateSeriesLine();
             }, 5000);
         },
