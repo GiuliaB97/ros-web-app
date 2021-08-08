@@ -41,8 +41,10 @@ const RoverSettingAdvancedOption = {
     },
     methods:{
         updateWsAddress (ws_address) {
-            console.log("rover advanced settings " + ws_address )
+            //console.log("rover advanced settings " + ws_address )
             this.$emit('update-ws', this.$props.ws_address)
+            //first arg evt (it is the arg passed as value for the parent method @update_ws when the child component is created in the parent)
+            //second arg variable passed
         }
     },
     mounted(){

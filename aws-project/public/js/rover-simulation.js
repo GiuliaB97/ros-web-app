@@ -14,7 +14,7 @@ const RoverSimulation = {
         <div class="content-area">
           <div class="container-fluid">
             <div class="row text-center" >
-              <h1>Welcome to the Marsyard simulation {{userName}}   {{ws_address}}</h1>                 
+              <h1>Welcome to the Marsyard simulation {{userName}} </h1>                 
             </div>
             <hr>
             <div class="text-center">
@@ -24,14 +24,17 @@ const RoverSimulation = {
 
             </div>
             <rover-setting :connected="connected" :ws_address="ws_address"></rover-setting>
-            
-            <rover-setting-advanced-option :connected="connected" :ws_address="ws_address" @update-ws="update_ws_address"><rover-setting-advanced-option>
+            <!--updateWsAddress is the method called in the child component to emit the update event
+                update_ws_address is the method called in the parent component to intercept the update event and update the ws variable--> 
+            <rover-setting-advanced-option :connected="connected" :ws_address="ws_address" @update-ws="update_ws_address"></rover-setting-advanced-option>
         <div v-if="connected">
           <rover-video :connected="connected"></rover-video>
           <rover-commands :connected="connected"></rover-commands>
           <rover-charts :connected="connected"></rover-charts>
         </div>
 
+          </div>     
+      </div>
       </div>
   </body>
 	`,
