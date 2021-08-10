@@ -376,3 +376,13 @@ button:focus {
 .prev:hover, .next:hover {
     background-color: rgba(0,0,0,0.9);
 }
+
+
+#noconnection {
+    height:500px;
+    width:50%;
+    display: block;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}

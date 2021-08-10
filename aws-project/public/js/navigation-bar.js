@@ -6,7 +6,7 @@ const NavigationBar =  {
         <div class="position-absolute top-5 start-50" >
           <a id="appName">RosWebApp</a>
         </div>
-        <form v-if="!token" id="form-login" method="post" @submit.prevent="login" class="col-xxl-5 col-lg-8 col-sm-12 col-12">
+        <form v-if="!token" id="form-login" method="post" @submit.prevent="login" class="col-xxl-4 col-lg-8 col-sm-12 col-12">
           <div class="row mx-0 align-items-center">
             <div class="col col-xl-8 col-7">
               <div class="row mx-0">
@@ -22,18 +22,18 @@ const NavigationBar =  {
               <div v-if="loginError" class="login-alert-error text-center mt-1"> {{ loginError }} </div>
             </div>
             <div id="form-button-container" class="col col-xl-4 col-5">
-              <input type="submit" value="Login" class="btn btn-success  btn-lg "/>
-              <input type="button" @click="openRegistrationForm" value="Sign in" class="btn btn-success  btn-lg "/>
+              <input type="submit" value="Login" class="btn btn-success"/>
+              <input type="button" @click="openRegistrationForm" value="Sign in" class="btn btn-success"/>
             </div>
           </div>
         </form>
-        <div v-else class="col-xxl-5 col-lg-8 col-sm-12 col-12 d-flex justify-content-sm-end justify-content-center mx-0">
+        <div v-else class="col-xxl-4 col-lg-8 col-sm-12 col-12 d-flex justify-content-sm-end justify-content-center mx-0">
           <div class="row">
             <div class="col-6 text-center">
-              <input type="button" @click="openSimulation" value="Simulation" class="btn btn-primary  btn-lg ">
+              <input type="button" @click="openSimulation" value="Simulation" class="btn btn-primary   ">
             </div>
             <div class="col-6 text-center">
-              <input type="button" value="Logout" @click="logout" class="btn btn-danger  btn-lg ">
+              <input type="button" value="Logout" @click="logout" class="btn btn-danger">
             </div>
           </div>
         </div>

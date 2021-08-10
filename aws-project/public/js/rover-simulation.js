@@ -24,6 +24,10 @@ const RoverSimulation = {
           <rover-commands :connected="connected"></rover-commands>
           <rover-charts :connected="connected" ></rover-charts>
         </div>
+            <div v-else>
+              <img src="/static/img/noconnection.png" alt="No connection image" id="noconnection">
+
+            </div>
 
           </div>     
       </div>
