@@ -23,14 +23,13 @@
     "mongo": "^0.1.0",
     "mongodb": "^4.0.0",
     "mongoose": "^5.13.3",
-    "vee-validate": "^4.5.0-alpha.1",
     "vue-carousel": "^0.18.0",
     "vue-chartjs": "^3.5.1",
-    "vue3-apexcharts": "^1.4.0",
     "vuelidate": "^0.7.6"
   },
   "devDependencies": {
     "vue-router": "^3.5.2",
-    "vuex": "^3.6.2"
+    "vuex": "^3.6.2",
+    "xxxxx": "^1.0.3"
   }
 }
