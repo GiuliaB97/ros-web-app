@@ -134,7 +134,7 @@ const RoverSimulation = {
                     }
                 })
                 .then(response => {
-                    console.log("getUSerName then get "+ response.data.name)
+                    //console.log("getUSerName then get "+ response.data.name)
                     this.userName = response.data.name
                 })
                 .catch(error => {
