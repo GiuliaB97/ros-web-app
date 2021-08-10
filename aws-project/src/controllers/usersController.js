@@ -90,30 +90,25 @@ exports.checkUsername = function(req, res) {
 function auth(req, id) {
 	const token = req.headers['authorization'];
 	let res;
-	if(token == null) {
-		res = {
-			isValidToken: false
-		};
-	}
-
-	try {
-		const decodedToken = jwt.verify(token, PRIVATE_SECRET_KEY);
-		if(decodedToken.id === id) {
-			res = {
-				isValidToken: true,
-				token: decodedToken
+	if(token !== null ){
+		try {
+			const decodedToken = jwt.verify(token, PRIVATE_SECRET_KEY);
+			if(decodedToken.id === id) {
+				res = {
+					isValidToken: true,
+					token: decodedToken
+				}
 			}
-		} else {
+		} catch (e) {
 			res = {
 				isValidToken: false
-			}
+			};
 		}
-	} catch (e) {
+	}else{
 		res = {
 			isValidToken: false
 		};
 	}
-
 	return res;
 }
 
