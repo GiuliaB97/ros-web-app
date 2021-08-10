@@ -6,7 +6,7 @@ const RoverSimulation = {
         <div class="content-area">
           <div class="container-fluid">
             <div class="row text-center" >
-              <h1>Welcome to the Marsyard simulation {{userName}} {{arrayPosition}}</h1>                 
+              <h1>Welcome to the Marsyard simulation {{userName}} {{arrayPosition}} {{odom}} {{prova}}</h1>                 
             </div>
             <hr>
             <div class="text-center">
@@ -38,6 +38,7 @@ const RoverSimulation = {
         'roverSettingAdvancedOption': RoverSettingAdvancedOption,
     },
     data () {
+
         return {
             connected: false, //variable to establish connection w/ ROS applicaation
             ros: null,
@@ -45,6 +46,7 @@ const RoverSimulation = {
             odom: '',  //TMP variable to check odom values read
             logs: [],
             userName: '',
+            prova:[]
         }
     },
     // Helper methods to connect to ROS
@@ -90,7 +92,7 @@ const RoverSimulation = {
         },
         //after we have the message, we just pass it to the ROSLIB.Topic to publish.
 
-        setOdomListener() {
+        setOdomListener:function() {
             listener = new ROSLIB.Topic({
                 ros: this.ros,
                 name: '/zed2/odom',
@@ -103,6 +105,11 @@ const RoverSimulation = {
                 this.odom = listener.name
 
                 arrayPosition=[]
+                this.prova=[]                               //se non lo ri-inizializzo lancia un errore
+                                                            //rover-simulation.js:109 Uncaught TypeError: Cannot read property 'push' of undefined
+                this.prova.push(message.pose.pose.position.x)
+
+                console.log("\n\n prova " +this.prova )
                 arrayPosition.push(message.pose.pose.position.x)
                 arrayPosition.push(message.pose.pose.position.y)
                 arrayPosition.push(message.pose.pose.position.z)
