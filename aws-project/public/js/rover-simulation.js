@@ -15,18 +15,18 @@ const RoverSimulation = {
               <button class="btn btn-secondary btn-lg position-absolute end-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Settings</button>
 
             </div>
+            
             <rover-setting :connected="connected" :ws_address="ws_address"></rover-setting>
             <!--updateWsAddress is the method called in the child component to emit the update event
                 update_ws_address is the method called in the parent component to intercept the update event and update the ws variable--> 
             <rover-setting-advanced-option :connected="connected" :ws_address="ws_address" @update-ws="update_ws_address"></rover-setting-advanced-option>
-        <div v-if="connected">
-          <rover-video :connected="connected"></rover-video>
-          <rover-commands :connected="connected"></rover-commands>
-          <rover-charts :connected="connected" ></rover-charts>
-        </div>
+            <div v-if="connected">
+              <rover-video :connected="connected"></rover-video>
+              <rover-commands :connected="connected"></rover-commands>
+              <rover-charts :connected="connected" ></rover-charts>
+            </div>
             <div v-else>
               <img src="/static/img/noconnection.png" alt="No connection image" id="noconnection">
-
             </div>
 
           </div>     
