@@ -44,7 +44,7 @@ const NavigationBar =  {
             this.token = localStorage.user;
         }
         if (localStorage.idUser) {
-            this.idGardener = localStorage.idGardener;
+            this.idUser = localStorage.idUser;
         }
     }
 }
