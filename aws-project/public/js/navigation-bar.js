@@ -7,13 +7,16 @@ const NavigationBar =  {
           <a id="appName">RosWebApp</a>
         </div>
         <div class="position-absolute top-10 end-0">
-        <div v-if="!token" id="nav-button "></div>
-            <button @click="openRegistrationForm" class="btn btn-success btn-lg" data-toggle="tooltip" data-placement="top" title="Click here to open the registration form">Registration!</button>
-            <button @click="openLoginForm" class="btn btn-success btn-lg" data-toggle="tooltip" data-placement="top" title="Click here to open the login form">Login!</button>
-        <div v-else>
-          <button @click="logout" class="btn btn-danger btn-lg" data-toggle="tooltip" data-placement="top" title="Click here to logout">Logout!</button>
+            <div id="nav-button " v-if="!token">
+              <button  @click="openRegistrationForm" class="btn btn-success btn-lg" data-toggle="tooltip" data-placement="top" title="Click here to open the registration form">Registration!</button>
+              <button  @click="openLoginForm" class="btn btn-success btn-lg" data-toggle="tooltip" data-placement="top" title="Click here to open the login form">Login!</button>
+              </div>
+            <div v-else>
+              <button  @click="goToSimulation" class="btn btn-primary btn-lg" data-toggle="tooltip" title="Click here to go to rover simulation page" >Open simulation!</button>
+              <button @click="logout" class="btn btn-danger btn-lg" data-toggle="tooltip" 
+                      title="Click here to logout">Logout!</button>
+            </div>
         </div>
-   </div>
    </nav>
     `,
     data(){
@@ -37,6 +40,9 @@ const NavigationBar =  {
             this.idUser = "";
             this.$router.replace('/').catch(err => {});
         },
+        goToSimulation(){
+            this.$router.replace('/rover-simulation/' + this.idUser).catch(err => {});
+        }
 
     },
     mounted() {

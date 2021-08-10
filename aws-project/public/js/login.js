@@ -82,7 +82,7 @@ const Login = {
                         this.passwordLogin = "";
                         //this.$router.replace('/rover-simulation').catch(err => {});
                         //TODO
-this.$router.replace('/rover-simulation/' + this.idUser).catch(err => {});
+                        this.$router.replace('/rover-simulation/' + this.idUser).catch(err => {});
                     } else {
                         this.loginError = "Invalid credentials";
                     }
