@@ -6,11 +6,11 @@ const RoverSimulation = {
         <div class="content-area">
           <div class="container-fluid">
             <div class="row text-center" >
-              <h1>Welcome to the Marsyard simulation {{userName}} {{arrayPosition}} {{odom}} {{prova}}</h1>                 
+              <h1>Welcome to the Marsyard simulation {{prova}}</h1>                 
             </div>
             <hr>
             <div class="text-center">
-              <button type="button" @click="disconnect" class="btn btn-danger rounded-pill btn-lg" v-if="connected"  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
+              <button type="button" @click="disconnect" class="btn btn-danger rounded-pill btn-lg" v-if="connected "  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
               <button  type="button"  @click="connect" class="btn btn-success rounded-pill btn-lg" v-else  data-toggle="tooltip" data-placement="top" title="Click here to connect to the simulation">Connect!</button>
               <button class="btn btn-secondary btn-lg position-absolute end-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Settings</button>
 
