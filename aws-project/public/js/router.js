@@ -9,6 +9,7 @@ const router = new VueRouter({
         { path: '/login', name: 'Login', component: Login },
         { path: '/rover-simulation/:id', name: 'RoverSimulation', component: RoverSimulation },
         { path: '/404', component: NotFound },
+        { path: '/401', component: NotAuthorized },
         { path: '*', redirect: '/404' }//*: match anything
     ]
 
