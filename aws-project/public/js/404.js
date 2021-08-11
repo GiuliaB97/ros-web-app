@@ -1,1 +1,4 @@
-const NotFound = { template: '<div><img src="static/img/404.jpg" /></div>' }
+const NotFound = {
+    template:
+        '<div><img src="static/img/404.png" id="notFound" @click="openMap"/></div>'
+}

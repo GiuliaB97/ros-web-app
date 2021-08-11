@@ -378,7 +378,7 @@ button:focus {
 }
 
 
-#noconnection {
+#noconnection, #notFound {
     height:60%;
     width:60%;
     display: block;
@@ -386,7 +386,7 @@ button:focus {
     margin-right: auto;
 }
 
-#notauthorized{
+#notauthorized {
     height:30%;
     width:30%;
     display: block;
