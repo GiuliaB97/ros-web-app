@@ -10,7 +10,7 @@ const Registration = {
                  
                    <br>
                     <div class="row">
-                        <h3 class="text-center">Sign Up</h3>
+                        <h1 class="text-center">Sign Up</h1>
                     </div>
                 </div>
                 <div class="card-body">
