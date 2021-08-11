@@ -6,7 +6,6 @@ const router = new VueRouter({
         // Each route should map to a component. The "component" can either be an actual component constructor created via
         { path: '/', name: 'Home', component: HomePage },
         { path: '/registration', name: 'Registration', component: Registration },
-        { path: '/login', name: 'Login', component: Login },
         { path: '/rover-simulation/:id', name: 'RoverSimulation', component: RoverSimulation },
         { path: '/404', component: NotFound },
         { path: '/401', component: NotAuthorized },
