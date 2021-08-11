@@ -7,11 +7,9 @@ const HomePage = {
           <blockquote class="blockquote">
             <p>This is a web page interface that allow you to control a rover simulation in a ROS environment</p>
           </blockquote>
-
         </figure>
             <hr>
             <homeslider></homeslider>
-            
             <homefooter></homefooter>
 	</div>
 		

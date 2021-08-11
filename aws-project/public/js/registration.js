@@ -10,7 +10,6 @@ const Registration = {
                  
                    <br>
                     <div class="row">
-                      
                         <h3 class="text-center">Sign Up</h3>
                     </div>
                 </div>
@@ -62,8 +61,6 @@ const Registration = {
             </div>
         </div>
     </div>
-        
-        
 	`,
 
     data() { //The data() method returns an object
@@ -86,7 +83,6 @@ const Registration = {
     },
     methods: {
         addUser() {
-            console.log("add user i am in ")
             let existingError = false
             this.passwordError = "";
             this.emailError = "";
@@ -98,8 +94,7 @@ const Registration = {
                 existingError = true;
             }
 
-            if (this.form.email !== '') {
-                console.log("if form i am in form values"+ this.form.email)
+            if (this.form.email !== '') { //console.log("if form i am in form values"+ this.form.email)
                 axios
                     .get(MONGO_URL + '/registration', {
                         params: {
@@ -119,15 +114,14 @@ const Registration = {
                                     password: this.form.password
                                 }
                             })
-                                .then(res => {
-                                    console.log("2nd then read data values are:"+ res.data)
+                                .then(res => { //console.log("2nd then read data values are:"+ res.data)
                                     let usrCreated = res.data;
                                     if (usrCreated) {
                                         this.registrationSuccess = "User successfully created, now you will be re-directed to the home page";
                                         this.redirecting = true;
                                         setTimeout(() => {
                                             this.$router.push('/')
-                                        }, 2000)
+                                        }, 3000)
                                     } else {
                                         this.registrationError = "Registration error, please try again";
                                     }

@@ -13,7 +13,6 @@ const RoverSimulation = {
               <button type="button" @click="disconnect" class="btn btn-danger rounded-pill btn-lg" v-if="connected "  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
               <button  type="button"  @click="connect" class="btn btn-success rounded-pill btn-lg" v-else  data-toggle="tooltip" data-placement="top" title="Click here to connect to the simulation">Connect!</button>
               <button class="btn btn-secondary btn-lg position-absolute end-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Settings</button>
-
             </div>
             
             <rover-setting :connected="connected" :ws_address="ws_address"></rover-setting>
@@ -21,9 +20,9 @@ const RoverSimulation = {
                 update_ws_address is the method called in the parent component to intercept the update event and update the ws variable--> 
             <rover-setting-advanced-option :connected="connected" :ws_address="ws_address" @update-ws="update_ws_address"></rover-setting-advanced-option>
             <div v-if="connected">
-              <rover-video :connected="connected"></rover-video>
-              <rover-commands :connected="connected"></rover-commands>
-              <rover-charts :connected="connected" ></rover-charts>
+              <rover-video></rover-video>
+              <rover-command></rover-command>
+              <rover-charts></rover-charts>
             </div>
             <div v-else>
               <img src="/static/img/noconnection.png" alt="No connection image" id="noconnection">
@@ -104,7 +103,6 @@ const RoverSimulation = {
             });
             console.log('set odom listener')
             listener.subscribe(function (message) {
-
                 //console.log('Received message on ' + listener.name + JSON.stringify(message));
                 this.odom = listener.name
 
@@ -127,7 +125,6 @@ const RoverSimulation = {
                 //arrayPosition[arrayPosition.length] = [message.pose.pose.position.x, message.pose.pose.position.y, message.pose.pose.position.z];
                 //console.log('\n\n\n\n\n Odom value' + this.odom + "pos x " + odomPosePositionX)
                 //console.log('\n array' + console.table(arrayPosition))
-
             });
         },
         getUserName: function() {
@@ -148,9 +145,7 @@ const RoverSimulation = {
         update_ws_address(ws_address_updated) {
             this.ws_address = ws_address_updated
         }
-
     },
-
 
     mounted() {
         if (localStorage.user && localStorage.idUser) {
@@ -161,4 +156,3 @@ const RoverSimulation = {
 		}
     },
 }                //Absolute 3D position and orientation relative to the Odometry frame (pure visual odometry for ZED, visual-inertial for ZED-M and ZED 2)
-// console.log('Received message on ' + listener.name + '; linear velocity' + message.data.linear+ ', angular velocity: ' + message.data.angular);

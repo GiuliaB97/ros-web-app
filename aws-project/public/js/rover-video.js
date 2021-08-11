@@ -1,7 +1,5 @@
 const RoverVideo = {
-    props: ['connected'],
     template: `
-      
       <div id="roverVideo" class="row" >
           <div class="col-md-12 text-center" >
             <h5>Streaming video</h5>
@@ -10,9 +8,7 @@ const RoverVideo = {
           <div class="col-md-12 text-center">
             <div id="mjpeg"></div>
           </div>
-          
       </div>
-  
   `,
     methods:{
         setCamera: function () {
@@ -27,12 +23,7 @@ const RoverVideo = {
             })
         },
     },
-
-    // be careful you have commented the method call in the parent component
-   mounted(){
+  mounted(){
        this.setCamera();
     },
-
-
-
 }

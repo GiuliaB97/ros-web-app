@@ -1,18 +1,15 @@
 const HomeSlider = {
     template: `
       <div>
-      <transition-group name='fade' tag='div' >
-        <div  v-for="i in [currentIndex]" :key='i'>
-          <!--rounded mx-auto d-block: is magic tag to center the image-->
-          <img :src="currentImg" id="image-slider" class="rounded mx-auto d-block"/>
-        </div>
-      </transition-group>
-      <a class="prev" @click="prev" href='#'>&#10094;</a>
-      <a class="next" @click="next" href='#'>&#10095;</a>
-
-      </div>
-      
-		
+          <transition-group name='fade' tag='div'>
+            <div  v-for="i in [currentIndex]" :key='i'>
+              <!--rounded mx-auto d-block: is magic tag to center the image-->
+              <img :src="currentImg" id="image-slider" class="rounded mx-auto d-block"/>
+            </div>
+          </transition-group>
+          <a class="prev" @click="prev" href='#'>&#10094;</a>
+          <a class="next" @click="next" href='#'>&#10095;</a>
+      </div>		
 	`,
     components:{
     },

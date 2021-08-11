@@ -96,7 +96,6 @@ const NavigationBar =  {
                 this.$router.replace('/rover-simulation/' + this.idUser).catch(err => {});
             }
         }
-
     },
     mounted() {
         if (localStorage.user) {
