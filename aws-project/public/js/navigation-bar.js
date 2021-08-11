@@ -1,7 +1,7 @@
 const NavigationBar =  {
     template: `
    <nav class="navbar navbar-expand-lg navbar-light bg-white justify-content-between" id="navigationbar">
-        <img src="/static/img/almaxLogoExtended.png" alt="Almax Logo" id="almaxLogo">
+        <img src="/static/img/almaxLogoExtended.png" alt="Almax Logo" id="almaxLogo" @click="openHome">
         <!-- BRAND -->
         <div class="text-center" >
           <a id="appName">RosWebApp</a>
@@ -23,7 +23,7 @@ const NavigationBar =  {
             </div>
             <div id="form-button-container" class="col col-xl-4 col-5">
               <input type="submit" value="Login" class="btn btn-success"/>
-              <input type="button" @click="openRegistrationForm" value="Sign in" class="btn btn-success"/>
+              <input type="button" @click="openRegistrationForm" value="Sign up" class="btn btn-success"/>
             </div>
           </div>
         </form>
@@ -95,7 +95,10 @@ const NavigationBar =  {
             if(localStorage.user) {
                 this.$router.replace('/rover-simulation/' + this.idUser).catch(err => {});
             }
-        }
+        },
+        openHome(){
+            this.$router.replace('/').catch(err => {})
+        },
     },
     mounted() {
         if (localStorage.user) {
