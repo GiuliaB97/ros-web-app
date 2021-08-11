@@ -3,7 +3,7 @@ const NavigationBar =  {
    <nav class="navbar navbar-expand-lg navbar-light bg-white justify-content-between" id="navigationbar">
         <img src="/static/img/almaxLogoExtended.png" alt="Almax Logo" id="almaxLogo">
         <!-- BRAND -->
-        <div class="position-absolute top-5 start-50" >
+        <div class="text-center" >
           <a id="appName">RosWebApp</a>
         </div>
         <form v-if="!token" id="form-login" method="post" @submit.prevent="login" class="col-xxl-4 col-lg-8 col-sm-12 col-12">
