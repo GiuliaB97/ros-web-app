@@ -43,7 +43,7 @@ const RoverSimulation = {
     data () {
 
         return {
-            connected: false, //variable to establish connection w/ ROS applicaation
+            connected: true, //variable to establish connection w/ ROS applicaation
             ros: null,
             ws_address: 'ws://localhost:9090/',  //address to at which ROS reply--> rosbridge node establish the connection on this port
             odom: '',  //TMP variable to check odom values read

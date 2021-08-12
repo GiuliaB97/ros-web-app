@@ -21,13 +21,13 @@ const NavigationBar =  {
               </div>
               <div v-if="loginError" class="login-alert-error text-center mt-1"> {{ loginError }} </div>
             </div>
-            <div id="form-button-container" class="col col-xl-4 col-5">
+            <div id="notLogged-button-container" class="col col-xl-4 col-5">
               <input type="submit" value="Login" class="btn btn-success"/>
               <input type="button" @click="openRegistrationForm" value="Sign up" class="btn btn-success"/>
             </div>
           </div>
         </form>
-        <div v-else class="col-xxl-4 col-lg-8 col-sm-12 col-12 d-flex justify-content-sm-end justify-content-center mx-0">
+        <div v-else class="col-xxl-4 col-lg-8 col-sm-12 col-12 d-flex justify-content-sm-end justify-content-center mx-0" id="logged-button-container">
           <div class="row">
             <div class="col-6 text-center">
               <input type="button" @click="openSimulation" value="Simulation" class="btn btn-primary   ">
