@@ -20,9 +20,10 @@ const RoverSimulation = {
                 update_ws_address is the method called in the parent component to intercept the update event and update the ws variable--> 
             <rover-setting-advanced-option :connected="connected" :ws_address="ws_address" @update-ws="update_ws_address"></rover-setting-advanced-option>
             <div v-if="connected">
-              <rover-video></rover-video>
-              <rover-command></rover-command>
-              <rover-charts></rover-charts>
+
+              <rover-video :connected="connected"></rover-video>
+              <rover-commands :connected="connected"></rover-commands>
+              <rover-charts :connected="connected"></rover-charts>
             </div>
             <div v-else>
               <img src="/static/img/noconnection.png" alt="No connection image" id="noconnection">
@@ -43,7 +44,7 @@ const RoverSimulation = {
     data () {
 
         return {
-            connected: true, //variable to establish connection w/ ROS applicaation
+            connected: false, //variable to establish connection w/ ROS applicaation
             ros: null,
             ws_address: 'ws://localhost:9090/',  //address to at which ROS reply--> rosbridge node establish the connection on this port
             odom: '',  //TMP variable to check odom values read
