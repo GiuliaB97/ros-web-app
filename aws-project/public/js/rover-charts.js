@@ -5,7 +5,7 @@ const RoverCharts = {
     },
     template: `
       <div id="roverChart" class="row">
-
+      <hr>
       <div class="col-md-12 text-center">
         <h5>Odometry data charts</h5>
         <div class="text-center">

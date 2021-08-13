@@ -9,23 +9,23 @@ const RoverCommands = {
        </div>
       
        <!-- 1st row -->
-      <div class="col-md-12 text-center">
+      <div class="col-sm-12 text-center">
         <button @click="forward" :disabled="!connected" class="btn btn-primary">Go forward</button>
         <br><br>
       </div>
       <!-- 2nd row -->
-      <div class="col-md-4 text-center">
+      <div class="col-4 text-center">
         <button @click="turnLeft" :disabled="!connected" class="btn btn-primary">Turn left</button>
       </div>
-      <div class="col-md-4 text-center">
+      <div class="col-4 text-center">
         <button @click="stop" :disabled="!connected" class="btn btn-danger">Stop</button>
         <br><br>
       </div>
-      <div class="col-md-4 text-center">
+      <div class="col-4 text-center">
         <button @click="turnRight" :disabled=" !connected" class="btn btn-primary">Turn right</button>
       </div>
       <!-- 3rd row -->
-      <div class="col-md-12 text-center">
+      <div class="col-sm-12 text-center">
         <button @click="backward" :disabled=" !connected" class="btn btn-primary">Go backward</button>
       </div>
      </div>
