@@ -1,14 +1,16 @@
 const RoverCharts = {
+    props: ['connected'],
     components:{
         'apexchart': VueApexCharts,
     },
     template: `
-    <div id="roverChart" class="row">
-        <div class="col-md-12 text-center">
-          <h5>Odometry data charts</h5>
+      <div id="roverChart" class="row">
+
+      <div class="col-md-12 text-center">
+        <h5>Odometry data charts</h5>
         <div class="text-center">
-          <button @click="hide" class="btn btn-danger" v-if="showed">Hide data charts</button>
-          <button @click="show" class="btn btn-info" v-else>Show data charts</button>
+          <button @click="hide" class="btn btn-danger" v-if="showed" :disabled="!connected">Hide data charts</button>
+          <button @click="show" class="btn btn-info" v-else :disabled="!connected">Show data charts</button>
         </div>
         <div class="row">
           <div class="col-md-6 text-center"  v-if="showed">
@@ -30,14 +32,17 @@ const RoverCharts = {
             />
           </div>
         </div>
-    </div>
-    </div>
-  `,
+      </div>
+      </div>
+    `,
+    watch: {
+
+    },
     data: function() {
 
         return {
             showed:false,
-            series: [ //first argument field name Pose.position = x,y,z; Pose.orientation = x,y,z,w
+            series: [
                 {
                     name: "x",
                     data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,],
@@ -50,9 +55,10 @@ const RoverCharts = {
                     name: "z",
                     data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,],
                 }
+
             ],
             chartOptions: {
-                colors: ['#db0909', '#4e9808', '#245c9a'],      //red, green, blu
+                colors: ['#db0909', '#4e9808', '#245c9a'],
                 chart: {
                     height: 350,
                 },
@@ -77,7 +83,7 @@ const RoverCharts = {
                     top: 22,
                 },
                 dataLabels: {
-                    enabled: true,
+                    enabled: false,
                 },
                 title: {
                     text: 'Odometry Pose position',
@@ -88,7 +94,7 @@ const RoverCharts = {
                 },
                 xaxis: {
                     tooltip: {
-                        enabled: true
+                        enabled: false
                     },
                     labels: {
                         show: true
@@ -144,10 +150,10 @@ const RoverCharts = {
                     top: 22,
                 },
                 dataLabels: {
-                    enabled: trye,
+                    enabled: false,
                 },
                 title: {
-                    text: 'Odometry Pose orientation',
+                    text: 'Odometry Pose position',
                     align: 'left',
                     style: {
                         color: '#FFF',
@@ -155,13 +161,13 @@ const RoverCharts = {
                 },
                 xaxis: {
                     tooltip: {
-                        enabled: true
+                        enabled: false
                     },
                     labels: {
                         show: true
                     },
                     axisTicks: {
-                        show: true
+                        show: false
                     }
                 },
             }
@@ -203,7 +209,8 @@ const RoverCharts = {
                 this.updateSeriesLine();
             }, 5000);
         },
-        updateSeriesLine() {    //updateSeries
+        updateSeriesLine() {
+            //updateSeries
             this.$refs.realtimeChart.appendSeries([{
                 data: this.series[0].data,
             }, {data: this.series[1].data,}, {data: this.series[2].data,}], false, true);
@@ -215,4 +222,4 @@ const RoverCharts = {
     mounted(){
         this.setDataLineChart()
     }
-  }
+}
