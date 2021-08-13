@@ -22,7 +22,7 @@ const RoverSimulation = {
             <div v-if="connected">
 
               <rover-video :connected="connected"></rover-video>
-              <rover-commands :connected="connected"></rover-commands>
+              <rover-commands :connected="connected"  @stop="stop" @turnLeft="turnLeft" @turnRight="turnRight" @forward="forward" @backward="backward"></rover-commands>
               <rover-charts :connected="connected"></rover-charts>
             </div>
             <div v-else>
@@ -144,7 +144,48 @@ const RoverSimulation = {
         },
         update_ws_address(ws_address_updated) {
             this.ws_address = ws_address_updated
-        }
+        },
+
+        forward: function () {
+            this.message = new ROSLIB.Message({
+                linear: {x: 1, y: 0, z: 0,},
+                angular: {x: 0, y: 0, z: 0,},
+            })
+            this.setTopic()
+            this.topic.publish(this.message)
+        },
+        stop: function () {
+            this.message = new ROSLIB.Message({
+                linear: {x: 0, y: 0, z: 0,},
+                angular: {x: 0, y: 0, z: 0,},
+            })
+            this.setTopic()
+            this.topic.publish(this.message)
+        },
+        backward: function () {
+            this.message = new ROSLIB.Message({
+                linear: {x: -1, y: 0, z: 0,},
+                angular: {x: 0, y: 0, z: 0,},
+            })
+            this.setTopic()
+            this.topic.publish(this.message)
+        },
+        turnLeft: function () {
+            this.message = new ROSLIB.Message({
+                linear: {x: 0.5, y: 0, z: 0,},
+                angular: {x: 0, y: 0, z: 0.5,},
+            })
+            this.setTopic()
+            this.topic.publish(this.message)
+        },
+        turnRight: function () {
+            this.message = new ROSLIB.Message({
+                linear: {x: 0.5, y: 0, z: 0,},
+                angular: {x: 0, y: 0, z: -0.5,},
+            })
+            this.setTopic()
+            this.topic.publish(this.message)
+        },
     },
 
     mounted() {

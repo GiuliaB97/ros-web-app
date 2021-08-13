@@ -18,5 +18,7 @@
     <orderEntry type="library" name="jscharting" level="application" />
     <orderEntry type="library" name="apexcharts" level="application" />
     <orderEntry type="library" name="vue-apexcharts" level="application" />
+    <orderEntry type="library" name="vue-renderless-carousel" level="application" />
+    <orderEntry type="library" name="particles" level="application" />
   </component>
 </module>

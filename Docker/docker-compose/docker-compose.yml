@@ -1,0 +1,107 @@
+version: "3.9"
+services:
+  nodejsapp:
+    build:
+      context: ./nodejs
+      dockerfile: Dockerfile
+      args:
+        - IMAGE_VERSION=non_serve
+    image: nodejsapp
+#    image: vic/debian.iptables.ifconfig
+    environment:
+      - MIAVAR=non_serve__solo_come_esempio
+    ports:
+      - 7000:7000
+    networks:
+      - local_network
+
+
+  mongodb:
+    build:
+      context: ./mongodb
+      dockerfile: Dockerfile
+      args:
+        - IMAGE_VERSION=non_serve
+    image: mymongo
+    environment:
+      - MIAVAR=non_serve3__solo_come_esempio
+    ports:
+      - 27017-27019:27017-27019
+    networks:
+      - local_network
+#    volumes:
+#      - mydata:/data
+
+
+  leo:
+    build: 
+      context: ERC-Remote-Navigation-Sim
+      dockerfile: Dockerfile
+    container_name: leo
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+     - "DISPLAY"
+     - "ROS_HOSTNAME=leo"
+     - "ROS_MASTER_URI=http://localhost:11311"
+    restart: always
+    networks:
+     - local_network
+
+  video:
+    build:
+      context: docker_ros-web-video-server
+      dockerfile: Dockerfile
+    environment:
+     - "ROS_HOSTNAME=video"
+     - "ROS_MASTER_URI=http://leo:11311"
+    depends_on:
+     - leo
+    ports:
+     - "11315:11315"
+    command:
+     - rosrun
+     - web_video_server
+     - web_video_server
+     - _port:=11315
+    restart: always
+    networks:
+     - local_network
+      
+  bridge:
+    build: 
+      context: rosbridge_suite
+      dockerfile: Dockerfile
+    environment:
+     - "ROS_HOSTNAME=bridge"
+     - "ROS_MASTER_URI=http://leo:11311"
+    depends_on:
+     - leo
+    ports:
+      - "9090:9090"
+    command:
+     - roslaunch
+     - --wait
+     - rosbridge_server
+     - rosbridge_websocket.launch
+    restart: always
+    networks:
+     - local_network
+
+networks:
+  local_network:
+    driver: bridge
+    driver_opts:
+       com.docker.network.bridge.name: "bridgelocal" 
+#      com.docker.network.enable_ipv6: "false"
+#volumes:
+#  mydata:
+
+
+#  mongodb:
+#    build:
+#      context: mongo
+#      dockerfile: Dockerfile
+#    image: mymongo
+#    ports:
+#      - 27017-27019:27017-27019

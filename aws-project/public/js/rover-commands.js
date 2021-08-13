@@ -42,44 +42,20 @@ const RoverCommands = {
     },
     methods:{
         forward: function () {
-            this.message = new ROSLIB.Message({
-                linear: {x: 1, y: 0, z: 0,},
-                angular: {x: 0, y: 0, z: 0,},
-            })
-            this.setTopic()
-            this.topic.publish(this.message)
+            this.$emit('forward')
         },
         stop: function () {
-            this.message = new ROSLIB.Message({
-                linear: {x: 0, y: 0, z: 0,},
-                angular: {x: 0, y: 0, z: 0,},
-            })
-            this.setTopic()
-            this.topic.publish(this.message)
+            this.$emit('stop')
+
         },
         backward: function () {
-            this.message = new ROSLIB.Message({
-                linear: {x: -1, y: 0, z: 0,},
-                angular: {x: 0, y: 0, z: 0,},
-            })
-            this.setTopic()
-            this.topic.publish(this.message)
+            this.$emit('backward')
         },
         turnLeft: function () {
-            this.message = new ROSLIB.Message({
-                linear: {x: 0.5, y: 0, z: 0,},
-                angular: {x: 0, y: 0, z: 0.5,},
-            })
-            this.setTopic()
-            this.topic.publish(this.message)
+            this.$emit('turnLeft')
         },
         turnRight: function () {
-            this.message = new ROSLIB.Message({
-                linear: {x: 0.5, y: 0, z: 0,},
-                angular: {x: 0, y: 0, z: -0.5,},
-            })
-            this.setTopic()
-            this.topic.publish(this.message)
+            this.$emit('turnRight')
         },
     },
 

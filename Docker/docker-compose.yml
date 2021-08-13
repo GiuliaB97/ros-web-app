@@ -1,5 +1,6 @@
 version: "3.9"
 services:
+
   leo:
     build: 
       context: ERC-Remote-Navigation-Sim
@@ -30,7 +31,7 @@ services:
      - web_video_server
      - _port:=11315
     restart: always
-      
+
   bridge:
     build: 
       context: rosbridge_suite
@@ -48,11 +49,3 @@ services:
      - rosbridge_server
      - rosbridge_websocket.launch
     restart: always
-
-#  mongodb:
-#    build:
-#      context: mongo
-#      dockerfile: Dockerfile
-#    image: mymongo
-#    ports:
-#      - 27017-27019:27017-27019
