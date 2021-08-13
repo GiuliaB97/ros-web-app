@@ -5,14 +5,14 @@ const RoverVideo = {
             <h5>Streaming video</h5>
           </div>
           
-          <div class="col-md-12 text-center">
+          <div class="col-md-12 text-center container-fluid">
             <div id="mjpeg"></div>
           </div>
       </div>
   `,
     methods:{
         setCamera: function () {
-            console.log('set camera method')
+            console.log('set camera method DESKTOP')
             this.cameraViewer = new MJPEGCANVAS.Viewer({
                 divID: 'mjpeg',
                 host: 'localhost',
@@ -22,8 +22,25 @@ const RoverVideo = {
                 port: 11315,
             })
         },
+        setCamera2: function () {
+            console.log('set camera method MOBILE')
+            this.cameraViewer = new MJPEGCANVAS.Viewer({
+                divID: 'mjpeg',
+                host: 'localhost',
+                width: 400,
+                height: 320,
+                topic: '/camera/image_raw',
+                port: 11315,
+            })
+        },
+
     },
   mounted(){
-       this.setCamera();
+      if (screen.width <= 760) {
+          console.log("res")
+          this.setCamera2();
+      }else{
+          this.setCamera();
+      }
     },
 }
