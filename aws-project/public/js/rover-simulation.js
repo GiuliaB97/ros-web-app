@@ -10,9 +10,9 @@ const RoverSimulation = {
             </div>
             <hr>
             <div class="text-center" id="simulationButtons">
-              <button type="button" @click="disconnect" class="btn btn-danger rounded-pill btn-lg" v-if="connected "  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
-              <button  type="button"  @click="connect" class="btn btn-success rounded-pill btn-lg" v-else  data-toggle="tooltip" data-placement="top" title="Click here to connect to the simulation">Connect!</button>
-              <button class="btn btn-secondary btn-lg position-absolute end-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Settings</button>
+              <button type="button" @click="disconnect" class="btn btn-danger rounded-pill" v-if="connected "  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
+              <button  type="button"  @click="connect" class="btn btn-success rounded-pill" v-else  data-toggle="tooltip" data-placement="top" title="Click here to connect to the simulation">Connect!</button>
+              <button class="btn btn-secondary position-absolute end-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Settings</button>
             </div>
             
             <rover-setting :connected="connected" :ws_address="ws_address"></rover-setting>

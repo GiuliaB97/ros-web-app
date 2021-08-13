@@ -30,7 +30,7 @@ const NavigationBar =  {
         <div v-else class="col-xxl-4 col-lg-8 col-sm-12 col-12 d-flex justify-content-sm-end justify-content-center mx-0" id="logged-button-container">
           <div class="row">
             <div class="col-6 text-center">
-              <input type="button" @click="openSimulation" value="Simulation" class="btn btn-primary   ">
+              <input type="button" @click="openSimulation" value="Simulation" class="btn btn-primary">
             </div>
             <div class="col-6 text-center">
               <input type="button" value="Logout" @click="logout" class="btn btn-danger">
