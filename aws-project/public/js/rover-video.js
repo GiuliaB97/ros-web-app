@@ -1,11 +1,10 @@
 const RoverVideo = {
     template: `
-      <div id="roverVideo" class="row container-fluid" >
+      <div id="roverVideo" class="row " >
           <div class="col-md-12 text-center" >
             <h5>Streaming video</h5>
           </div>
-          
-          <div class="col-md-12 text-center">
+          <div class="col-md-12 text-center container-fluid">
             <div id="mjpeg"></div>
           </div>
       </div>
