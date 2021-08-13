@@ -55,7 +55,7 @@ const RoverSimulation = {
     },
     // Helper methods to connect to ROS
     // This adds a listener for a connection event to the ros object.
-    // The two blocks following the connection event listener do the same for error and close events.
+    // e two blocks following the connection event listener do the same for error and close events.
     // This way, we can monitor the connection to the rosbridge server.
 
     methods: {
