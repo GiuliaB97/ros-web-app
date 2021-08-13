@@ -12,7 +12,7 @@ const RoverCharts = {
           <button @click="hide" class="btn btn-danger" v-if="showed" :disabled="!connected">Hide data charts</button>
           <button @click="show" class="btn btn-info" v-else :disabled="!connected">Show data charts</button>
         </div>
-        <div class="row">
+        <div class="row container-fluid text-center">
           <div class="col-md-6 text-center"  v-if="showed">
             <apexchart
                 ref="realtimeChart"
