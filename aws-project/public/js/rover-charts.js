@@ -45,15 +45,15 @@ const RoverCharts = {
             series: [
                 {
                     name: "x",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,],
+                    data:  Array(5).fill(0),
                 },
                 {
                     name: "y",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,],
+                    data: Array(5).fill(0),
                 },
                 {
                     name: "z",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,],
+                    data:  Array(5).fill(0),
                 }
 
             ],
@@ -86,11 +86,7 @@ const RoverCharts = {
                     enabled: false,
                 },
                 title: {
-                    text: 'Odometry Pose position',
-                    align: 'left',
-                    style: {
-                        color: '#FFF',
-                    },
+                    text: 'Position',
                 },
                 xaxis: {
                     tooltip: {
@@ -108,19 +104,19 @@ const RoverCharts = {
             series2: [
                 {
                     name: "x",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,]
+                    data:  Array(5).fill(0),
                 },
                 {
                     name: "y",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,]
+                    data:  Array(5).fill(0),
                 },
                 {
                     name: "z",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,]
+                    data:  Array(5).fill(0),
                 },
                 {
                     name: "w",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,]
+                    data:  Array(5).fill(0),
                 }
 
             ],
@@ -153,11 +149,7 @@ const RoverCharts = {
                     enabled: false,
                 },
                 title: {
-                    text: 'Odometry Pose position',
-                    align: 'left',
-                    style: {
-                        color: '#FFF',
-                    },
+                    text: 'Orientation',
                 },
                 xaxis: {
                     tooltip: {
