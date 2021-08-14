@@ -6,7 +6,7 @@ const RoverSimulation = {
         <div class="content-area">
           <div class="container-fluid">
             <div class="row text-center" >
-              <h1>Welcome to the Marsyard simulation {{prova}}</h1>                 
+              <h1>Welcome to the Marsyard simulation </h1>                 
             </div>
             <hr>
             <div class="text-center" id="simulationButtons">
