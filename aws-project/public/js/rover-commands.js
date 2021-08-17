@@ -2,10 +2,9 @@ const RoverCommands = {
     props: ['connected'],
     template: `
       <div id="rover controller"v-if="connected" class="row">
-      <!--<div id="rover controller" class="row">-->
-       <div class=" text-center">
+       
+      <div class=" text-center">
          <h5>Commands</h5>
-         
        </div>
       
        <!-- 1st row -->
@@ -29,17 +28,7 @@ const RoverCommands = {
         <button @click="backward" :disabled=" !connected" class="btn btn-primary">Go backward</button>
       </div>
      </div>
-      <!--</div>-->
-  
   `,
-    components: {
-
-    },
-    data: function() {
-        return {
-
-        }
-    },
     methods:{
         forward: function () {
             this.$emit('forward')
@@ -58,5 +47,4 @@ const RoverCommands = {
             this.$emit('turnRight')
         },
     },
-
 }

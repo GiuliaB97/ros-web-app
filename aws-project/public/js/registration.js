@@ -7,7 +7,6 @@ const Registration = {
                     <div  class="justify-content-center">
                       <img src="/static/img/almaxLogo.jpeg" alt="Almax Icon" id="almaxIcon">
                     </div>
-                 
                    <br>
                     <div class="row">
                         <h1 class="text-center">Sign Up</h1>
@@ -83,7 +82,7 @@ const Registration = {
     },
     methods: {
         addUser() {
-            let existingError = false
+            let error = false
             this.passwordError = "";
             this.emailError = "";
             this.registrationError = "";
@@ -91,7 +90,7 @@ const Registration = {
 
             if (this.form.password !== this.form.password2) {
                 this.passwordError = "Passwords do not match";
-                existingError = true;
+                error = true;
             }
 
             if (this.form.email !== '') { //console.log("if form i am in form values"+ this.form.email)
@@ -105,7 +104,7 @@ const Registration = {
                         let existingUser = res.data;
                         if (existingUser) {
                             this.emailError = "Email already registered";
-                        } else if (!existingError) {
+                        } else if (!error) {
                             axios.post(MONGO_URL + '/registration', {
                                 params: {
                                     name: this.form.name,
@@ -121,7 +120,7 @@ const Registration = {
                                         this.redirecting = true;
                                         setTimeout(() => {
                                             this.$router.push('/')
-                                        }, 3000)
+                                        }, 4000)
                                     } else {
                                         this.registrationError = "Registration error, please try again";
                                     }

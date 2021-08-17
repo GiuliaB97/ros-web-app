@@ -10,5 +10,4 @@ const router = new VueRouter({
         { path: '/401', component: NotAuthorized },
         { path: '*', redirect: '/404' }//*: match anything
     ]
-
 })
