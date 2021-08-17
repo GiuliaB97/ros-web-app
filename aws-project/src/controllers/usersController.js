@@ -23,9 +23,8 @@ exports.user_info = function(req, res) {
 	if(authorizationResult.isValidToken) {
 		let token = authorizationResult.token;
 		User.findOne({user_id: token.user}, function(err, user) {
-			if (err) {
+			if (err)
 				res.status(500).send(err);
-			}
 			res.json(user);
 		});
 	} else {
@@ -76,7 +75,6 @@ exports.login = function(req, res) {
 
 exports.checkUsername = function(req, res) {
 	let requestUser = req.query.userId;
-	//console.log("check user function: "+ requestUser)
 	User.exists({user_id: requestUser}, function (err, result) {
 		res.send(result);
 	});
