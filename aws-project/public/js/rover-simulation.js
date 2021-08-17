@@ -121,13 +121,9 @@ const RoverSimulation = {
                 arrayPosition.push(message.pose.pose.orientation.w)
 
                 console.log("array" +arrayPosition )
-
-                //arrayPosition[arrayPosition.length] = [message.pose.pose.position.x, message.pose.pose.position.y, message.pose.pose.position.z];
-                //console.log('\n\n\n\n\n Odom value' + this.odom + "pos x " + odomPosePositionX)
-                //console.log('\n array' + console.table(arrayPosition))
             });
         },
-        getUserName: function() {
+        isLoginOk: function() {
             axios
                 .get(MONGO_URL + "/user/" + this.$route.params.id, {
                     headers: {
@@ -135,7 +131,6 @@ const RoverSimulation = {
                     }
                 })
                 .then(response => {
-                    console.log("getUSerName then get "+ response.data.name)
                     this.userName = response.data.name
                 })
                 .catch(error => {
@@ -191,7 +186,7 @@ const RoverSimulation = {
     mounted() {
         if (localStorage.user && localStorage.idUser) {
 			this.token = localStorage.user;
-			this.getUserName();
+			this.isLoginOk();
 		} else {
 			this.$router.replace('/').catch(err => {});
 		}
