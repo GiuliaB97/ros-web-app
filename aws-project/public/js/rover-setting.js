@@ -1,8 +1,6 @@
 const RoverSetting = {
     props: ['ws_address', 'connected'],
-    components:{
 
-    },
     template: `
     <div id="roverSetting">
     <!--offcanvas-->
