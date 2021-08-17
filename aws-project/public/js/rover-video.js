@@ -11,8 +11,8 @@ const RoverVideo = {
   `,
     data () {
         return {//desktop video dimensions as default
-            width: 640,
-            height: 480,
+            width: 940,
+            height: 560,
         }
     },
     methods:{
