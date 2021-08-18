@@ -9,7 +9,7 @@
   <arg name="gui" default="true"/>
   <arg name="debug" default="false"/>
   <arg name="verbose" default="false"/>
-  <arg name="headless" default="true"/>
+  <arg name="headless" default="true"/>		<!--change this value to true if you want to open gazebo simulation-->
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(arg world_name)"/>
