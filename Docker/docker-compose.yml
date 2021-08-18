@@ -3,7 +3,7 @@ services:
 
   leo:
     build: 
-      context: ERC-Remote-Navigation-Sim
+      context: leo-rover
       dockerfile: Dockerfile
     container_name: leo
     volumes:
