@@ -178,32 +178,50 @@ html, body {
     border-radius: .25rem;
 }
 
-
-@media screen and (min-width: 992px) {
-
-    #logo-container {
+@media screen{
+    h1{
+        font-weight: bold;
+        font-size: 20px;
+    }
+    h3, h5{
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .blockquote, .blockquote-footer{
+        font-size: 15px;
+    }
+    #appName{
         padding-right: 1rem;
+        font-size: 20px;
     }
-
     #form-login {
-        padding-top: 1rem;
-        padding-left: 1rem;
+        padding: .25rem .5rem;
+        font-size: .875rem;
+        border-radius: .2rem;
     }
-}
 
-@media screen and (max-width: 1399px) {
-    #logo-container {
-        text-align: center;
-    }
-}
-
-@media screen and (min-width: 1400px) {
-
-    #logo-container {
+    #almaxIcon {
+        max-width: 40%;
+        max-height: 40%;
         text-align: start;
     }
-}
 
+    #notLogged-button-container, #logged-button-container {
+        text-align: center;
+        font-size: 10px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    /*
+    #simulationButtons{
+        text-align: center;
+        font-size: 10px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+     */
+}
 .hide {
     visibility: hidden !important;
 }
@@ -344,12 +362,12 @@ button:focus {
 .fade-enter,
 .fade-leave-to {
     visibility: hidden;
-    width:80%;
+    width:100%;
     opacity: 0;
 }
 #image-slider {
-    height:700px;
-    width:80%
+    height:100%;
+    width:70%
 }
 .prev, .next {
     cursor: pointer;
@@ -375,4 +393,21 @@ button:focus {
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
     background-color: rgba(0,0,0,0.9);
+}
+
+/*images*/
+#noconnection, #notFound {
+    height:60%;
+    width:60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#notauthorized {
+    height:30%;
+    width:30%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

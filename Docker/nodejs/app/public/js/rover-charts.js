@@ -4,15 +4,15 @@ const RoverCharts = {
         'apexchart': VueApexCharts,
     },
     template: `
-    <div id="roverChart" class="row">
-   
-        <div class="col-md-12 text-center">
-          <h5>Odometry data charts</h5>
+      <div id="roverChart" class="row">
+      <hr>
+      <div class="col-md-12 text-center">
+        <h5>Odometry data charts</h5>
         <div class="text-center">
           <button @click="hide" class="btn btn-danger" v-if="showed" :disabled="!connected">Hide data charts</button>
           <button @click="show" class="btn btn-info" v-else :disabled="!connected">Show data charts</button>
         </div>
-        <div class="row">
+        <div class="row container-fluid text-center">
           <div class="col-md-6 text-center"  v-if="showed">
             <apexchart
                 ref="realtimeChart"
@@ -32,28 +32,27 @@ const RoverCharts = {
             />
           </div>
         </div>
-    </div>
-    </div>
-  `,
+      </div>
+      </div>
+    `,
     watch: {
 
     },
     data: function() {
-
         return {
             showed:false,
             series: [
                 {
                     name: "x",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,],
+                    data:  Array(5).fill(0)
                 },
                 {
                     name: "y",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,],
+                    data:  Array(5).fill(0)
                 },
                 {
                     name: "z",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,],
+                    data:  Array(5).fill(0)
                 }
 
             ],
@@ -86,11 +85,7 @@ const RoverCharts = {
                     enabled: false,
                 },
                 title: {
-                    text: 'Odometry Pose position',
-                    align: 'left',
-                    style: {
-                        color: '#FFF',
-                    },
+                    text: 'Position',
                 },
                 xaxis: {
                     tooltip: {
@@ -108,19 +103,19 @@ const RoverCharts = {
             series2: [
                 {
                     name: "x",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,]
+                    data: Array(5).fill(0)
                 },
                 {
                     name: "y",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,]
+                    data:  Array(5).fill(0)
                 },
                 {
                     name: "z",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,]
+                    data:  Array(5).fill(0)
                 },
                 {
                     name: "w",
-                    data: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001,]
+                    data: Array(5).fill(0)
                 }
 
             ],
@@ -153,11 +148,8 @@ const RoverCharts = {
                     enabled: false,
                 },
                 title: {
-                    text: 'Odometry Pose position',
-                    align: 'left',
-                    style: {
-                        color: '#FFF',
-                    },
+                    text: 'Orientation',
+
                 },
                 xaxis: {
                     tooltip: {
@@ -184,42 +176,34 @@ const RoverCharts = {
         setDataLineChart() {
             setInterval(() => {
                 //splice rimuove l'elemento in testa, così l0'array ha sempre lo stesso numero di elementi con cui è stato inizializzato --> se no il grafico diventa illegibile
-                //console.log("\n\n odom from line chart"+ odomPosePositionX + odomPosePositionY +"\n\n"+this.series[0].data+"\n"+this.series[1].data)
-                this.series[0].data.splice(0, 1);
-                //this.$props.arrayPosition[0]
-                this.series[0].data.push(arrayPosition[0]);
-
-                this.series[1].data.splice(0, 1);
-                this.series[1].data.push(arrayPosition[1]);
-
-                this.series[2].data.splice(0, 1);
-                this.series[2].data.push(arrayPosition[2]);
-
-                this.series2[0].data.splice(0, 1);
-                this.series2[0].data.push(arrayPosition[3]);
-
-                this.series2[1].data.splice(0, 1);
-                this.series2[1].data.push(arrayPosition[4]);
-
-                this.series2[2].data.splice(0, 1);
-                this.series2[2].data.push(arrayPosition[5]);
-
-                this.series2[3].data.splice(0, 1);
-                this.series2[3].data.push(arrayPosition[6]);
+                for (let i = 0; i < 3; i++) {//Pose.position
+                    this.series[i].data.splice(0, 1);
+                    //this.$props.arrayPosition[0]
+                    this.series[i].data.push(arrayPosition[i]);
+                }
+                for (let i = 0; i < 4; i++) {//Pose.orientation
+                    this.series2[i].data.splice(0, 1);
+                    this.series2[i].data.push(arrayPosition[i+3]);
+                }
                 this.updateSeriesLine();
             }, 5000);
         },
         updateSeriesLine() {
             //updateSeries
-            this.$refs.realtimeChart.appendSeries([{
-                data: this.series[0].data,
-            }, {data: this.series[1].data,}, {data: this.series[2].data,}], false, true);
-            this.$refs.realtimeChart2.appendSeries([{
-                data: this.series2[0].data,
-            }, {data: this.series2[1].data,}, {data: this.series2[2].data,}, {data: this.series2[3].data,}], false, true);
+            this.$refs.realtimeChart.appendSeries([
+                {data: this.series[0].data,},
+                {data: this.series[1].data,},
+                {data: this.series[2].data,}
+            ], false, true);
+            this.$refs.realtimeChart2.appendSeries([
+                {data: this.series2[0].data,},
+                {data: this.series2[1].data,},
+                {data: this.series2[2].data,},
+                {data: this.series2[3].data,}
+            ], false, true);
         },
     },
     mounted(){
         this.setDataLineChart()
     }
-  }
+}

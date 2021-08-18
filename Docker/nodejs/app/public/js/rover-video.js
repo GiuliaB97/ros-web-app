@@ -1,38 +1,38 @@
 const RoverVideo = {
-    props: ['connected'],
     template: `
-      
-      <div id="roverVideo" class="row" >
+      <div id="roverVideo" class="row " >
           <div class="col-md-12 text-center" >
             <h5>Streaming video</h5>
           </div>
-          
-          <div class="col-md-12 text-center">
+          <div class="col-md-12 text-center container-fluid">
             <div id="mjpeg"></div>
           </div>
-          
       </div>
-  
   `,
+    data () {
+        return {//desktop video dimensions as default
+            width: 940,
+            height: 560,
+        }
+    },
     methods:{
         setCamera: function () {
             console.log('set camera method')
             this.cameraViewer = new MJPEGCANVAS.Viewer({
+                width: this.width,
+                height: this.height,
                 divID: 'mjpeg',
                 host: 'localhost',
-                width: 640,
-                height: 480,
                 topic: '/camera/image_raw',
                 port: 11315,
             })
         },
     },
-
-    // be careful you have commented the method call in the parent component
-   mounted(){
-       this.setCamera();
+  mounted(){
+      if (screen.width <= 760) {
+          this.width = 400
+          this.height = 320
+      }
+      this.setCamera();
     },
-
-
-
 }

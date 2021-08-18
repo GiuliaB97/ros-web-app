@@ -19,13 +19,12 @@ exports.list_users = function(req, res) {
 
 exports.user_info = function(req, res) {
 	let userId = req.params.id;
-	let authResult = auth(req, userId);
-	if(authResult.isValidToken) {
-		let token = authResult.token;
+	let authorizationResult = auth(req, userId);
+	if(authorizationResult.isValidToken) {
+		let token = authorizationResult.token;
 		User.findOne({user_id: token.user}, function(err, user) {
-			if (err) {
+			if (err)
 				res.status(500).send(err);
-			}
 			res.json(user);
 		});
 	} else {
@@ -35,7 +34,6 @@ exports.user_info = function(req, res) {
 
 exports.registration = function(req, res) {
 	let newUserTmp = req.body.params;
-	console.log("registration method receive:"+ req.body.params)
 	newUserTmp.salt = bcrypt.genSaltSync(10);
 	newUserTmp.password = bcrypt.hashSync(newUserTmp.password, newUserTmp.salt);
 
@@ -50,10 +48,6 @@ exports.registration = function(req, res) {
 exports.login = function(req, res) {
 	let userId = req.body.params.userId;
 	let password = req.body.params.password;
-	/*res.send({
-		result:userId
-	});*/
-	//I cannot use userId field for now because match does not work
 	User.findOne({email: userId}, 'user_id password salt', function(err, user) {
 		if (err || user == null){
 			res.send({
@@ -63,7 +57,7 @@ exports.login = function(req, res) {
 			if(bcrypt.compareSync(password ,user.password)) {
 				let token = jwt.sign({user: user.user_id, id: user._id}, PRIVATE_SECRET_KEY, {
 					algorithm: 'HS512',
-					expiresIn: '2d'
+					expiresIn: '1d'
 				});
 				res.send({
 					result: true,
@@ -81,7 +75,6 @@ exports.login = function(req, res) {
 
 exports.checkUsername = function(req, res) {
 	let requestUser = req.query.userId;
-	console.log("i am in check user function: "+ requestUser)
 	User.exists({user_id: requestUser}, function (err, result) {
 		res.send(result);
 	});
@@ -90,30 +83,25 @@ exports.checkUsername = function(req, res) {
 function auth(req, id) {
 	const token = req.headers['authorization'];
 	let res;
-	if(token == null) {
-		res = {
-			isValidToken: false
-		};
-	}
-
-	try {
-		const decodedToken = jwt.verify(token, PRIVATE_SECRET_KEY);
-		if(decodedToken.id === id) {
-			res = {
-				isValidToken: true,
-				token: decodedToken
+	if(token !== null ){
+		try {
+			const decodedToken = jwt.verify(token, PRIVATE_SECRET_KEY);
+			if(decodedToken.id === id) {
+				res = {
+					isValidToken: true,
+					token: decodedToken
+				}
 			}
-		} else {
+		} catch (e) {
 			res = {
 				isValidToken: false
-			}
+			};
 		}
-	} catch (e) {
+	}else{
 		res = {
 			isValidToken: false
 		};
 	}
-
 	return res;
 }
 

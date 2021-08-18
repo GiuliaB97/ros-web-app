@@ -7,11 +7,9 @@ const Registration = {
                     <div  class="justify-content-center">
                       <img src="/static/img/almaxLogo.jpeg" alt="Almax Icon" id="almaxIcon">
                     </div>
-                 
                    <br>
                     <div class="row">
-                      
-                        <h3 class="text-center">Sign Up</h3>
+                        <h1 class="text-center">Sign Up</h1>
                     </div>
                 </div>
                 <div class="card-body">
@@ -62,8 +60,6 @@ const Registration = {
             </div>
         </div>
     </div>
-        
-        
 	`,
 
     data() { //The data() method returns an object
@@ -86,8 +82,7 @@ const Registration = {
     },
     methods: {
         addUser() {
-            console.log("add user i am in ")
-            let existingError = false
+            let error = false
             this.passwordError = "";
             this.emailError = "";
             this.registrationError = "";
@@ -95,11 +90,10 @@ const Registration = {
 
             if (this.form.password !== this.form.password2) {
                 this.passwordError = "Passwords do not match";
-                existingError = true;
+                error = true;
             }
 
-            if (this.form.email !== '') {
-                console.log("if form i am in form values"+ this.form.email)
+            if (this.form.email !== '') { //console.log("if form i am in form values"+ this.form.email)
                 axios
                     .get(MONGO_URL + '/registration', {
                         params: {
@@ -110,7 +104,7 @@ const Registration = {
                         let existingUser = res.data;
                         if (existingUser) {
                             this.emailError = "Email already registered";
-                        } else if (!existingError) {
+                        } else if (!error) {
                             axios.post(MONGO_URL + '/registration', {
                                 params: {
                                     name: this.form.name,
@@ -119,15 +113,14 @@ const Registration = {
                                     password: this.form.password
                                 }
                             })
-                                .then(res => {
-                                    console.log("2nd then read data values are:"+ res.data)
+                                .then(res => { //console.log("2nd then read data values are:"+ res.data)
                                     let usrCreated = res.data;
                                     if (usrCreated) {
                                         this.registrationSuccess = "User successfully created, now you will be re-directed to the home page";
                                         this.redirecting = true;
                                         setTimeout(() => {
                                             this.$router.push('/')
-                                        }, 2000)
+                                        }, 4000)
                                     } else {
                                         this.registrationError = "Registration error, please try again";
                                     }

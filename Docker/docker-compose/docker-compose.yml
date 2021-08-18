@@ -93,15 +93,3 @@ networks:
     driver: bridge
     driver_opts:
        com.docker.network.bridge.name: "bridgelocal" 
-#      com.docker.network.enable_ipv6: "false"
-#volumes:
-#  mydata:
-
-
-#  mongodb:
-#    build:
-#      context: mongo
-#      dockerfile: Dockerfile
-#    image: mymongo
-#    ports:
-#      - 27017-27019:27017-27019

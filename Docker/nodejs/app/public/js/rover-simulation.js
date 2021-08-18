@@ -9,21 +9,25 @@ const RoverSimulation = {
               <h1>Welcome to the Marsyard simulation {{prova}}</h1>                 
             </div>
             <hr>
-            <div class="text-center">
-              <button type="button" @click="disconnect" class="btn btn-danger rounded-pill btn-lg" v-if="connected "  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
-              <button  type="button"  @click="connect" class="btn btn-success rounded-pill btn-lg" v-else  data-toggle="tooltip" data-placement="top" title="Click here to connect to the simulation">Connect!</button>
-              <button class="btn btn-secondary btn-lg position-absolute end-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Settings</button>
-
+            <div class="text-center" id="simulationButtons">
+              <button type="button" @click="disconnect" class="btn btn-danger rounded-pill" v-if="connected "  data-toggle="tooltip" data-placement="top" title="Click here to tear down the connection ">Disconnect!</button>
+              <button  type="button"  @click="connect" class="btn btn-success rounded-pill" v-else  data-toggle="tooltip" data-placement="top" title="Click here to connect to the simulation">Connect!</button>
+              <button class="btn btn-secondary position-absolute end-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Settings</button>
             </div>
+            
             <rover-setting :connected="connected" :ws_address="ws_address"></rover-setting>
             <!--updateWsAddress is the method called in the child component to emit the update event
                 update_ws_address is the method called in the parent component to intercept the update event and update the ws variable--> 
             <rover-setting-advanced-option :connected="connected" :ws_address="ws_address" @update-ws="update_ws_address"></rover-setting-advanced-option>
-        <div v-if="connected">
-          <rover-video :connected="connected"></rover-video>
-          <rover-commands :connected="connected"></rover-commands>
-          <rover-charts :connected="connected" ></rover-charts>
-        </div>
+            <div v-if="connected">
+
+              <rover-video :connected="connected"></rover-video>
+              <rover-commands :connected="connected"  @stop="stop" @turnLeft="turnLeft" @turnRight="turnRight" @forward="forward" @backward="backward"></rover-commands>
+              <rover-charts :connected="connected"></rover-charts>
+            </div>
+            <div v-else>
+              <img src="/static/img/noconnection.png" alt="No connection image" id="noconnection">
+            </div>
 
           </div>     
       </div>
@@ -50,8 +54,7 @@ const RoverSimulation = {
         }
     },
     // Helper methods to connect to ROS
-    // This adds a listener for a connection event to the ros object.
-    // The two blocks following the connection event listener do the same for error and close events.
+    // This adds a listener for a connection event to the ros object. e two blocks following the connection event listener do the same for error and close events.
     // This way, we can monitor the connection to the rosbridge server.
 
     methods: {
@@ -100,7 +103,6 @@ const RoverSimulation = {
             });
             console.log('set odom listener')
             listener.subscribe(function (message) {
-
                 //console.log('Received message on ' + listener.name + JSON.stringify(message));
                 this.odom = listener.name
 
@@ -119,14 +121,9 @@ const RoverSimulation = {
                 arrayPosition.push(message.pose.pose.orientation.w)
 
                 console.log("array" +arrayPosition )
-
-                //arrayPosition[arrayPosition.length] = [message.pose.pose.position.x, message.pose.pose.position.y, message.pose.pose.position.z];
-                //console.log('\n\n\n\n\n Odom value' + this.odom + "pos x " + odomPosePositionX)
-                //console.log('\n array' + console.table(arrayPosition))
-
             });
         },
-        getUserName: function() {
+        isLoginOk: function() {
             axios
                 .get(MONGO_URL + "/user/" + this.$route.params.id, {
                     headers: {
@@ -134,7 +131,6 @@ const RoverSimulation = {
                     }
                 })
                 .then(response => {
-                    //console.log("getUSerName then get "+ response.data.name)
                     this.userName = response.data.name
                 })
                 .catch(error => {
@@ -143,18 +139,56 @@ const RoverSimulation = {
         },
         update_ws_address(ws_address_updated) {
             this.ws_address = ws_address_updated
-        }
+        },
 
+        forward: function () {
+            this.message = new ROSLIB.Message({
+                linear: {x: 1, y: 0, z: 0,},
+                angular: {x: 0, y: 0, z: 0,},
+            })
+            this.setTopic()
+            this.topic.publish(this.message)
+        },
+        stop: function () {
+            this.message = new ROSLIB.Message({
+                linear: {x: 0, y: 0, z: 0,},
+                angular: {x: 0, y: 0, z: 0,},
+            })
+            this.setTopic()
+            this.topic.publish(this.message)
+        },
+        backward: function () {
+            this.message = new ROSLIB.Message({
+                linear: {x: -1, y: 0, z: 0,},
+                angular: {x: 0, y: 0, z: 0,},
+            })
+            this.setTopic()
+            this.topic.publish(this.message)
+        },
+        turnLeft: function () {
+            this.message = new ROSLIB.Message({
+                linear: {x: 0.5, y: 0, z: 0,},
+                angular: {x: 0, y: 0, z: 0.5,},
+            })
+            this.setTopic()
+            this.topic.publish(this.message)
+        },
+        turnRight: function () {
+            this.message = new ROSLIB.Message({
+                linear: {x: 0.5, y: 0, z: 0,},
+                angular: {x: 0, y: 0, z: -0.5,},
+            })
+            this.setTopic()
+            this.topic.publish(this.message)
+        },
     },
-
 
     mounted() {
         if (localStorage.user && localStorage.idUser) {
 			this.token = localStorage.user;
-			this.getUserName();
+			this.isLoginOk();
 		} else {
 			this.$router.replace('/').catch(err => {});
 		}
     },
 }                //Absolute 3D position and orientation relative to the Odometry frame (pure visual odometry for ZED, visual-inertial for ZED-M and ZED 2)
-// console.log('Received message on ' + listener.name + '; linear velocity' + message.data.linear+ ', angular velocity: ' + message.data.angular);
