@@ -26,6 +26,7 @@ services:
       context: leo-rover
       dockerfile: Dockerfile
     container_name: leo
+    image: ros-leo
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
     environment:
@@ -38,6 +39,7 @@ services:
     build:
       context: docker_ros-web-video-server
       dockerfile: Dockerfile
+    image: ros-video
     environment:
      - "ROS_HOSTNAME=video"
      - "ROS_MASTER_URI=http://leo:11311"
@@ -56,6 +58,7 @@ services:
     build: 
       context: rosbridge_suite
       dockerfile: Dockerfile
+    image: ros-bridge
     environment:
      - "ROS_HOSTNAME=bridge"
      - "ROS_MASTER_URI=http://leo:11311"

@@ -6,7 +6,7 @@ const RoverSimulation = {
         <div class="content-area">
           <div class="container-fluid">
             <div class="row text-center" >
-              <h1>Welcome to the Marsyard simulation {{prova}}</h1>                 
+              <h1>Welcome to the Marsyard simulation </h1>                 
             </div>
             <hr>
             <div class="text-center" id="simulationButtons">
@@ -50,7 +50,7 @@ const RoverSimulation = {
             odom: '',  //TMP variable to check odom values read
             logs: [],
             userName: '',
-            prova:[]
+           
         }
     },
     // Helper methods to connect to ROS
@@ -107,11 +107,8 @@ const RoverSimulation = {
                 this.odom = listener.name
 
                 arrayPosition=[]
-                this.prova=[]                               //se non lo ri-inizializzo lancia un errore
-                                                            //rover-simulation.js:109 Uncaught TypeError: Cannot read property 'push' of undefined
-                this.prova.push(message.pose.pose.position.x)
-
-                console.log("\n\n prova " +this.prova )
+                
+              
                 arrayPosition.push(message.pose.pose.position.x)
                 arrayPosition.push(message.pose.pose.position.y)
                 arrayPosition.push(message.pose.pose.position.z)
