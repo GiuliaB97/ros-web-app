@@ -8,12 +8,11 @@ global.appRoot = path.resolve(__dirname);
 
 var PORT = 7000;
 
-mongoose.connect('mongodb://localhost/aws-ros-web-app', { useNewUrlParser: true, useFindAndModify: false });
+mongoose.connect('mongodb://mongodb/aws-ros-web-app', { useNewUrlParser: true, useFindAndModify: false });
 
 app.use(cors())
 
 app.use(express.json());
-
 //Remapping pblic in static
 app.use('/static', express.static(__dirname + '/public'));
 

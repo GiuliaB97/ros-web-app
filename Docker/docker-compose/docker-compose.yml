@@ -1,36 +1,29 @@
 version: "3.9"
 services:
-  nodejsapp:
-    build:
-      context: ./nodejs
-      dockerfile: Dockerfile
-      args:
-        - IMAGE_VERSION=non_serve
-    image: nodejsapp
-#    image: vic/debian.iptables.ifconfig
-    environment:
-      - MIAVAR=non_serve__solo_come_esempio
-    ports:
-      - 7000:7000
-    networks:
-      - local_network
-
-
   mongodb:
     build:
-      context: ./mongodb
+      context: ../mongodb
       dockerfile: Dockerfile
-      args:
-        - IMAGE_VERSION=non_serve
     image: mymongo
-    environment:
-      - MIAVAR=non_serve3__solo_come_esempio
     ports:
-      - 27017-27019:27017-27019
+      - 27017:27017
+    volumes:
+      - mydata:/data
     networks:
-      - local_network
-#    volumes:
-#      - mydata:/data
+     - local_network
+
+  nodejsapp:
+    build:
+      context: ../nodejs
+      dockerfile: ../nodejs/Dockerfile
+    image: nodejsapp
+    ports:
+      - 7000:7000
+    depends_on:
+      mongodb:
+        condition: service_started
+    networks:
+     - local_network
 
 
   leo:
