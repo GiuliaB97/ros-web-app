@@ -24,34 +24,6 @@ db.users.insert({"_id" : {"$oid":"6117a745c5c72d2b09e891ea"},
   "email" : "s@gmail.com",
   "password" : "$2b$10$hmlngR08LevowH4C0Jx6BeswxXkSMlftIR.Y5hqcMSaUS.LnAmWjO",
   "salt" : "$2b$10$hmlngR08LevowH4C0Jx6Be"
-}
-{	"_id" : {"$oid":"6117a77cc5c72d2b09e891ed"},
-  "name" : "Ada",
-  "surname" : "Lovelace",
-  "email" : "a@gmail.com",
-  "password" : "$2b$10$rRJCoHF4YY7RkZDAjEDpeOMafT49gJJi3ofvPbiwrV6MRZisVXOKK",
-  "salt" : "$2b$10$rRJCoHF4YY7RkZDAjEDpeO"
-}
-{	"_id" : {"$oid":"6117a79bc5c72d2b09e891f0"},
-  "name" : "Marie",
-  "surname" : "Curie",
-  "email" : "m@gmail.com",
-  "password" : "$2b$10$vXCnUIhOs73u/D8LDlEnn.CLuuLFl4Aw6pK5xC6mw6OV5nCB9M8SC",
-  "salt" : "$2b$10$vXCnUIhOs73u/D8LDlEnn."
-}
-{	"_id" : {"$oid":"6117a856c5c72d2b09e891f3"},
-  "name" : "Judit",
-  "surname" : "Polgar",
-  "email" : "j@gmail.com",
-  "password" : "$2b$10$YRuQtBEc7pxJp4XxkxdoUuGCvRmbnci6132QDVhvASbXlPAutieJi",
-  "salt" : "$2b$10$YRuQtBEc7pxJp4XxkxdoUu"
-}
-{	"_id" : {"$oid":"6117a88bc5c72d2b09e891f6"},
-  "name" : "Margherita",
-  "surname" : "Hack",
-  "email" : "m@gmail.com",
-  "password" : "$2b$10$r1AObR1LjkQUWuEidOElu.GiGMpK9gOi8HU7QKRohEALwq.DVxq9q",
-  "salt" : "$2b$10$r1AObR1LjkQUWuEidOElu."
 })
 
 // visualizza documenti esistenti
