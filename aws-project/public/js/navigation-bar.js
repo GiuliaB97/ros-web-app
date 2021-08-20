@@ -38,6 +38,7 @@ const NavigationBar =  {
           </div>
         </div>
    </nav>
+   <hr>
     `,
     data(){
         return {
