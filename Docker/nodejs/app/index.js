@@ -8,12 +8,13 @@ global.appRoot = path.resolve(__dirname);
 
 var PORT = 7000;
 
-mongoose.connect('mongodb://mongodb/aws-ros-web-app', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost/aws-ros-web-app', { useNewUrlParser: true, useUnifiedTopology: true  });
 
 app.use(cors())
 
 app.use(express.json());
-//Remapping pblic in static
+
+//Remapping public in static
 app.use('/static', express.static(__dirname + '/public'));
 
 var routes = require('./src/routes/usersRoutes');

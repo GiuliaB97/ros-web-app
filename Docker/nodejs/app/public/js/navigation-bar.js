@@ -38,6 +38,7 @@ const NavigationBar =  {
           </div>
         </div>
    </nav>
+   <hr>
     `,
     data(){
         return {
@@ -60,13 +61,11 @@ const NavigationBar =  {
                 })
                 .then(res => {
                     if(res.data.result) { //login is ok
-                        let token = res.data.token;
-                        localStorage.user = token;
-                        this.token = token;
+                        localStorage.user = res.data.token;
+                        this.token = res.data.token;
 
-                        let id = res.data.id;
-                        localStorage.idUser = id;
-                        this.idUser = id;
+                        localStorage.idUser = res.data.id;
+                        this.idUser = res.data.id;
 
                         this.usernameLogin = "";
                         this.passwordLogin = "";
@@ -101,11 +100,6 @@ const NavigationBar =  {
         },
     },
     mounted() {
-        if (localStorage.user) {
-            this.token = localStorage.user;
-        }
-        if (localStorage.User) {
-            this.User = localStorage.idUser;
-        }
+
     }
 }

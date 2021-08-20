@@ -6,7 +6,7 @@ const RoverSimulation = {
         <div class="content-area">
           <div class="container-fluid">
             <div class="row text-center" >
-              <h1>Welcome to the Marsyard simulation </h1>                 
+              <h1>Welcome to the Marsyard simulation</h1>                 
             </div>
             <hr>
             <div class="text-center" id="simulationButtons">
@@ -50,7 +50,7 @@ const RoverSimulation = {
             odom: '',  //TMP variable to check odom values read
             logs: [],
             userName: '',
-           
+            prova:[]
         }
     },
     // Helper methods to connect to ROS
@@ -103,12 +103,10 @@ const RoverSimulation = {
             });
             console.log('set odom listener')
             listener.subscribe(function (message) {
-                //console.log('Received message on ' + listener.name + JSON.stringify(message));
-                this.odom = listener.name
+                //this.odom = listener.name //console.log('Received message on ' + listener.name + JSON.stringify(message));
 
                 arrayPosition=[]
-                
-              
+
                 arrayPosition.push(message.pose.pose.position.x)
                 arrayPosition.push(message.pose.pose.position.y)
                 arrayPosition.push(message.pose.pose.position.z)
@@ -117,7 +115,7 @@ const RoverSimulation = {
                 arrayPosition.push(message.pose.pose.orientation.z)
                 arrayPosition.push(message.pose.pose.orientation.w)
 
-                console.log("array" +arrayPosition )
+                //console.log("array" +arrayPosition )
             });
         },
         isLoginOk: function() {
