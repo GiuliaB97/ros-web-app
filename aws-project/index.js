@@ -14,7 +14,7 @@ app.use(cors())
 
 app.use(express.json());
 
-//Remapping pblic in static
+//Remapping public in static
 app.use('/static', express.static(__dirname + '/public'));
 
 var routes = require('./src/routes/usersRoutes');
