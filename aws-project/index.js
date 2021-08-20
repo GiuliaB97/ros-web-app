@@ -8,7 +8,7 @@ global.appRoot = path.resolve(__dirname);
 
 var PORT = 7000;
 
-mongoose.connect('mongodb://localhost/aws-ros-web-app', { useNewUrlParser: true, useFindAndModify: false });
+mongoose.connect('mongodb://localhost/aws-ros-web-app', { useNewUrlParser: true, useUnifiedTopology: true  });
 
 app.use(cors())
 
