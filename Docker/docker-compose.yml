@@ -10,16 +10,16 @@ services:
     volumes:
       - mydata:/data
 
-#  nodejsapp:
-#    build:
-#      context: nodejs
-#      dockerfile: Dockerfile
-#    image: nodejsapp
-#    ports:
-#      - 7000:7000
-#    depends_on:
-#      mongodb:
-#        condition: service_started
+  nodejsapp:
+    build:
+      context: nodejs
+      dockerfile: Dockerfile
+    image: nodejsapp
+    ports:
+      - 7000:7000
+    depends_on:
+      mongodb:
+        condition: service_started
 
   leo:
     build: 
@@ -37,7 +37,7 @@ services:
 
   video:
     build:
-      context: docker_ros-web-video-server
+      context: ros-web-video-server
       dockerfile: Dockerfile
     image: ros-video
     environment:
