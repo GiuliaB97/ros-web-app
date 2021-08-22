@@ -1,0 +1,20 @@
+*  ***Check local container***:
+  ```shell_session
+  docker ps
+  ```
+*  ***Check local container***:
+  ```shell_session
+  docker images
+  ```
+*  ***delete container***:
+  ```shell_session
+  docker rm container_id
+  ```
+*  ***delete image***:
+  ```shell_session
+  docker image rm -f image_id
+  ```
+*  ***delete useless containers***:
+  ```shell_session
+  docker prune -a 
+  ```
