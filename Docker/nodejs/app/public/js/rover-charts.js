@@ -178,32 +178,38 @@ const RoverCharts = {
                 //splice rimuove l'elemento in testa, così l0'array ha sempre lo stesso numero di elementi con cui è stato inizializzato --> se no il grafico diventa illegibile
                 for (let i = 0; i < 3; i++) {//Pose.position
                     this.series[i].data.splice(0, 1);
-                    //this.$props.arrayPosition[0]
                     this.series[i].data.push(arrayPosition[i]);
                 }
                 for (let i = 0; i < 4; i++) {//Pose.orientation
                     this.series2[i].data.splice(0, 1);
                     this.series2[i].data.push(arrayPosition[i+3]);
                 }
-                this.updateSeriesLine();
-            }, 5000);
+                try{
+                    this.updateSeriesLine();
+                }catch(e){}
+            }, 6000);
         },
         updateSeriesLine() {
-            //updateSeries
-            this.$refs.realtimeChart.appendSeries([
-                {data: this.series[0].data,},
-                {data: this.series[1].data,},
-                {data: this.series[2].data,}
-            ], false, true);
-            this.$refs.realtimeChart2.appendSeries([
-                {data: this.series2[0].data,},
-                {data: this.series2[1].data,},
-                {data: this.series2[2].data,},
-                {data: this.series2[3].data,}
-            ], false, true);
+                this.$refs.realtimeChart.appendSeries([
+                    {data: this.series[0].data,},
+                    {data: this.series[1].data,},
+                    {data: this.series[2].data,}
+                ]
+                , false, true);
+
+                this.$refs.realtimeChart2.appendSeries([
+                    {data: this.series2[0].data,},
+                    {data: this.series2[1].data,},
+                    {data: this.series2[2].data,},
+                    {data: this.series2[3].data,}
+                ], false, true);
         },
+
     },
     mounted(){
-        this.setDataLineChart()
+
+                this.setDataLineChart()
+
+
     }
 }
