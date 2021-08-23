@@ -50,7 +50,6 @@ const RoverSimulation = {
             odom: '',  //TMP variable to check odom values read
             logs: [],
             userName: '',
-            prova:[]
         }
     },
     // Helper methods to connect to ROS
@@ -103,19 +102,16 @@ const RoverSimulation = {
             });
             console.log('set odom listener')
             listener.subscribe(function (message) {
-                //this.odom = listener.name //console.log('Received message on ' + listener.name + JSON.stringify(message));
-
-                arrayPosition=[]
-
-                arrayPosition.push(message.pose.pose.position.x)
-                arrayPosition.push(message.pose.pose.position.y)
-                arrayPosition.push(message.pose.pose.position.z)
-                arrayPosition.push(message.pose.pose.orientation.x)
-                arrayPosition.push(message.pose.pose.orientation.y)
-                arrayPosition.push(message.pose.pose.orientation.z)
-                arrayPosition.push(message.pose.pose.orientation.w)
-
-                //console.log("array" +arrayPosition )
+                //this.odom = listener.name
+                //console.log('Received message on ' + listener.name + JSON.stringify(message)); //
+                arrayPosition[0]=message.pose.pose.position.x
+                arrayPosition[1]=message.pose.pose.position.y
+                arrayPosition[2]=message.pose.pose.position.z
+                arrayPosition[3]=message.pose.pose.orientation.x
+                arrayPosition[4]=message.pose.pose.orientation.y
+                arrayPosition[5]=message.pose.pose.orientation.z
+                arrayPosition[6]=message.pose.pose.orientation.w
+                //console.log("\n"+ message.pose.pose.position.x+ "\t" +arrayPosition[0] + "\n")
             });
         },
         isLoginOk: function() {
@@ -176,6 +172,7 @@ const RoverSimulation = {
             this.setTopic()
             this.topic.publish(this.message)
         },
+
     },
 
     mounted() {
